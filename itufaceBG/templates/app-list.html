@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>凡普信贷app</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="{% static '/css/font.css' %}">
+    <link rel="stylesheet" href="{% static '/css/xadmin.css' %}">
+    <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
+    <script type="text/javascript" src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/xadmin.js' %}"></script>
+    <script type="text/javascript" src="{% static "/js/layui/layui.js" %}" charset="utf-8"></script>
+</head>
+<style type="text/css">
+    table {
+
+        table-layout: fixed;
+
+    }
+
+    tr td {
+        text-overflow: ellipsis; /* for IE */
+        overflow: hidden;
+        white-space: nowrap;
+
+    }
+
+</style>
+
+<body>
+
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so" method="post" id="form-sumbit">
+            <input class="layui-input" placeholder="开始日" name="create_time" id="start">
+            <input class="layui-input" placeholder="截止日" name="end_time" id="end">
+            <div class="layui-input-inline">
+                <select name="customerOruser">
+                    <option value="">钢铁侠/个人版</option>
+                    <option value="USER">钢铁侠</option>
+                    <option value="CUSTOMER">个人版</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="appType">
+                    <option value="">app类型</option>
+                    <option VALUE="ANDROID">android</option>
+                    <option VALUE="IOS">ios</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="isfinal">
+                    <option value="">最终版？</option>
+                    <option value="1">是</option>
+                    <option VALUE="0">否</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="environment">
+                    <option value="">测试/生产</option>
+                    <option value="测试">测试</option>
+                    <option VALUE="生产">生产</option>
+                </select>
+            </div>
+
+            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:void(0)" onclick="location.reload()" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn" onclick="x_admin_show('添加','/add-app/')"><i class="layui-icon"></i>添加
+        </button>
+        <span class="x-right" style="line-height:40px">共有{{ paginator.count }}条，每页显示{{ paginator.per_page }}条</span>
+    </xblock>
+    <div id="tabb">
+        <table class="mytable layui-table" width="100%">
+            <thead>
+            <tr>
+                <th>
+                    {#                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i#}
+                    {#                        class="layui-icon">&#xe605;</i></div>#}
+                </th>
+                <th>APP类型</th>
+                <th>钢铁侠/个人版</th>
+                <th>生产/测试</th>
+                <th>版本号</th>
+                <th>创建时间</th>
+                <th>最终版？</th>
+                <th>描述</th>
+
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for inner in applist %}
+                <tr id="{{ inner.id }}">
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>{{ inner.appType }}</td>
+                    <td>{{ inner.cos }}</td>
+                    <td>{{ inner.environment }}</td>
+                    <td>{{ inner.appVersion }}</td>
+                    <td>{{ inner.create_time|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ inner.isfinal }}</td>
+                    <td onclick="tdd(this)">{{ inner.ms }}</td>
+
+                    <td class="td-manage">
+                        <a href={% static inner.appPath %}>
+                            <i class="layui-icon layui-icon-download-circle"></i>
+                        </a>
+                        <a title="查看" onclick="qrcode('{% static inner.appPath %}')">
+                            <i class="layui-icon layui-icon-cellphone"></i>
+                        </a>
+                        <a title="修改" onclick="x_admin_show('修改','/update-app/?id={{ inner.id }}')">
+                            <i class="layui-icon layui-icon-edit"></i>
+                        </a>
+                        <a title="删除" onclick="del_list(this,{{ inner.id }})" href="javascript:;">
+                            <i class="layui-icon layui-icon-delete"></i>
+                        </a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        <div>
+            {% if applist.has_previous %}
+                {#  当前页的上一页按钮正常使用#}
+                <a class="prev" href="?page={{ applist.previous_page_number }}">&lt;&lt;</a>
+            {% else %}
+                {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                <a class="prev" href="#">&lt;&lt;</a>
+            {% endif %}
+            {#上一页按钮结束#}
+            {# 页码开始#}
+            {% for num in paginator.page_range %}
+
+                {% if num == currentPage %}
+                    <a class="num" href="?page={{ num }}">{{ num }}</a>
+                {% else %}
+                    <a class="num" href="?page={{ num }}">{{ num }}</a>
+
+                {% endif %}
+            {% endfor %}
+            {% if applist.has_next %}
+                {#  当前页的上一页按钮正常使用#}
+                <a class="prev" href="?page={{ applist.next_page_number }}">&gt;&gt;</a>
+            {% else %}
+                {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                <a class="prev" href="#">&gt;&gt;</a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<!--删除操作-->
+<script>
+    function del_list(the, inner_id) {
+
+        var name = $(the).parents("tr").children("td").eq(1).text()
+        var cou = $(the).parents("tr").children("td").eq(2).text()
+
+        var Environmental = $(the).parents("tr").children("td").eq(3).text()
+
+        var version = $(the).parents("tr").children("td").eq(4).text()
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim',
+            area: ["400px", "200px"],
+            title: "删除条目",
+            content: '<div align="center" class="text-center" style="margin-top:20px"><p>是否确认删除</br>' + Environmental + '-' + cou + '-' + name + '-' + version + '?</p></div>',
+            btn: ['确定', '取消'],
+            yes: function () {
+
+                $.ajax({
+                    url: "{% url 'del_app_list' %}",
+                    type: 'post',
+                    data: {"column_id": inner_id},
+                    success: function (e) {
+                        if (e == 1) {
+                            layer.closeAll();
+                            layer.msg("删除成功");
+                            $(the).parents("tr").remove();
+
+
+                        }
+                        else if (e == 2) {
+                            layer.closeAll();
+                            layer.msg("删除文件路径不存在");
+
+                        }
+
+                        else {
+                            layer.closeAll();
+                            layer.msg("删除失败，请重试");
+                        }
+                    },
+                })
+            },
+
+        });
+    }
+
+
+</script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+</script>
+<!--局部刷新-->
+<script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#form-sumbit').submit(function () {
+            var customerOruser = $("select[name=customerOruser]").val()
+            var appType = $("select[name=appType]").val()
+            var isfinal = $("select[name=isfinal]").val()
+            var environment = $("select[name=environment]").val()
+            var start_time = $("input[name=create_time]").val()
+            var end_time = $("input[name=end_time]").val()
+            $.ajax({
+                    url: "{% url 'app_list' %}",
+                    type: 'post',
+                    data: {
+                        "create_time": start_time,
+                        "end_time": end_time,
+                        "customerOruser": customerOruser,
+                        "appType": appType,
+                        "isfinal": isfinal,
+                        "environment": environment
+                    },
+                    success: function (data) {
+
+                        var data = data;
+
+                        var key = /<table[\w|\W]+\<\/table>/;
+                        datas = data.match(key);
+
+                        $('#tabb').html(datas);
+
+
+                    },
+                    else: function () {
+                        layui.use('layer', function () {
+                            var layer = layui.layer;
+
+                            layer.msg('查询失败，请稍后重试');
+                        });
+                    }
+
+
+                }
+            );
+
+
+            return false;
+        });
+
+
+    });
+
+
+    <!--查看二维码-->
+
+    function qrcode(url) {
+
+
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                    type: 1,
+                    content: '<div id="codez"></div>',
+                    title: '二维码下载',
+                    offset: 't'
+
+                }
+            );
+            $('#codez').qrcode(window.location.host + url)
+        });
+
+    }
+    <!--点击table后弹窗-->
+
+    function tdd(the) {
+        alert($(the).text());
+
+    }
+
+</script>
+</body>
+
+</html>

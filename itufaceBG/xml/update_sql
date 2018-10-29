@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mysql>
+
+    <update id="update_app_manage">
+        update app_manage set appType='{appType}' , environment='{environment}', customerOruser='{customerOruser}' ,
+        isFinal={isFinal} , appVersion='{appVersion}' , `describe`='{describe}' where id ={id};
+
+    </update>
+</mysql>

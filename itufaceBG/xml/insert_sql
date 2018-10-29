@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mysql>
+    <select id="insert_user_id_data_host">
+        insert into `data`(user_id,`data`,`host`) VALUES({user_id},'{data}','{host}')
+    </select>
+
+    <insert id="insert_app_path">
+        INSERT INTO `app_manage`(
+        `appVersion` ,
+        `appType` ,
+        `customerOruser` ,
+        `describe` ,
+        `appPath`,
+        `environment`,
+        `isFinal`
+        )
+        VALUES
+        (
+        "{appVersion}",
+        "{appType}" ,
+        "{customerOruser}",
+        "{describe}",
+        "{appPath}",
+        "{environment}",
+        "{isFinal}"
+        );
+    </insert>
+
+</mysql>

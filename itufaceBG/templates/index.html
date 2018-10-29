@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
+</head>
+<body>    <div class="layui-input-inline">
+                <select name="customerOruser">
+                    <option value="">钢铁侠/个人版</option>
+                    <option value="USER">钢铁侠</option>
+                    <option VALUE="CUSTOMER">个人版</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="appType">
+                    <option value="">app类型</option>
+                    <option VALUE="ANDROID">android</option>
+                    <option VALUE="IOS">ios</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="isfinal">
+                    <option value="">最终版？</option>
+                    <option value="1">是</option>
+                    <option VALUE="0">否</option>
+                </select>
+            </div>
+</body>
+</html>

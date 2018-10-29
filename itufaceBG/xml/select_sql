@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mysql>
+    <select id="web_mysql_data_user">
+        SELECT
+        d.id as id,
+        s2.id AS UserId ,
+        s2.`user` AS username ,
+        d.create_time AS CreateTime ,
+        d.update_time AS UpdateTime ,
+        d. DATA AS DATA ,
+        d. HOST AS HOST
+        FROM
+        DATA d
+        LEFT JOIN students2 s2 ON d.user_id = s2.id
+
+    </select>
+
+    <select id="app_list_select">
+
+        SELECT
+        id,
+        appType ,
+        appVersion ,
+        create_time ,
+        environment,
+        appPath,
+        CASE
+        WHEN customerOruser = 'CUSTOMER' THEN
+        '个人版'
+        WHEN customerOruser = 'user' THEN
+        '钢铁侠'
+        END AS cos ,
+        CASE
+        WHEN isFinal = 0 THEN
+        '否'
+        ELSE
+        '是'
+        END AS isfinal,
+        CASE
+        when `describe`is null OR `describe`='' then
+        '无'
+        else `describe`
+        end as ms
+        FROM
+        app_manage
+
+    </select>
+    <select id="update_app_list">
+
+
+        SELECT
+        appType ,
+        environment ,
+        customerOruser ,
+        isFinal ,
+        appVersion ,
+        `describe`
+        FROM
+        app_manage
+        WHERE
+        id ={id}
+    </select>
+    <select id="delete_file_path">
+        select appPath from app_manage where id ={id}
+
+    </select>
+</mysql>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mysql>
+    <delete id="delete_app_list_id">
+
+        DELETE from app_manage where id={id}
+    </delete>
+
+
+</mysql>
