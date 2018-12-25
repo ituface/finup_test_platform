@@ -15,7 +15,7 @@ def  createplist(app_url,fileName):
                          {'kind': 'full-size-image', 'url': 'http://app.finupcredit.com/512x512.png'},
 
                      ],
-                     'metadata': {'bundle-identifier': 'com.finupironman.app', 'bundle-version': '1.0.1',
+                     'metadata': {'bundle-identifier': 'com.yls.app', 'bundle-version': '1.0.1',
                                   'kind': 'software', 'title': 'FinupLoanStore'}
                  },
 
