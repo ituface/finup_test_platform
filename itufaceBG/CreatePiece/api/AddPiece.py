@@ -39,7 +39,7 @@ class AddPiece():
                         return data
                 return 2
 
-        except Exception as e:
+        except ValueError as e:
             return 3
 
     @classmethod
