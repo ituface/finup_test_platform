@@ -1,6 +1,6 @@
 import pymysql
-from itufaceBG.CreatePiece.SqlCron import update_city_code
-from itufaceBG.CreatePiece.SqlCron import insert_statistics_amount
+from CreatePiece.SqlCron import update_city_code
+from CreatePiece.SqlCron import insert_statistics_amount
 pymysql.install_as_MySQLdb()
 
 
