@@ -10,7 +10,7 @@ from  CreatePiece.api.saleApi import saleApi
 from public.mysql import MysqlHandle
 
 cfg = configparser.ConfigParser()
-cfg.read('/Users/finup/Desktop/itufaceBG/public/config.ini')
+cfg.read('./public/config.ini')
 
 '''
 生产 or 本地库
