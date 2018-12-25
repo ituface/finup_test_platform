@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>凡普信贷app</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="{% static '/css/font.css' %}">
+    <link rel="stylesheet" href="{% static '/css/xadmin.css' %}">
+    <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
+    <script type="text/javascript" src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/xadmin.js' %}"></script>
+    <script type="text/javascript" src="{% static "/js/layui/layui.js" %}" charset="utf-8"></script>
+
+    <style>
+
+
+        .loading {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.4;
+            z-index: 1000;
+        }
+
+        /* 动图样式 */
+        .gif {
+            height: 128px;
+            width: 128px;
+            background: url('{% static "/images/loading.gif" %}');
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -64px;
+            margin-top: -64px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form" method="post" enctype="multipart/form-data" id="form-sumbit">
+        <!--class="layui-form" -->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>产品名称</label>
+
+            <div class="layui-input-inline">
+                <input type="text" name="product_name" required lay-verify="required" placeholder="请输入产品名称"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>产品枚举</label>
+
+            <div class="layui-input-inline">
+                <input type="text" name="product_enum" required lay-verify="required" placeholder="请输入枚举值"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>薪/商
+            </label>
+            <div class="layui-input-inline">
+                <select name="product_type">
+                    <option>薪</option>
+                    <option>商</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
+                增加
+            </button>
+            <div class="layui-form-mid layui-word-aux">
+                {{ errorid }}
+            </div>
+            <h2 align="center"><font size="5" color="red"> {{ message }}</font></h2>
+        </div>
+    </form>
+
+    <div id="loadings">
+        <div id="loadinggif">
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#btnClass').click(function () {
+            var name = $("input[name=product_name]").val()
+            var mobile = $("input[name=product_enum]").val()
+
+            if (name == '') {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+
+                    layer.msg('必填项不能为空');
+                });
+            }
+            else if (mobile == '') {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+
+                    layer.msg('必填项不能为空');
+                });
+            }
+
+            else {
+                $('#loadings').addClass('loading');
+                $('#loadinggif').addClass('gif');
+            }
+
+        });
+
+
+    });
+
+
+</script>
+</body>
+
+</html>

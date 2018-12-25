@@ -12,7 +12,9 @@
         `describe` ,
         `appPath`,
         `environment`,
-        `isFinal`
+        `isFinal`,
+        `test_or_beta`,
+        `qr_path`
         )
         VALUES
         (
@@ -22,8 +24,28 @@
         "{describe}",
         "{appPath}",
         "{environment}",
-        "{isFinal}"
+        "{isFinal}",
+        "{test_or_beta}",
+        "{qr_path}"
         );
+    </insert>
+    <insert id="insert_app_product">
+
+        insert into app_product (product_name,product_enum,product_type) values
+        ("{product_name}","{product_enum}",'{product_type}')
+
+    </insert>
+
+    <insert id="insert_piece">
+        insert into app_piece(name,mobile,want_to_status,app_request_id,lend_request_id,current_status) VALUES
+        ('{name}','{mobile}','{want_to_status}',{app_request_id},{lend_request_id},'{current_status}')
+
+    </insert>
+    <insert id="insert_into_statistics_data">
+        insert into `statistics_amount` ( `date_record`, `count`, `category`) values ( '{date_record}', {count},
+        '{category}');
+
+
     </insert>
 
 </mysql>

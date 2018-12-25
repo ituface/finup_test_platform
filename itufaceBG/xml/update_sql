@@ -3,7 +3,21 @@
 
     <update id="update_app_manage">
         update app_manage set appType='{appType}' , environment='{environment}', customerOruser='{customerOruser}' ,
-        isFinal={isFinal} , appVersion='{appVersion}' , `describe`='{describe}' where id ={id};
+        isFinal={isFinal} , appVersion='{appVersion}' , `describe`='{describe}',test_or_beta='{test_or_beta}' where id
+        ={id};
 
     </update>
+
+    <update id="timer_regions">
+
+        update app_system_regions set enabled=1 where parent_code!=-1 and regions_name!='市辖区' and regions_name!='县';
+
+    </update>
+
+    <update id="update_regions_enabled">
+        update app_system_regions set enabled=0 where regions_code={regions_code}
+
+    </update>
+
+
 </mysql>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINUP-IOS-DOWNLOAD</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+<div align="center">
+<table >
+
+    <tr>
+        <td><h2>IOS{{ data.cos }}</h2></td>
+        <td><h2>{{ data.appVersion }}</h2></td>
+    </tr>
+    <tr>
+        <td colspan="2"><a href="itms-services://?action=download-manifest&url={{ data.qr_path }}"><h2>点击进行下载</h2></a> </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

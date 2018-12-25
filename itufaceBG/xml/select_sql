@@ -24,6 +24,8 @@
         create_time ,
         environment,
         appPath,
+        test_or_beta,
+        qr_path,
         CASE
         WHEN customerOruser = 'CUSTOMER' THEN
         '个人版'
@@ -54,7 +56,8 @@
         customerOruser ,
         isFinal ,
         appVersion ,
-        `describe`
+        `describe`,
+        test_or_beta
         FROM
         app_manage
         WHERE
@@ -63,5 +66,43 @@
     <select id="delete_file_path">
         select appPath from app_manage where id ={id}
 
+    </select>
+    <select id="select_ios_qr_path">
+        SELECT appVersion , CASE WHEN customerOruser = 'CUSTOMER' THEN '个人版' WHEN customerOruser = 'user' THEN '钢铁侠' END
+        AS cos , qr_path FROM app_manage WHERE id = {id}
+
+    </select>
+
+
+    <select id="select_product_list">
+        select id,product_name,product_enum,product_type,create_time from app_product;
+    </select>
+
+    <select id="select_regions_code">
+        select regions_code from app_system_regions where enabled=1 limit 1
+    </select>
+
+    <select id="select_piece_list">
+        select id,name,mobile,want_to_status,app_request_id,lend_request_id,current_status,create_time from app_piece
+    </select>
+
+    <select id="select_mobile_to_update_lend">
+        select * from app_piece where create_time >='{create_time}'
+    </select>
+    <select id="select_chart_piece">
+
+        select count(*) as number from app_piece where DATE_FORMAT(create_time,'%Y-%m-%d')='{create_time}'
+
+    </select>
+    <select id="select_chart_app">
+        select count(*) as number from app_manage where DATE_FORMAT(create_time,'%Y-%m-%d')='{create_time}'
+
+    </select>
+
+    <select id="select_statistics_amount_app_data">
+        select DATE_FORMAT(date_record,'%Y-%m-%d') as date,count from statistics_amount where category='APP' and date_record>'{hebdomad_ago}'
+    </select>
+    <select id="select_statistics_amount_piece_data">
+        select DATE_FORMAT(date_record,'%Y-%m-%d') as date,count from statistics_amount where category='PIECE' and date_record>'{hebdomad_ago}'
     </select>
 </mysql>

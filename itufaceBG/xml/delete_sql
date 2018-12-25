@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mysql>
     <delete id="delete_app_list_id">
-
         DELETE from app_manage where id={id}
+    </delete>
+    <delete id='delete_product_list_id'>
+        DELETE from app_product where id={id}
+    </delete>
+    <delete id="delete_piece_list_id">
+        delete from app_piece where id={id}
     </delete>
 
 

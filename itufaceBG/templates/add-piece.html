@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>凡普信贷app</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="{% static '/css/font.css' %}">
+    <link rel="stylesheet" href="{% static '/css/xadmin.css' %}">
+    <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
+    <script type="text/javascript" src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/xadmin.js' %}"></script>
+    <script type="text/javascript" src="{% static "/js/layui/layui.js" %}" charset="utf-8"></script>
+
+    <style>
+
+
+        .loading {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.4;
+            z-index: 1000;
+        }
+
+        /* 动图样式 */
+        .gif {
+            height: 128px;
+            width: 128px;
+            background: url('{% static "/images/loading.gif" %}');
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -64px;
+            margin-top: -64px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="x-body">
+    <table width="100%">
+        <tr>
+            <td width="50%">
+                <form class="layui-form" method="post" enctype="multipart/form-data" id="form-sumbit">
+                    <!--class="layui-form" -->
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="x-red">*</span>姓名</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="x-red">*</span>手机号</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="mobile" required lay-verify="required" placeholder="请输入手机号"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>需要到的状态
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="status">
+                                <option value="REGISTER_SUCCESS">注册成功</option>
+                                <option VALUE="BASE_INFO">基本信息</option>
+                                <option value="MX_GRAB">魔蝎抓取</option>
+                                <option VALUE="PUSH_TO_IRON">推送钢铁侠</option>
+                                <option value="PUSH_TO_LEND">推送个贷</option>
+                                <option value="APPROVED">批核</option>
+                                <option VALUE="WAIT_CONTRACT">生成合同</option>
+                                <option value="CALM_PERIOD">冷静期</option>
+                                <option value="PROCESSING">放款成功</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            产品(选填)
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="product_type">
+                                <option value="">若只关注状态，勿选</option>
+
+                                {% for inner in data %}
+                                    <option value="{{ inner.product_enum }}">{{inner.product_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">销售工号(选填)</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="saleNo" placeholder="默认023264"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                     <div class="layui-form-item">
+                        <label class="layui-form-label">销售密码(选填)</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="salePassword" placeholder="默认123456"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                   <div class="layui-form-item">
+                        <label class="layui-form-label">身份证年份(选填)</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="year" placeholder="默认1987"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_repass" class="layui-form-label">
+                        </label>
+                        <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
+                            增加
+                        </button>
+                        <div class="layui-form-mid layui-word-aux">
+                            {{ errorid }}
+                        </div>
+                        <h2 align="center"><font size="5" color="red" id="message"> </font></h2>
+                    </div>
+                </form>
+
+                <div id="loadings">
+                    <div id="loadinggif">
+
+                    </div>
+                </div>
+            </td>
+            <td width="50%" align="center" id="search_result">
+
+                <p><font size="4" color="#6495ed">搜索到库中可能符合你要求的件</font></p>
+                <p><font size="4" color="#6495ed">如果没有符合，再次点击申请新的进件</font></p>
+                <ol>
+
+                </ol>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#btnClass').click(function () {
+            var name = $("input[name=name]").val()
+            var mobile = $("input[name=moblie]").val()
+
+            if (name == '') {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+
+                    layer.msg('必填项不能为空');
+                });
+            }
+            else if (mobile == '') {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+
+                    layer.msg('必填项不能为空');
+                });
+            }
+
+            else {
+                $('#loadings').addClass('loading');
+                $('#loadinggif').addClass('gif');
+            }
+
+        });
+
+
+    });
+
+
+</script>
+<script>
+
+    $(document).ready(function () {
+        var num = 0  //判断是否展示搜索结果
+
+        $('#search_result').hide()
+
+        $('#form-sumbit').submit(function () {
+            $('#loadings').show()
+            var name = $("input[name=name]").val();
+            var mobile = $("input[name=mobile]").val();
+            var product_type = $("select[name=product_type]").val();
+            var status = $("select[name=status]").val();
+            var saleNo = $("input[name=saleNo]").val();
+            var year = $("input[name=year]").val();
+            var salePassword = $("input[name=salePassword]").val();
+            $.ajax({
+                    url: "{% url 'api-add-piece' %}",
+                    type: 'post',
+                    data: {
+                        "name": name,
+                        "mobile": mobile,
+                        "product_type": product_type,
+                        "status": status,
+                        "saleNo": saleNo,
+                        "salePassword": salePassword,
+                        "year":year,
+                        "num": num
+                    },
+                    success: function (data) {
+                        num = 1
+                        console.log('num:' + num);
+                        console.log('sss'+data)
+                        if (data.code == 200) {
+                            $('#loadings').hide();
+                            $('#search_result').show();
+                            var result=data.data
+
+                            for (var i=0;i<result.length;i++) {
+                                console.log(result[i].customer_name)
+                                $("ol").prepend('<li>姓名：'+result[i].customer_name+', 手机号：'+result[i].mobile + '</li>');
+                            }
+
+                        }
+                        if (data.code==202){
+
+                            $('#loadings').hide();
+                            console.log(data)
+                            $('#message').text(data.message)
+                        }
+
+
+                    }
+
+
+                }
+            );
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

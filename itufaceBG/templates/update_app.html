@@ -98,6 +98,17 @@
         </div>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>test/beta
+            </label>
+            <div class="layui-input-inline">
+                <select name="test_or_beta">
+                    <option>beta</option>
+                    <option>test</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>版本号
             </label>
             <div class="layui-input-inline">
@@ -119,12 +130,12 @@
             <label for="L_repass" class="layui-form-label">
             </label>
             <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
-                    修改
+                修改
             </button>
             <div class="layui-form-mid layui-word-aux">
                 {{ errorid }}
-            </div >
-            <h2 align="center" ><font size="5" color="red"> {{ message }}</font></h2>
+            </div>
+            <h2 align="center"><font size="5" color="red"> {{ message }}</font></h2>
         </div>
     </form>
 
@@ -145,7 +156,7 @@
 
 
 <script>
-  $(document).ready(function () {
+    $(document).ready(function () {
         $('#btnClass').click(function () {
             $('#loadings').addClass('loading');
             $('#loadinggif').addClass('gif');
@@ -155,15 +166,16 @@
 
     });
 
-   $(document).ready(function () {
+    $(document).ready(function () {
 
-           $('select[name=app_type]').val('{{ data.appType }}')
-           $('select[name=environment]').val('{{ data.environment }}')
-           $('select[name=customeroruser]').val('{{ data.customerOruser }}')
-           $('select[name=isfinal]').val('{{ data.isFinal }}')
-           $('input[name=app_version]').val('{{ data.appVersion }}')
-           $('textarea[name=describe]').text('{{ data.describe|safe }}')
-        });
+        $('select[name=app_type]').val('{{ data.appType }}')
+        $('select[name=environment]').val('{{ data.environment }}')
+        $('select[name=customeroruser]').val('{{ data.customerOruser }}')
+        $('select[name=test_or_beta]').val('{{ data.test_or_beta}}')
+        $('select[name=isfinal]').val('{{ data.isFinal }}')
+        $('input[name=app_version]').val('{{ data.appVersion }}')
+        $('textarea[name=describe]').text('{{ data.describe|safe }}')
+    });
 
 
 </script>

@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+#!usr/bin/python
+# -*- coding:utf-8 -*-
+from biplist import *
+import os,sys
+import sys
+import plistlib
+# try:
+#     plist = str(readPlist("/Users/finup/Desktop/itufaceBG/static/plistfile/plistfile/store_manifest.plist")).encode('utf-8');
+#
+# except InvalidPlistException as e:
+#     print("Not a Plist or Plist Invalid:", e)
+#
+#
+#
+# try:
+#     writePlist(plist, "/Users/finup/Desktop/itufaceBG/static/store_manifest.plist")
+# except (InvalidPlistException, NotBinaryPlistException) as e:
+#     print("/Users/finup/Desktop/itufaceBG/static/plistfile/plistfile/store_manifest.plistSomething bad happened:", e)
+DATA = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -11,7 +29,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://10.10.180.206:8882/static/appfile/1540462362/FinupLoanCustomer.ipa</string>
+					<string>http://app.finupcredit.com/FinupLoanStore.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
@@ -41,3 +59,7 @@
 	</array>
 </dict>
 </plist>
+
+"""
+
+plistlib.writePlist(DATA,'/Users/finup/Desktop/itufaceBG/static/storemanifest.plist')

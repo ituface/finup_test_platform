@@ -1,32 +1,147 @@
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>开始使用layui</title>
-    <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
-</head>
-<body>    <div class="layui-input-inline">
-                <select name="customerOruser">
-                    <option value="">钢铁侠/个人版</option>
-                    <option value="USER">钢铁侠</option>
-                    <option VALUE="CUSTOMER">个人版</option>
-                </select>
+    <head>
+        <meta charset="UTF-8">
+        <title>凡普信贷app</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport"
+              content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="{% static '/css/font.css' %}">
+        <link rel="stylesheet" href="{% static '/css/xadmin.css' %}">
+        <link rel="stylesheet" href="{% static '/js/layui/css/layui.css' %}">
+        <script type="text/javascript" src="{% static '/js/jquery-3.3.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/xadmin.js' %}"></script>
+        <script type="text/javascript" src="{% static "/js/layui/layui.js" %}" charset="utf-8"></script>
+        <style>
+            .gif {
+                background: url('{% static "/images/loading.gif" %}');
+            }
+
+        </style>
+    </head>
+<body>
+<!-- 顶部开始 -->
+<div class="container">
+    <div class="logo"><a href="/index/">ituface 1.0</a></div>
+    <div class="left_open">
+        <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+    </div>
+
+    <ul class="layui-nav right" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">用户</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                <dd><a href="/logout/">退出</a></dd>
+            </dl>
+        </li>
+        <!--<li class="layui-nav-item to-index"><a href="/">前台首页</a></li>-->
+    </ul>
+
+</div>
+<!-- 顶部结束 -->
+<!-- 中部开始 -->
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>数据管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="piece-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>造件流程</cite>
+
+                        </a>
+                    </li>
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="app-product.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>产品列表</cite>
+
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>客户端管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="app-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>安装包上传下载</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+        <ul class="layui-tab-title">
+            <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src='welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
-            <div class="layui-input-inline">
-                <select name="appType">
-                    <option value="">app类型</option>
-                    <option VALUE="ANDROID">android</option>
-                    <option VALUE="IOS">ios</option>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="isfinal">
-                    <option value="">最终版？</option>
-                    <option value="1">是</option>
-                    <option VALUE="0">否</option>
-                </select>
-            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-bg"></div>
+<!-- 右侧主体结束 -->
+<!-- 中部结束 -->
+<!-- 底部开始 -->
+<div class="footer">
+    <div class="copyright" id="support">支持开发者</div>
+</div>
+<!-- 底部结束 -->
+<script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+
+    $(document).ready(function () {
+
+        $('#support').click(function () {
+            var imgs = "<img src=' {% static "/images/supports.png" %} ' />";
+
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 1,
+                    content: imgs,
+                    offset: 'auto'
+                });
+
+            });
+        });
+    });
+</script>
 </body>
 </html>

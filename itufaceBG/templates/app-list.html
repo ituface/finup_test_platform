@@ -69,11 +69,16 @@
                     <option VALUE="生产">生产</option>
                 </select>
             </div>
+            <div class="layui-input-inline">
+                <select name="test_or_beta">
+                    <option value="">test/beta</option>
+                    <option value="beta">beta</option>
+                    <option VALUE="test">test</option>
+                </select>
+            </div>
 
             <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
 
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:void(0)" onclick="location.reload()" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
         </form>
     </div>
     <xblock>
@@ -95,6 +100,7 @@
                 <th>版本号</th>
                 <th>创建时间</th>
                 <th>最终版？</th>
+                <th>test/beta</th>
                 <th>描述</th>
 
                 <th>操作</th>
@@ -110,15 +116,16 @@
                     <td>{{ inner.cos }}</td>
                     <td>{{ inner.environment }}</td>
                     <td>{{ inner.appVersion }}</td>
-                    <td>{{ inner.create_time|date:"Y-m-d H:i:s" }}</td>
+                    <td onclick="tdd(this)">{{ inner.create_time|date:"Y-m-d H:i:s" }}</td>
                     <td>{{ inner.isfinal }}</td>
+                    <td>{{ inner.test_or_beta }}</td>
                     <td onclick="tdd(this)">{{ inner.ms }}</td>
 
                     <td class="td-manage">
                         <a href={% static inner.appPath %}>
                             <i class="layui-icon layui-icon-download-circle"></i>
                         </a>
-                        <a title="查看" onclick="qrcode('{% static inner.appPath %}')">
+                        <a title="查看" onclick="qrcode('{% static  inner.qr_path%}','{{ inner.appType }}','{{ inner.id }}')">
                             <i class="layui-icon layui-icon-cellphone"></i>
                         </a>
                         <a title="修改" onclick="x_admin_show('修改','/update-app/?id={{ inner.id }}')">
@@ -242,11 +249,12 @@
             var customerOruser = $("select[name=customerOruser]").val()
             var appType = $("select[name=appType]").val()
             var isfinal = $("select[name=isfinal]").val()
+            var test_or_beta = $("select[name=test_or_beta]").val()
             var environment = $("select[name=environment]").val()
             var start_time = $("input[name=create_time]").val()
             var end_time = $("input[name=end_time]").val()
             $.ajax({
-                    url: "{% url 'app_list' %}",
+                    url: "{% url 'app-list' %}",
                     type: 'post',
                     data: {
                         "create_time": start_time,
@@ -254,7 +262,8 @@
                         "customerOruser": customerOruser,
                         "appType": appType,
                         "isfinal": isfinal,
-                        "environment": environment
+                        "environment": environment,
+                        "test_or_beta": test_or_beta
                     },
                     success: function (data) {
 
@@ -289,7 +298,7 @@
 
     <!--查看二维码-->
 
-    function qrcode(url) {
+    function qrcode(url, type,id) {
 
 
         layui.use('layer', function () {
@@ -302,7 +311,12 @@
 
                 }
             );
-            $('#codez').qrcode(window.location.host + url)
+            if (type == 'IOS') {
+                $('#codez').qrcode(window.location.host+'/qr-ios-download/?id='+id)
+            }
+            else {
+                $('#codez').qrcode(window.location.host + url)
+            }
         });
 
     }

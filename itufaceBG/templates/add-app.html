@@ -98,6 +98,19 @@
         </div>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>test/beta
+            </label>
+            <div class="layui-input-inline">
+                <select name="test_or_beta">
+                    <option>beta</option>
+                    <option>test</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>版本号
             </label>
             <div class="layui-input-inline">
@@ -151,7 +164,7 @@
 <script>
     $(document).ready(function () {
         $('#btnClass').click(function () {
-            if ( $("input[name=myfile]").val() == '') {
+            if ($("input[name=myfile]").val() == '') {
                 layui.use('layer', function () {
                     var layer = layui.layer;
 
