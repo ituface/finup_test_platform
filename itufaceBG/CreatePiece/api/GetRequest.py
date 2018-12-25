@@ -15,7 +15,7 @@ cfg.read('./public/config.ini')
 '''
 生产 or 本地库
 '''
-host = cfg.get('apihost', 'host')
+host = path.Apihost
 
 
 class GetRequest():
@@ -237,6 +237,7 @@ class GetRequest():
 
     def request_post(self, url, data, headers=None):
         print('url--------------->', url)
+        print('host------------>',host)
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
         get_result = result
         result_data = json.loads(get_result.text)
