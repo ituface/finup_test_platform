@@ -205,7 +205,7 @@ class AppApi():
         :param fileName: str
         :return: json
         '''
-        f = open("/Users/finup/Desktop/itufaceBG/static/images/image.jpg", 'rb').read()
+        f = open("./static/images/image.jpg", 'rb').read()
         image = str(base64.b64encode(f), encoding='utf-8')
         if fileName == 0:
             fileName = AppApi.timestamp
