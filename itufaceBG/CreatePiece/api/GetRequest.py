@@ -280,7 +280,3 @@ class GetRequest():
 #     print('步骤----》',i)
 #     s=eval('gtr.%s()'%i)
 #     print(s)
-a = 1
-b = 1 if a  else 2
-
-print(b)
