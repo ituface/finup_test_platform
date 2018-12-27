@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 CRONJOBS=[
-    ('0/5 * * * * ?', 'CreatePiece.SqlCron.task')
+    ('*/1 * * * *', 'CreatePiece.SqlCron.task')
 ]
 
 MIDDLEWARE = [
