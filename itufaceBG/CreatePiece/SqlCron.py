@@ -63,3 +63,7 @@ def insert_statistics_amount():
             statistics_sql.format(date_record=yesterday, count=inner[0], category=inner[1]))
        print('tag----->',tag)
 
+
+
+def task():
+    print('一丝丝')
