@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '%_q%b)%pte+@vo!+r^0f8(mgk%p+ptl(jj_78#o&_mv$hxourg'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'AppManage',
     'login',
     'CreatePiece',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -94,10 +93,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lend_app',
-        'HOST':'10.10.180.206',
-        'PORT':3306,
-        'USER':'root',
-        'PASSWORD':'root123!@YE'
+        'HOST': '10.10.180.206',
+        'PORT': 3306,
+        'USER': 'root',
+        'PASSWORD': 'root123!@YE'
     }
 }
 # Password validation
@@ -118,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -132,12 +130,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 
 ]
