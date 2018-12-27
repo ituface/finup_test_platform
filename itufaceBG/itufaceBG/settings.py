@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'AppManage',
     'login',
     'CreatePiece',
-    'django_crontab',
 ]
 
 CRONJOBS=[
