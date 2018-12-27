@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'AppManage',
     'login',
     'CreatePiece',
+    'django_crontab',
 ]
 
-CRONJOBS=[
+CRONJOBS = [
     ('*/1 * * * *', 'CreatePiece.SqlCron.task')
 ]
 
