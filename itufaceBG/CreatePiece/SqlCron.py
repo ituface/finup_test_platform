@@ -66,4 +66,4 @@ def insert_statistics_amount():
 
 
 def task():
-    print('一丝丝')
+    print('一丝丝p')
