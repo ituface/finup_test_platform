@@ -32,6 +32,15 @@ def schedulers(func):
         p = multiprocessing.Process(target=worker, args=())
         p.start()
     return inner
+def testschedulers(func):
+    def inner():
+        def worker():
+            scheduler = BlockingScheduler()
+            scheduler.add_job(func=func, trigger='cron',hour=7,minute =20,second=0)
+            scheduler.start()
+        p = multiprocessing.Process(target=worker, args=())
+        p.start()
+    return inner
 
 @schedulers
 def update_city_code():
@@ -64,6 +73,6 @@ def insert_statistics_amount():
        print('tag----->',tag)
 
 
-
+@testschedulers
 def task():
     print('一丝丝p')
