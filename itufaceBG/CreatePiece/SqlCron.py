@@ -36,7 +36,7 @@ def testschedulers(func):
     def inner():
         def worker():
             scheduler = BlockingScheduler()
-            scheduler.add_job(func=func, trigger='cron',hour=7,minute =20,second=0)
+            scheduler.add_job(func=func, trigger='cron',hour=19,minute =22,second=0)
             scheduler.start()
         p = multiprocessing.Process(target=worker, args=())
         p.start()
