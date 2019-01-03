@@ -24,7 +24,6 @@ SECRET_KEY = '%_q%b)%pte+@vo!+r^0f8(mgk%p+ptl(jj_78#o&_mv$hxourg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-import CreatePiece
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,10 +37,6 @@ INSTALLED_APPS = [
     'AppManage',
     'login',
     'CreatePiece',
-    'django_crontab',
-]
-CRONJOBS = [
-    ('*/1 * * * *', 'CreatePiece.SqlCron.task')
 ]
 
 MIDDLEWARE = [
