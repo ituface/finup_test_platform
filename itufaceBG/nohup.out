@@ -1,0 +1,48 @@
+==========ssss==============
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: —noreload
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/popen_fork.py", line 29, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+KeyboardInterrupt
+Process Process-2:
+Traceback (most recent call last):
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 249, in _bootstrap
+    self.run()
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/finup/Desktop/itufacegit/itufaceBG/itufaceBG/CreatePiece/SqlCron.py", line 31, in worker
+    scheduler.start()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 19, in start
+    self._main_loop()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 28, in _main_loop
+    self._event.wait(wait_seconds)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 299, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+Process Process-1:
+Traceback (most recent call last):
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 249, in _bootstrap
+    self.run()
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/finup/Desktop/itufacegit/itufaceBG/itufaceBG/CreatePiece/SqlCron.py", line 31, in worker
+    scheduler.start()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 19, in start
+    self._main_loop()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 28, in _main_loop
+    self._event.wait(wait_seconds)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 299, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+==========ssss==============
+sh: line 0: cd: /root/data/plistfile: No such file or directory
