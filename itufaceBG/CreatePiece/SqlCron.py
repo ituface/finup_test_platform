@@ -27,7 +27,7 @@ def schedulers(func):
     def inner():
         def worker():
             scheduler = BlockingScheduler()
-            scheduler.add_job(func=func, trigger='cron',hour=15,minute =47,second=0)
+            scheduler.add_job(func=func, trigger='cron',hour=15,minute =51,second=0)
             scheduler.start()
         p = multiprocessing.Process(target=worker, args=())
         p.start()
@@ -59,10 +59,16 @@ def insert_statistics_amount():
     piece_sql = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_chart_piece')
     piece_data = MysqlHandle.select_mysql_data(piece_sql.format(create_time=yesterday))
     piece_number = piece_data[0].get('number')
+    print(
+        'piece_data---->',piece_data
+    )
     # 查询昨日上传包数量
     app_sql = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_chart_app')
     app_data = MysqlHandle.select_mysql_data(app_sql.format(create_time=yesterday))
     app_number = app_data[0].get('number')
+    print(
+        'app_number---->', app_number
+    )
 
     # 将数量插入到statistics_amount中
     statistics_tuple = ((piece_number, 'PIECE'), (app_number, 'APP'))
