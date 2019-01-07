@@ -27,7 +27,7 @@ def schedulers(func):
     def inner():
         def worker():
             scheduler = BlockingScheduler()
-            scheduler.add_job(func=func, trigger='cron',hour=1,minute =0,second=0)
+            scheduler.add_job(func=func, trigger='cron',hour=15,minute =45,second=0)
             scheduler.start()
         p = multiprocessing.Process(target=worker, args=())
         p.start()
@@ -51,6 +51,7 @@ def update_city_code():
 @schedulers
 def insert_statistics_amount():
     # 计算昨天日期
+    print('开始了')
     today = datetime.datetime.now()
     offset = datetime.timedelta(days=-1)
     yesterday = (today + offset).strftime('%Y-%m-%d')
