@@ -12,7 +12,7 @@ class AppApi():
     submitLoanApply = '/apply/v1/submitLoanApply'  # 提交借款申请
     submitProduct = '/apply/v1/submitProduct'  # 选择产品
     sumbitContact = '/contact/v1/submit'  # 提交联系人信息
-    submitBasicInfo = '/basic/v1/submitBasicInfo'  # 提交基本信息
+    submitBasicInfo = '/basic/v2/submitBasicInfo'  # 提交基本信息
     postVideoCheck = '/video/v1/postVideoCheck'  # 提交签约方式
     postBusinessPositionInfo = '/position/v1/postBusinessPositionInfo'  # 提交职业信息 商
     postPositionInfo = '/position/v1/postPositionInfo'  # 薪类
@@ -150,7 +150,7 @@ class AppApi():
                 "housePropertyType": "NO_HOUSE", "lifeYears": 20.0,
                 "livingType": "SELF_HOUSE", "livingTypeOther": "asdf", "marriage": "UNMARRIED",
                 "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
-                "town": "朝阳区物资学院"}
+                "town": "朝阳区物资学院","repaySource":"WAGE_INCOME"}
         return json.dumps(data)
 
     '''

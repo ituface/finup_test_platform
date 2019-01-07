@@ -46,3 +46,53 @@ Traceback (most recent call last):
 KeyboardInterrupt
 ==========ssss==============
 sh: line 0: cd: /root/data/plistfile: No such file or directory
+[master 283e7ec] firs
+ 4 files changed, 93 insertions(+), 1 deletion(-)
+ create mode 100644 itufaceBG/nohup.out
+remote: Powered By [01;34mGitee.com[0m        
+To https://gitee.com/ituface/itufaceBG.git
+   20b2017..283e7ec  master -> master
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 13 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+January 07, 2019 - 09:03:42
+Django version 1.11.3, using settings 'itufaceBG.settings'
+Starting development server at http://0.0.0.0:8882/
+Quit the server with CONTROL-C.
+Process Process-1:
+Traceback (most recent call last):
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 249, in _bootstrap
+    self.run()
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/finup/Desktop/itufacegit/itufaceBG/itufaceBG/CreatePiece/SqlCron.py", line 31, in worker
+    scheduler.start()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 19, in start
+    self._main_loop()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 28, in _main_loop
+    self._event.wait(wait_seconds)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 299, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+Process Process-2:
+Traceback (most recent call last):
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 249, in _bootstrap
+    self.run()
+  File "/Users/finup/anaconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/finup/Desktop/itufacegit/itufaceBG/itufaceBG/CreatePiece/SqlCron.py", line 31, in worker
+    scheduler.start()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 19, in start
+    self._main_loop()
+  File "/Users/finup/anaconda/lib/python3.6/site-packages/apscheduler/schedulers/blocking.py", line 28, in _main_loop
+    self._event.wait(wait_seconds)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "/Users/finup/anaconda/lib/python3.6/threading.py", line 299, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
