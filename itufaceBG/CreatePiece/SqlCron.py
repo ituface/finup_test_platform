@@ -10,7 +10,7 @@ def scheduler(parameter):
         def inner(*args, **kwargs):
             def worker():
                 scheduler = BlockingScheduler()
-                scheduler.add_job(func=func, trigger='cron', hour=19,minute = 52,second=0)
+                scheduler.add_job(func=func, trigger='cron', hour=10,minute = 0,second=0)
                 scheduler.start()
             p = multiprocessing.Process(target=worker, args=())
             print('pa-',parameter)
@@ -78,8 +78,3 @@ def insert_statistics_amount():
        tag= MysqlHandle.delete_update_insert_mysql_data(
             statistics_sql.format(date_record=yesterday, count=inner[0], category=inner[1]))
        print('tag----->',tag)
-
-
-@testschedulers
-def task():
-    print('一丝丝p')

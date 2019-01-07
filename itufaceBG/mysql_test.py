@@ -109,15 +109,9 @@ def insert_statistics_amount():
             statistics_sql.format(date_record=yesterday, count=inner[0], category=inner[1]))
        print('tag----->',tag)
 
-
-
-date=[]
-count=[]
-sql=MysqlHandle.get_xml_sql(xml_path='select_sql',xml_tag='select',xml_id='select_statistics_amount_app_data')
-data=MysqlHandle.select_mysql_data(sql)
-for i in data:
-    inner='%d'%i['date']
-    date.append(int(i['date']))
-    count.append(i['count'])
-print(date)
-print(count)
+today = datetime.datetime.now()
+offset = datetime.timedelta(days=-1)
+yesterday = (today + offset).strftime('%Y-%m-%d')
+app_sql = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_chart_app')
+app_data = MysqlHandle.select_mysql_data(app_sql.format(create_time=yesterday))
+print(app_data)
