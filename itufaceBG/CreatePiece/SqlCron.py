@@ -27,7 +27,7 @@ def schedulers(func):
     def inner():
         def worker():
             scheduler = BlockingScheduler()
-            scheduler.add_job(func=func, trigger='cron',hour=16,minute =12,second=0)
+            scheduler.add_job(func=func, trigger='cron',hour=16,minute =20,second=0)
             scheduler.start()
         p = multiprocessing.Process(target=worker, args=())
         p.start()
