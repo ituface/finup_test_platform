@@ -41,10 +41,28 @@
 # print(workday_to_date())
 #
 #
-date=['2018-12-20', '2018-12-19', '2018-12-18', '2018-12-17', '2018-12-14']
-date_dao=date[::-1]
-print(date_dao)
+# date=['2018-12-20', '2018-12-19', '2018-12-18', '2018-12-17', '2018-12-14']
+# date_dao=date[::-1]
+# print(date_dao)
+#
+# source=[{'number': 8, 'date': '2018-12-13'}, {'number': 11, 'date': '2018-12-14'}, {'number': 9, 'date': '2018-12-17'}, {'number': 5, 'date': '2018-12-18'}, {'number': 11, 'date': '2018-12-19'}]
+# for inner in source:
+#     print(inner['date'])
+class A():
+    def __init__(self,name):
 
-source=[{'number': 8, 'date': '2018-12-13'}, {'number': 11, 'date': '2018-12-14'}, {'number': 9, 'date': '2018-12-17'}, {'number': 5, 'date': '2018-12-18'}, {'number': 11, 'date': '2018-12-19'}]
-for inner in source:
-    print(inner['date'])
+        self.name=name
+    def  bu(self):
+        return 3
+
+    def __getattribute__(self, item):
+        try:
+            super(A,self).__getattribute__(item)
+        except KeyError:
+            return 'default'
+
+a=A('ui')
+print(a.name)
+print(a.bs)
+print(a.__dict__)
+print(hasattr(a,'909090'))
