@@ -14,7 +14,9 @@
 <script language="JavaScript">
     $(document).ready(function () {
         var chart = {
+
             type: 'column'
+
         };
         var title = {
             text: '最近一周'
@@ -22,12 +24,10 @@
 
         var xAxis = {
             categories:{{ date }},
-            allowDecimals:false,
             crosshair: true
         };
         var yAxis = {
             min: 0,
-            allowDecimals:false,
             title: {
                 text: '数量（个）'
             }
@@ -54,8 +54,9 @@
             name: '造件数',
             data: {{ piece_count }}
         },
-            {name: 'app上传数',
-             data: {{ app_count }}
+            {
+                name: 'app上传数',
+                data: {{ app_count }}
             }
         ];
 

@@ -2,36 +2,37 @@ import multiprocessing
 from apscheduler.schedulers.blocking import BlockingScheduler
 from public.mysql import MysqlHandle
 import datetime
+
 '''
 带参
 '''
-def scheduler(parameter):
+def scheduler(hour,minute,second):
     def outer(func):
         def inner(*args, **kwargs):
             def worker():
                 scheduler = BlockingScheduler()
-                scheduler.add_job(func=func, trigger='cron', hour=10,minute = 0,second=0)
+                scheduler.add_job(func=func, trigger='cron', hour=hour,minute = minute,second=second)
                 scheduler.start()
             p = multiprocessing.Process(target=worker, args=())
-            print('pa-',parameter)
             p.start()
         return inner
     return outer
 
+
 '''
 不带参
 '''
-
-
 def schedulers(func):
     def inner():
         def worker():
             scheduler = BlockingScheduler()
-            scheduler.add_job(func=func, trigger='cron',hour=16,minute =20,second=0)
+            scheduler.add_job(func=func, trigger='cron',hour=11,minute =0,second=0)
             scheduler.start()
         p = multiprocessing.Process(target=worker, args=())
         p.start()
     return inner
+
+
 def testschedulers(func):
     def inner():
         def worker():
@@ -42,13 +43,13 @@ def testschedulers(func):
         p.start()
     return inner
 
-@schedulers
+@scheduler(1,0,0)
 def update_city_code():
         print('datetime------>',datetime.datetime.now())
         sql=MysqlHandle.get_xml_sql(xml_path='update_sql',xml_tag='update',xml_id='timer_regions')
         MysqlHandle.delete_update_insert_mysql_data(sql)
 
-@schedulers
+@scheduler(1,0,0)
 def insert_statistics_amount():
     # 计算昨天日期
     print('开始了')
