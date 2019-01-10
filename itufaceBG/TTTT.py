@@ -48,21 +48,28 @@
 # source=[{'number': 8, 'date': '2018-12-13'}, {'number': 11, 'date': '2018-12-14'}, {'number': 9, 'date': '2018-12-17'}, {'number': 5, 'date': '2018-12-18'}, {'number': 11, 'date': '2018-12-19'}]
 # for inner in source:
 #     print(inner['date'])
-class A():
-    def __init__(self,name):
+# class A():
+#     def __init__(self,name):
+#
+#         self.name=name
+#     def  bu(self):
+#         return 3
+#
+#     def __getattribute__(self, item):
+#         try:
+#             super(A,self).__getattribute__(item)
+#         except KeyError:
+#             return 'default'
+#
+# a=A('ui')
+# print(a.name)
+# print(a.bs)
+# print(a.__dict__)
+# print(hasattr(a,'909090'))
 
-        self.name=name
-    def  bu(self):
-        return 3
 
-    def __getattribute__(self, item):
-        try:
-            super(A,self).__getattribute__(item)
-        except KeyError:
-            return 'default'
+import  requests
 
-a=A('ui')
-print(a.name)
-print(a.bs)
-print(a.__dict__)
-print(hasattr(a,'909090'))
+
+code=requests.post(url='http://10.10.180.206:8090/updateLendApp',data={'mobile':'17800038282','state_type':'SALE_EXAMINE'})
+print(code.text)

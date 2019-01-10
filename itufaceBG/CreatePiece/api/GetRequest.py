@@ -156,6 +156,8 @@ class GetRequest():
 
         statuss = status('GraspData')
         enum_list = list(set(self.inner_status).intersection(set(statuss)))
+        if 'CREDIT_REPORT' not in enum_list:
+            enum_list.append('CREDIT_REPORT')
         if len(enum_list):
             data = self.inner_post(self.api.updateMXstatus, self.api.func_updateMXstatus(self.mobile, enum_list))
             if self.code:
@@ -173,8 +175,11 @@ class GetRequest():
         api = self.api.submitToSale
         api_data = self.api.func_JsonIsNull()
         data = self.request_post(url=api, data=api_data, headers=self.headers)
+        if self.product_type=='SPEED1.0':
+           cs=requests.post(url=path.ToChangeStatus,data={'mobile':self.mobile,'state_type':'SALE_EXAMINE'})
         if self.code:
             return data
+
         return 0
 
     '''
