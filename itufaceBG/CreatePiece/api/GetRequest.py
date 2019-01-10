@@ -114,7 +114,7 @@ class GetRequest():
         ]
         for inner in ApiList:
             print(inner)
-            data = self.request_post(url=inner[0], data=inner[1], headers=self.headers)
+            data = self.request_post(url=inner[1], data=inner[0], headers=self.headers)
             if self.code:
                 return data
         return 0
