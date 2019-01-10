@@ -4,6 +4,7 @@ from public.path import path
 import json
 from CreatePiece.api.GetRequest import GetRequest
 import bisect
+import traceback
 
 
 class AddPiece():
@@ -40,6 +41,7 @@ class AddPiece():
                 return 2
 
         except Exception as e:
+            print(traceback.print_exc())
             return 3
 
     @classmethod
