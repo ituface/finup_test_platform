@@ -99,13 +99,18 @@ class GetRequest():
     '''
 
     def BASE_INFO(self):
+
         # 职业信息接口区分薪商
         profession_info = self.api.postBusinessPositionInfo if self.product_bool else self.api.postPositionInfo
+        isable=1
+        if self.product_type=='SPEED1.0':
+            isable=0
+
         ApiList = [
-            [self.api.postVideoCheck, self.api.func_postVideoCheck()],
-            [self.api.sumbitContact, self.api.func_submitContact()],
-            [self.api.submitBasicInfo, self.api.func_submitBaseInfo()],
-            [profession_info, self.api.func_postBusinessPositionInfo(product_bool=self.product_bool)]
+            [self.api.func_postVideoCheck(),self.api.postVideoCheck,],
+            [self.api.func_submitContact(isable),self.api.sumbitContact],
+            [self.api.func_submitBaseInfo(isable),self.api.submitBasicInfo],
+            [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info]
         ]
         for inner in ApiList:
             print(inner)

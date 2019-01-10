@@ -111,20 +111,43 @@ class AppApi():
     '''
 
     @staticmethod
-    def func_submitContact():
+    def func_submitContact(isable=1):
 
-        data = {
-            "contactVoList": [{"contactMobile": "18220022211", "contactName": "王朗", "department": "信息科", "isKnow": "0",
-                               "relation": "FATHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
-                              {"contactMobile": "13577772222", "contactName": "王明阳", "department": "信息科", "isKnow": "0",
-                               "relation": "MOTHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
-                              {"contactMobile": "17308882222", "contactName": "叶利钦", "department": "信息科",
-                               "isKnow": "0",
-                               "relation": "RELATIVES", "relationExplain": "string",
-                               "relationType": "WORK_CERTIFICATE"},
-                              {"contactMobile": "16722233322", "contactName": "斯大林", "department": "信息科", "isKnow": "0",
-                               "relation": "COLLEAGUE", "relationExplain": "string", "relationType": "OTHER_CONTACTS"}],
-            "startTime": AppApi.timestamp}
+        if isable:
+            data = {
+                "contactVoList": [
+                    {"contactMobile": "18220022211", "contactName": "王朗", "department": "信息科", "isKnow": "0",
+                     "relation": "FATHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
+                    {"contactMobile": "13577772222", "contactName": "王明阳", "department": "信息科", "isKnow": "0",
+                     "relation": "MOTHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
+                    {"contactMobile": "17308882222", "contactName": "叶利钦", "department": "信息科",
+                     "isKnow": "0",
+                     "relation": "RELATIVES", "relationExplain": "string",
+                     "relationType": "WORK_CERTIFICATE"},
+                    {"contactMobile": "16722233322", "contactName": "斯大林", "department": "信息科", "isKnow": "0",
+                     "relation": "COLLEAGUE", "relationExplain": "string", "relationType": "OTHER_CONTACTS"}],
+                "startTime": AppApi.timestamp}
+        else:
+            AppApi.sumbitContact='/contact/v2/submit'
+            data = {
+                "contactVoList": [{
+                    "contactMobile": "13662669333",
+                    "contactName": "母亲大人",
+                    "department": "",
+                    "isKnow": 1,
+                    "relation": "MOTHER",
+                    "relationExplain": "",
+                    "relationType": "LINEAL_RELATIVES"
+                }, {
+                    "contactMobile": "17600810361",
+                    "contactName": "同事二蛋",
+                    "department": "",
+                    "isKnow": 0,
+                    "relation": "COLLEAGUE",
+                    "relationExplain": "",
+                    "relationType": "OTHER_CONTACTS"
+                }]
+            }
         return json.dumps(data)
 
     '''
@@ -143,14 +166,34 @@ class AppApi():
     '''
 
     @staticmethod
-    def func_submitBaseInfo():
-        data = {"annualIncome": "1000000", "bankNo": "77722223333322", "carPropertyType": "HAVE_CAR_AND_LOAN",
-                "childrenNumber": 0.0, "city": "北京", "cityCode": "110100", "dist": "东城区", "distCode": "110101",
-                "education": "UNDERGRADUATE", "email": '%s@163.com' % str(int(time.time() * 1000)),
-                "housePropertyType": "NO_HOUSE", "lifeYears": 20.0,
-                "livingType": "SELF_HOUSE", "livingTypeOther": "asdf", "marriage": "UNMARRIED",
-                "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
-                "town": "朝阳区物资学院","repaySource":"WAGE_INCOME"}
+    def func_submitBaseInfo(isable=1):
+        if isable:
+            data = {"annualIncome": "1000000", "bankNo": "77722223333322", "carPropertyType": "HAVE_CAR_AND_LOAN",
+                    "childrenNumber": 0.0, "city": "北京", "cityCode": "110100", "dist": "东城区", "distCode": "110101",
+                    "education": "UNDERGRADUATE", "email": '%s@163.com' % str(int(time.time() * 1000)),
+                    "housePropertyType": "NO_HOUSE", "lifeYears": 20.0,
+                    "livingType": "SELF_HOUSE", "livingTypeOther": "asdf", "marriage": "UNMARRIED",
+                    "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
+                    "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}
+        else:
+            AppApi.submitBasicInfo='/basic/v3/submitBasicInfo'
+            data = {
+                "city": "市辖区",
+                "email": '%s@163.com' % str(int(time.time() * 1000)),
+                "marriage": "UNMARRIED",
+                "province": "北京市",
+                "dist": "东城区",
+                "distCode": "110101",
+                "cityCode": "110100",
+                "annualIncome": "3663.00",
+                "town": "银河护卫队A座凡普金科集团有限公司亚龙湾",
+                "housePropertyType": "HAVE_HOUSE_AND_LOAN_WITHOUT",
+                "provinceCode": "110000",
+                "livingType": "HOME_HOUSE",
+                "education": "SEN",
+                "livingTypeOther": "",
+                "bankNo": "623166446666"
+            }
         return json.dumps(data)
 
     '''
