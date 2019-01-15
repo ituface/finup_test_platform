@@ -103,7 +103,7 @@ class GetRequest():
         # 职业信息接口区分薪商
         profession_info = self.api.postBusinessPositionInfo if self.product_bool else self.api.postPositionInfo
         isable=1
-        if self.product_type=='SPEED1.0':
+        if self.product_type=='QUICK1.0':
             isable=0
 
         ApiList = [
@@ -175,7 +175,7 @@ class GetRequest():
         api = self.api.submitToSale
         api_data = self.api.func_JsonIsNull()
         data = self.request_post(url=api, data=api_data, headers=self.headers)
-        if self.product_type=='SPEED1.0':
+        if self.product_type=='QUICK1.0':
            cs=requests.post(url=path.ToChangeStatus,data={'mobile':self.mobile,'state_type':'SALE_EXAMINE'})
         if self.code:
             return data
