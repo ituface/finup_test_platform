@@ -25,6 +25,7 @@ class AddPiece():
             lend_status = status('lend')
             position = app_status.index(request_status) + 1
             print('position---------------》', position)
+            print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
             if request_status in app_status:
                 for inner_status in range(position):

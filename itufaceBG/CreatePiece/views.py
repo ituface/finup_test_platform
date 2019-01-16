@@ -109,6 +109,8 @@ def add_piece_api(request):
     num = gain_data['num']
     name = gain_data['name']
     product_type = gain_data['product_type']
+    video_check=gain_data['video_check']
+    print('video_Check--------------->',video_check)
     mobile = gain_data['mobile']
     lend_status = Func_status('lend')
     print('status---------------->', status)
