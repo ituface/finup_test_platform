@@ -175,7 +175,7 @@ class AppApi():
                     "housePropertyType": "NO_HOUSE", "lifeYears": 20.0,
                     "livingType": "SELF_HOUSE", "livingTypeOther": "asdf", "marriage": "UNMARRIED",
                     "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
-                    "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}
+                    "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}   #还款来源：repaySource
         else:
             AppApi.submitBasicInfo = '/basic/v3/submitBasicInfo'
             data = {
