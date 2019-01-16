@@ -103,6 +103,7 @@ def RequestPostToStr(no_handle_list):
     def out(func):
         def inner(request, *args, **kwargs):
             data = dict(request.POST)
+            print('data========================>',data)
             strs = ''
             for key in data.keys():
                 if key in no_handle_list:
