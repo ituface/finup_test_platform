@@ -112,7 +112,7 @@
                         <div class="layui-input-inline">
                             <select name="video_check">
                                 <option value="OFF_SIGN">线下</option>
-                                <option VALUE="VIDEO_SIGN">线上</option>
+                                <option value="VIDEO_SIGN">线上</option>
 
                             </select>
                         </div>
@@ -173,26 +173,14 @@
 </div>
 <script>
     $(document).ready(function () {
+        console.log('dafafdafas')
 
         $('#btnClass').click(function () {
             var name = $("input[name=name]").val()
-            var mobile = $("input[name=moblie]").val()
-
-            if (name == '') {
-                layui.use('layer', function () {
-                    var layer = layui.layer;
-
-                    layer.msg('必填项不能为空');
-                });
+            var mobile = $("input[name=mobile]").val()
+            if (name.length==0 || mobile.length==0) {
+                return false
             }
-            else if (mobile == '') {
-                layui.use('layer', function () {
-                    var layer = layui.layer;
-
-                    layer.msg('必填项不能为空');
-                });
-            }
-
             else {
                 $('#loadings').addClass('loading');
                 $('#loadinggif').addClass('gif');
@@ -215,14 +203,20 @@
         $('#form-sumbit').submit(function () {
             $('#loadings').show()
             var name = $("input[name=name]").val();
+            console.log('oooname---->'+name)
             var mobile = $("input[name=mobile]").val();
             var product_type = $("select[name=product_type]").val();
             var status = $("select[name=status]").val();
             var saleNo = $("input[name=saleNo]").val();
             var year = $("input[name=year]").val();
             var salePassword = $("input[name=salePassword]").val();
-            var video_check = $("input[name=video_check]").val();
+            console.log('name------->'+name )
+            var video_check = $("select[name=video_check]").val();
+            console.log('video_check------->'+video_check)
+
+
             $.ajax({
+
                     url: "{% url 'api-add-piece' %}",
                     type: 'post',
                     data: {
@@ -234,7 +228,7 @@
                         "salePassword": salePassword,
                         "year": year,
                         "num": num,
-                        "video_check":video_check
+                        "video_check": video_check,
                     },
                     success: function (data) {
                         num = 1
