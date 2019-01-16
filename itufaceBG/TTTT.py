@@ -66,10 +66,17 @@
 # print(a.bs)
 # print(a.__dict__)
 # print(hasattr(a,'909090'))
-
-
-import  requests
-
-
-code=requests.post(url='http://10.10.180.206:8090/updateLendApp',data={'mobile':'17800038282','state_type':'SALE_EXAMINE'})
-print(code.text)
+def fip():
+    n=0
+    while 1:
+        x=yield n
+        print('l',n)
+        n+=1
+s=fip()
+next(s)
+s.send(1)
+# for i in fip():
+#     print(i)
+#     if i==15:
+#         break
+print(next(s))

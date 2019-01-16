@@ -128,7 +128,7 @@ class AppApi():
                      "relation": "COLLEAGUE", "relationExplain": "string", "relationType": "OTHER_CONTACTS"}],
                 "startTime": AppApi.timestamp}
         else:
-            AppApi.sumbitContact='/contact/v2/submit'
+            AppApi.sumbitContact = '/contact/v2/submit'
             data = {
                 "contactVoList": [{
                     "contactMobile": "13662669333",
@@ -155,10 +155,11 @@ class AppApi():
     '''
 
     @staticmethod
-    def func_postVideoCheck():
+    def func_postVideoCheck(video_check):
         data = {
-            "videoCheck": "VIDEO_SIGN"
+            "videoCheck":video_check   #VIDEO_SIGN  OFF_SIGN
         }
+        print('video--------》',data)
         return json.dumps(data)
 
     '''
@@ -176,7 +177,7 @@ class AppApi():
                     "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
                     "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}
         else:
-            AppApi.submitBasicInfo='/basic/v3/submitBasicInfo'
+            AppApi.submitBasicInfo = '/basic/v3/submitBasicInfo'
             data = {
                 "city": "市辖区",
                 "email": '%s@163.com' % str(int(time.time() * 1000)),

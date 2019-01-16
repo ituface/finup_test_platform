@@ -19,8 +19,8 @@ host = path.Apihost
 
 
 class GetRequest():
-    def __init__(self, name, mobile, product_type='SALARY2.0_TALENT', saleNo='023264',
-                 salePassword='123456', year='1987'):
+    def __init__(self, name, mobile, product_type='SALARY2.0_TALENT',video_check="VIDEO_SIGN",saleNo='023264',
+                 salePassword='123456', year='1987',):
         '''
 
         :param name: 姓名 str
@@ -42,6 +42,7 @@ class GetRequest():
         self.code = 0
         self.year = year
         self.headers = SetHearder.setHearderData()
+        self.video_check=video_check
 
     '''
     快速登录
@@ -107,7 +108,7 @@ class GetRequest():
             isable=0
 
         ApiList = [
-            [self.api.func_postVideoCheck(),self.api.postVideoCheck,],
+            [self.api.func_postVideoCheck(self.video_check),self.api.postVideoCheck,],
             [self.api.func_submitContact(isable),self.api.sumbitContact],
             [self.api.func_submitBaseInfo(isable),self.api.submitBasicInfo],
             [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info]

@@ -100,8 +100,20 @@
                                 <option value="">若只关注状态，勿选</option>
 
                                 {% for inner in data %}
-                                    <option value="{{ inner.product_enum }}">{{inner.product_name }}</option>
+                                    <option value="{{ inner.product_enum }}">{{ inner.product_name }}</option>
                                 {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label">
+                            <span class="x-red">*</span>签约方式
+                        </label>
+                        <div class="layui-input-inline">
+                            <select name="video_check">
+                                <option value="OFF_SIGN">线下</option>
+                                <option VALUE="VIDEO_SIGN">线上</option>
+
                             </select>
                         </div>
                     </div>
@@ -113,7 +125,7 @@
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                     <div class="layui-form-item">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">销售密码(选填)</label>
 
                         <div class="layui-input-inline">
@@ -121,7 +133,7 @@
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
-                   <div class="layui-form-item">
+                    <div class="layui-form-item">
                         <label class="layui-form-label">身份证年份(选填)</label>
 
                         <div class="layui-input-inline">
@@ -209,6 +221,7 @@
             var saleNo = $("input[name=saleNo]").val();
             var year = $("input[name=year]").val();
             var salePassword = $("input[name=salePassword]").val();
+            var video_check = $("input[name=video_check]").val();
             $.ajax({
                     url: "{% url 'api-add-piece' %}",
                     type: 'post',
@@ -219,25 +232,26 @@
                         "status": status,
                         "saleNo": saleNo,
                         "salePassword": salePassword,
-                        "year":year,
-                        "num": num
+                        "year": year,
+                        "num": num,
+                        "video_check":video_check
                     },
                     success: function (data) {
                         num = 1
                         console.log('num:' + num);
-                        console.log('sss'+data)
+                        console.log('sss' + data)
                         if (data.code == 200) {
                             $('#loadings').hide();
                             $('#search_result').show();
-                            var result=data.data
+                            var result = data.data
 
-                            for (var i=0;i<result.length;i++) {
+                            for (var i = 0; i < result.length; i++) {
                                 console.log(result[i].customer_name)
-                                $("ol").prepend('<li>姓名：'+result[i].customer_name+', 手机号：'+result[i].mobile + '</li>');
+                                $("ol").prepend('<li>姓名：' + result[i].customer_name + ', 手机号：' + result[i].mobile + '</li>');
                             }
 
                         }
-                        if (data.code==202){
+                        if (data.code == 202) {
 
                             $('#loadings').hide();
                             console.log(data)
