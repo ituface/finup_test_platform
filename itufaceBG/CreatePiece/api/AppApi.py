@@ -305,3 +305,7 @@ class AppApi():
         :return:
         '''
         return json.dumps({'mobile': mobile, 'type': type})
+    def __del__(self):
+
+
+        print('我被销毁了。。。。。啦啦啦啦啦啦啦啊')
