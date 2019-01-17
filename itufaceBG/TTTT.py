@@ -81,14 +81,3 @@
 # #         break
 # print(next(s))
 
-
-
-
-class A():
-    a=1
-    def b(self):
-        A.a=2
-    def __del__(self):
-        print('dadaf')
-uuuu=A()
-print(uuuu.a)

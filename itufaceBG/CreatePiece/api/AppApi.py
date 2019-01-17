@@ -114,6 +114,8 @@ class AppApi():
     def func_submitContact(isable=1):
 
         if isable:
+            AppApi.sumbitContact = '/contact/v1/submit'
+
             data = {
                 "contactVoList": [
                     {"contactMobile": "18220022211", "contactName": "王朗", "department": "信息科", "isKnow": "0",
