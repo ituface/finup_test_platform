@@ -140,6 +140,170 @@
 
             {% endfor %}
             </tbody>
+
+            <!--删除操作-->
+            <script>
+                function del_list(the, inner_id) {
+
+                    var name = $(the).parents("tr").children("td").eq(1).text()
+                    var cou = $(the).parents("tr").children("td").eq(2).text()
+
+                    var Environmental = $(the).parents("tr").children("td").eq(3).text()
+
+                    var version = $(the).parents("tr").children("td").eq(4).text()
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim',
+                        area: ["400px", "200px"],
+                        title: "删除条目",
+                        content: '<div align="center" class="text-center" style="margin-top:20px"><p>是否确认删除</br>' + Environmental + '-' + cou + '-' + name + '-' + version + '?</p></div>',
+                        btn: ['确定', '取消'],
+                        yes: function () {
+
+                            $.ajax({
+                                url: "{% url 'del_app_list' %}",
+                                type: 'post',
+                                data: {"column_id": inner_id},
+                                success: function (e) {
+                                    if (e == 1) {
+                                        layer.closeAll();
+                                        layer.msg("删除成功");
+                                        $(the).parents("tr").remove();
+
+
+                                    }
+                                    else if (e == 2) {
+                                        layer.closeAll();
+                                        layer.msg("删除文件路径不存在");
+
+                                    }
+
+                                    else {
+                                        layer.closeAll();
+                                        layer.msg("删除失败，请重试");
+                                    }
+                                },
+                            })
+                        },
+
+                    });
+                }
+
+
+            </script>
+            <script>
+                layui.use('laydate', function () {
+                    var laydate = layui.laydate;
+
+                    //执行一个laydate实例
+                    laydate.render({
+                        elem: '#start' //指定元素
+                    });
+
+                    //执行一个laydate实例
+                    laydate.render({
+                        elem: '#end' //指定元素
+                    });
+                });
+            </script>
+            <!--局部刷新-->
+            <script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+            <script>
+
+                $(document).ready(function () {
+
+                    $('#form-sumbit').submit(function () {
+                        var customerOruser = $("select[name=customerOruser]").val()
+                        var appType = $("select[name=appType]").val()
+                        var isfinal = $("select[name=isfinal]").val()
+                        var test_or_beta = $("select[name=test_or_beta]").val()
+                        var environment = $("select[name=environment]").val()
+                        var start_time = $("input[name=create_time]").val()
+                        var end_time = $("input[name=end_time]").val()
+                        $.ajax({
+                                url: "{% url 'app-list' %}",
+                                type: 'post',
+                                data: {
+                                    "create_time": start_time,
+                                    "end_time": end_time,
+                                    "customerOruser": customerOruser,
+                                    "appType": appType,
+                                    "isfinal": isfinal,
+                                    "environment": environment,
+                                    "test_or_beta": test_or_beta
+                                },
+                                success: function (data) {
+
+                                    var data = data;
+
+                                    var key = /<table[\w|\W]+\<\/table>/;
+                                    datas = data.match(key);
+
+                                    $('#tabb').html(datas);
+
+
+                                },
+                                else: function () {
+                                    layui.use('layer', function () {
+                                        var layer = layui.layer;
+
+                                        layer.msg('查询失败，请稍后重试');
+                                    });
+                                }
+
+
+                            }
+                        );
+
+
+                        return false;
+                    });
+
+
+                });
+
+
+                <!--查看二维码-->
+
+                function qrcode(url, type, id) {
+
+
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.open({
+                                type: 1,
+                                content: '<div id="codez"></div>',
+                                title: '二维码下载',
+                                offset: 't'
+
+                            }
+                        );
+                        if (type == 'IOS') {
+                            $('#codez').qrcode(window.location.host + '/qr-ios-download/?id=' + id)
+                        }
+                        else {
+                            $('#codez').qrcode(window.location.host + url)
+                        }
+                    });
+
+                }
+                <!--点击table后弹窗-->
+
+                function tdd(the) {
+                    alert($(the).text());
+
+                };
+
+
+            </script>
+            <script>
+
+                $(document).ready(function () {
+                    $('tr.ANDROID').css("background-color", "#f6f5ec");
+                    $('tr.IOS').css("background-color", "#fffffb");
+                });
+            </script>
         </table>
     </div>
     <div class="page">
@@ -174,165 +338,6 @@
 
 </div>
 
-<!--删除操作-->
-<script>
-    function del_list(the, inner_id) {
-
-        var name = $(the).parents("tr").children("td").eq(1).text()
-        var cou = $(the).parents("tr").children("td").eq(2).text()
-
-        var Environmental = $(the).parents("tr").children("td").eq(3).text()
-
-        var version = $(the).parents("tr").children("td").eq(4).text()
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-rim',
-            area: ["400px", "200px"],
-            title: "删除条目",
-            content: '<div align="center" class="text-center" style="margin-top:20px"><p>是否确认删除</br>' + Environmental + '-' + cou + '-' + name + '-' + version + '?</p></div>',
-            btn: ['确定', '取消'],
-            yes: function () {
-
-                $.ajax({
-                    url: "{% url 'del_app_list' %}",
-                    type: 'post',
-                    data: {"column_id": inner_id},
-                    success: function (e) {
-                        if (e == 1) {
-                            layer.closeAll();
-                            layer.msg("删除成功");
-                            $(the).parents("tr").remove();
-
-
-                        }
-                        else if (e == 2) {
-                            layer.closeAll();
-                            layer.msg("删除文件路径不存在");
-
-                        }
-
-                        else {
-                            layer.closeAll();
-                            layer.msg("删除失败，请重试");
-                        }
-                    },
-                })
-            },
-
-        });
-    }
-
-
-</script>
-<script>
-    layui.use('laydate', function () {
-        var laydate = layui.laydate;
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-    });
-</script>
-<!--局部刷新-->
-<script src="//cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
-
-<script>
-
-    $(document).ready(function () {
-
-        $('#form-sumbit').submit(function () {
-            var customerOruser = $("select[name=customerOruser]").val()
-            var appType = $("select[name=appType]").val()
-            var isfinal = $("select[name=isfinal]").val()
-            var test_or_beta = $("select[name=test_or_beta]").val()
-            var environment = $("select[name=environment]").val()
-            var start_time = $("input[name=create_time]").val()
-            var end_time = $("input[name=end_time]").val()
-            $.ajax({
-                    url: "{% url 'app-list' %}",
-                    type: 'post',
-                    data: {
-                        "create_time": start_time,
-                        "end_time": end_time,
-                        "customerOruser": customerOruser,
-                        "appType": appType,
-                        "isfinal": isfinal,
-                        "environment": environment,
-                        "test_or_beta": test_or_beta
-                    },
-                    success: function (data) {
-
-                        var data = data;
-
-                        var key = /<table[\w|\W]+\<\/table>/;
-                        datas = data.match(key);
-
-                        $('#tabb').html(datas);
-
-
-                    },
-                    else: function () {
-                        layui.use('layer', function () {
-                            var layer = layui.layer;
-
-                            layer.msg('查询失败，请稍后重试');
-                        });
-                    }
-
-
-                }
-            );
-
-
-            return false;
-        });
-
-
-    });
-
-
-    <!--查看二维码-->
-
-    function qrcode(url, type, id) {
-
-
-        layui.use('layer', function () {
-            var layer = layui.layer;
-            layer.open({
-                    type: 1,
-                    content: '<div id="codez"></div>',
-                    title: '二维码下载',
-                    offset: 't'
-
-                }
-            );
-            if (type == 'IOS') {
-                $('#codez').qrcode(window.location.host + '/qr-ios-download/?id=' + id)
-            }
-            else {
-                $('#codez').qrcode(window.location.host + url)
-            }
-        });
-
-    }
-    <!--点击table后弹窗-->
-
-    function tdd(the) {
-        alert($(the).text());
-
-    };
-    $(document).ready(function () {
-        $('tr.ANDROID').css("background-color", "#bbf");
-    });
-
-
-</script>
 </body>
 
 </html>
