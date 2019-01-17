@@ -40,6 +40,7 @@ class MysqlHandle:
             print(e)
             data = []
         cursor.close()
+        cls.conn.close()
         return data
     @classmethod
     def delete_update_insert_mysql_data(cls,sql):
