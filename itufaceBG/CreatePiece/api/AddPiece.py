@@ -27,16 +27,19 @@ class AddPiece():
             print('position---------------》', position)
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
+            del gtr
             if request_status in app_status:
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])
                     print('inner-----<', inner_status)
+                    del gtr
                     if data:
                         return data
                 return 1
             if request_status in lend_status:
                 for inner_lend_status in app_status:
                     data = eval('gtr.%s()' % inner_lend_status)
+                    del gtr
                     if data:
                         return data
                 return 2

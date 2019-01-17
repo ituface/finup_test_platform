@@ -88,6 +88,7 @@ class A():
     a=1
     def b(self):
         A.a=2
-
-A().b()
-print(A.a)
+    def __del__(self):
+        print('dadaf')
+uuuu=A()
+print(uuuu.a)
