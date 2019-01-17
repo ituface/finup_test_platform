@@ -108,7 +108,7 @@
             </thead>
             <tbody>
             {% for inner in applist %}
-                <tr id="{{ inner.id }}">
+                <tr id="{{ inner.id }}" class="{{ inner.appType }}">
                     <td>
                         {{ forloop.counter }}
                     </td>
@@ -125,7 +125,8 @@
                         <a href={% static inner.appPath %}>
                             <i class="layui-icon layui-icon-download-circle"></i>
                         </a>
-                        <a title="查看" onclick="qrcode('{% static  inner.qr_path%}','{{ inner.appType }}','{{ inner.id }}')">
+                        <a title="查看"
+                           onclick="qrcode('{% static  inner.qr_path %}','{{ inner.appType }}','{{ inner.id }}')">
                             <i class="layui-icon layui-icon-cellphone"></i>
                         </a>
                         <a title="修改" onclick="x_admin_show('修改','/update-app/?id={{ inner.id }}')">
@@ -298,7 +299,7 @@
 
     <!--查看二维码-->
 
-    function qrcode(url, type,id) {
+    function qrcode(url, type, id) {
 
 
         layui.use('layer', function () {
@@ -312,7 +313,7 @@
                 }
             );
             if (type == 'IOS') {
-                $('#codez').qrcode(window.location.host+'/qr-ios-download/?id='+id)
+                $('#codez').qrcode(window.location.host + '/qr-ios-download/?id=' + id)
             }
             else {
                 $('#codez').qrcode(window.location.host + url)
@@ -325,7 +326,11 @@
     function tdd(the) {
         alert($(the).text());
 
-    }
+    };
+    $(document).ready(function () {
+        $('tr.ANDROID').css("background-color", "#bbf");
+    });
+
 
 </script>
 </body>
