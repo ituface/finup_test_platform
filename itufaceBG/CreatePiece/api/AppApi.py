@@ -169,6 +169,8 @@ class AppApi():
     @staticmethod
     def func_submitBaseInfo(isable=1):
         if isable:
+            AppApi.submitBasicInfo = '/basic/v2/submitBasicInfo'
+
             data = {"annualIncome": "1000000", "bankNo": "77722223333322", "carPropertyType": "HAVE_CAR_AND_LOAN",
                     "childrenNumber": 0.0, "city": "北京", "cityCode": "110100", "dist": "东城区", "distCode": "110101",
                     "education": "UNDERGRADUATE", "email": '%s@163.com' % str(int(time.time() * 1000)),

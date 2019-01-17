@@ -66,17 +66,28 @@
 # print(a.bs)
 # print(a.__dict__)
 # print(hasattr(a,'909090'))
-def fip():
-    n=0
-    while 1:
-        x=yield n
-        print('l',n)
-        n+=1
-s=fip()
-next(s)
-s.send(1)
-# for i in fip():
-#     print(i)
-#     if i==15:
-#         break
-print(next(s))
+# def fip():
+#     n=0
+#     while 1:
+#         x=yield n
+#         print('l',n)
+#         n+=1
+# s=fip()
+# next(s)
+# s.send(1)
+# # for i in fip():
+# #     print(i)
+# #     if i==15:
+# #         break
+# print(next(s))
+
+
+
+
+class A():
+    a=1
+    def b(self):
+        A.a=2
+
+A().b()
+print(A.a)
