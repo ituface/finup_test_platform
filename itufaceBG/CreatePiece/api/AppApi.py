@@ -230,7 +230,7 @@ class AppApi():
                 "companyName": "现单位名称",
                 "telephone": "011-6490662-0",
                 "provinceCode": "110000",
-                "entryTime": 1543593600000,
+                "entryTime": 1529314076000,
                 "companyAttribute": "ENTERPRISE_COMPANY",
                 "salaryGetForm": "SALARY_BANK_CARD",
                 "department": "现单位部门"
