@@ -28,7 +28,7 @@ def piece_list(request):
     sql = request.DPOST.get('sql') + ' order by create_time desc'
     data = MysqlHandle.select_mysql_data(sql)
     print('sqls------>', sql)
-    paginator = Paginator(data, 10)
+    paginator = Paginator(data, 20)
     page = request.GET.get('page', 1)
     currentPage = int(page)
     try:
