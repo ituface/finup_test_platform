@@ -1,7 +1,7 @@
 
 #上线要改
 class path():
-    Apihost='http://finup-lend-app-server.lendapp.beta'
+    Apihost='http://finup-lend-app-server.lendapp.test'
     innerApiPath='http://10.10.180.206:8088'
     #测试地址
     # host = '127.0.0.1'
