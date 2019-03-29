@@ -19,6 +19,7 @@ class AppApi():
     sumbitPicture = '/annex/v1/upload/picture'  # 提交拍照像
     annexstate = '/annex/v1/change/state'  # 更新拍照项状态
     submitToSale = '/apply/v1/submitToSale'  # 提交钢铁侠
+    submitCutomer = '/basic/v1/submit/customer/id'  # 提交客户身份证信息
     timestamp = int(time.time() * 1000)
 
     # 内部接口
@@ -159,9 +160,9 @@ class AppApi():
     @staticmethod
     def func_postVideoCheck(video_check):
         data = {
-            "videoCheck":video_check   #VIDEO_SIGN  OFF_SIGN
+            "videoCheck": video_check  # VIDEO_SIGN  OFF_SIGN
         }
-        print('video--------》',data)
+        print('video--------》', data)
         return json.dumps(data)
 
     '''
@@ -179,7 +180,7 @@ class AppApi():
                     "housePropertyType": "NO_HOUSE", "lifeYears": 20.0,
                     "livingType": "SELF_HOUSE", "livingTypeOther": "asdf", "marriage": "UNMARRIED",
                     "mobile1": "18618430076", "province": "北京市", "provinceCode": "110000", "qq": 174323928,
-                    "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}   #还款来源：repaySource
+                    "town": "朝阳区物资学院", "repaySource": "WAGE_INCOME"}  # 还款来源：repaySource
         else:
             AppApi.submitBasicInfo = '/basic/v3/submitBasicInfo'
             data = {
@@ -307,7 +308,22 @@ class AppApi():
         :return:
         '''
         return json.dumps({'mobile': mobile, 'type': type})
-    def __del__(self):
 
+    @staticmethod
+    def func_submitCutomer():
+        return json.dumps({
+            "cityCode": "110100",
+            "provinceCode": "110000",
+            "city": "市辖区",
+            "dist": "西城区",
+            "town": "街道",
+            "validTermStart": "2015-03-29",
+            "validTermFinish": "2019-03-29",
+            "houseCity": "false",
+            "distCode": "110102",
+            "province": "北京市"
+        })
+
+    def __del__(self):
 
         print('我被销毁了。。。。。啦啦啦啦啦啦啦啊')
