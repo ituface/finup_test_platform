@@ -27,7 +27,7 @@ def welcome(request):
     today = datetime.datetime.now()
     offset = datetime.timedelta(days=-7)
     hebdomad_ago = (today + offset).strftime('%Y-%m-%d')
-    print('hebdomad_ago-----》', hebdomad_ago)
+    print('一周前的今天', hebdomad_ago)
     sql = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_statistics_amount_app_data')
     data = MysqlHandle.select_mysql_data(sql.format(hebdomad_ago=hebdomad_ago))
     for i in data:
