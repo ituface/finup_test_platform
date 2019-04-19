@@ -114,6 +114,9 @@ class GetRequest():
             [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info],
             [self.api.func_submitCutomer(),self.api.submitCutomer]
         ]
+        if self.product_type=='QUICK2.0':
+            ApiList.append([self.api.func_submitSupplementInfo(),self.api.submitSupplementInfo])
+            ApiList.append([self.api.func_sumbitContact_v2(),self.api.sumbitContact_v2])
         for inner in ApiList:
             print(inner)
             data = self.request_post(url=inner[1], data=inner[0], headers=self.headers)
@@ -136,6 +139,9 @@ class GetRequest():
         self.inner_status = data['data']
         statuss = status('PhotoData')
         enum_list = list(set(self.inner_status).intersection(set(statuss)))
+        if self.product_type=='QUICK2.0':
+            enum_list.append('INCOME_PROVE')
+            enum_list.append('SOCIAL_SECURITY_FUND')
         for inner in enum_list:
             print('inner=--->', inner)
             if inner == 'ID_PHOTO':

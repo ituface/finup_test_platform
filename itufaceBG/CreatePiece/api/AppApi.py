@@ -22,6 +22,10 @@ class AppApi():
     submitCutomer = '/basic/v1/submit/customer/id'  # 提交客户身份证信息
     timestamp = int(time.time() * 1000)
 
+    # 补充一提交资料
+    submitSupplementInfo = '/basic/v1/submitSupplementInfo'
+    sumbitContact_v2 = '/contact/v2/submit'
+
     # 内部接口
     searchProductRequired = '/v1/get/searchProductRequired'
     SearchResult = '/v1/get/SearchResult'
@@ -322,6 +326,43 @@ class AppApi():
             "houseCity": "false",
             "distCode": "110102",
             "province": "北京市"
+        })
+
+    # 补充一资料项
+    # 补充联系人信息
+    @staticmethod
+    def func_sumbitContact_v2():
+        return json.dumps({
+            "dataType": "SUPPLEMENT",
+            "contactVoList": [{
+                "contactMobile": "13566469999",
+                "contactName": "补充一直系",
+                "department": "",
+                "isKnow": 0,
+                "relation": "MOTHER",
+                "relationExplain": "",
+                "relationType": "LINEAL_RELATIVES"
+            }, {
+                "contactMobile": "13566499666",
+                "contactName": "补充一工作",
+                "department": "凡心",
+                "isKnow": 0,
+                "relation": "COLLEAGUE",
+                "relationExplain": "",
+                "relationType": "WORK_CERTIFICATE"
+            }]
+        })
+
+    # 补充信息
+    @staticmethod
+    def func_submitSupplementInfo():
+        return json.dumps({
+            "accumulationFund": 0,
+            "specialUnitType": "FORMAL_MEDICAL_INSTITUTION",
+            "carPropertyType": "HAVE_CAR_AND_LOAN_WITHOUT",
+            "specialOccupationType": "ARCHITECT",
+            "department": "现单位部门补充一",
+            "positionName": "DISPATCH_STAFF"
         })
 
     def __del__(self):
