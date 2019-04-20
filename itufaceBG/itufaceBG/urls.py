@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'app-product',pieceview.app_product),
     url(r'add-product',pieceview.add_product),
     url(r'del_product_list',pieceview.del_product_list,name='del_product_list'),
-    url(r'del_piece_list',pieceview.del_piece_list,name='del_piece_list')
+    url(r'del_piece_list',pieceview.del_piece_list,name='del_piece_list'),
+    url(r'finup_lottery',views.finup_lottery,name='finup_lottery'),
 
 ]

@@ -167,3 +167,7 @@ def qr_ios_download(request):
     data=MysqlHandle.select_mysql_data(sql_select.format(id=ids))[0]
 
     return render(request,'qr-ios-download.html',{'data':data})
+
+
+def finup_lottery(request):
+    return render(request,'finup-lottery.html')
