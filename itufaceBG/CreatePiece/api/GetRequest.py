@@ -19,8 +19,8 @@ host = path.Apihost
 
 
 class GetRequest():
-    def __init__(self, name, mobile, product_type='SALARY2.0_TALENT',video_check="VIDEO_SIGN",saleNo='023264',
-                 salePassword='123456', year='1987',):
+    def __init__(self, name, mobile,idNo=None,product_type='SALARY2.0_TALENT',video_check="VIDEO_SIGN",saleNo='023264',
+                 salePassword='123456', year='1987'):
         '''
 
         :param name: 姓名 str
@@ -43,6 +43,7 @@ class GetRequest():
         self.year = year
         self.headers = SetHearder.setHearderData()
         self.video_check=video_check
+        self.idNo=idNo
 
     '''
     快速登录
@@ -61,7 +62,8 @@ class GetRequest():
     '''
 
     def REGISTER_SUCCESS(self):
-        self.idNo = self.IdNo()
+        if self.idNo==None:
+            self.idNo = self.IdNo()
         if self.code:
             return self.idNo
         print('身份证号-----》', self.idNo)
