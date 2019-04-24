@@ -142,6 +142,14 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">身份证号(选填)</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" name="idNo" placeholder="选填"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
                         </label>
                         <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
@@ -212,6 +220,7 @@
             var salePassword = $("input[name=salePassword]").val();
             console.log('name------->'+name )
             var video_check = $("select[name=video_check]").val();
+            var idNo = $("input[name=idNo]").val();
             console.log('video_check------->'+video_check)
 
 
@@ -229,6 +238,7 @@
                         "year": year,
                         "num": num,
                         "video_check": video_check,
+                        'idNo':idNo,
                     },
                     success: function (data) {
                         num = 1
