@@ -18,6 +18,8 @@ def status(position):
     if position=='lend_app':
         return ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT', 'BASE_INFO', 'SubmitPicture', 'MX_GRAB', 'PUSH_TO_IRON',
          'PUSH_TO_LEND')
+    if position=='old_friend_plan':
+        return ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT')
     else:
         return None
 

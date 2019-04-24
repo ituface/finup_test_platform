@@ -19,14 +19,29 @@ class AddPiece():
             return 0
 
     @staticmethod
-    def piece_to_status(request_status, eval_strs):
+    def piece_to_status(request_status, eval_strs,product_type=None):
+        '''
+
+        :param request_status: 所要到的状态
+        :param eval_strs: 造件信息传递
+        :param product_type: 为了区分老友计划和优选计划
+        :return:
+        '''
         try:
-            app_status = status('lend_app')
-            lend_status = status('lend')
-            position = app_status.index(request_status) + 1
+            if product_type == 'EXTENSION2.0':
+                app_status = status('old_friend_plan')
+                if request_status not in app_status:
+                    position=len(app_status)
+                else:
+                    position=app_status.index(request_status) + 1
+            else:
+                app_status = status('lend_app')
+                lend_status = status('lend')
+                position = app_status.index(request_status) + 1
             print('position---------------》', position)
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
+
             if request_status in app_status:
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])

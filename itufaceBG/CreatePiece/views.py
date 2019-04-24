@@ -127,7 +127,7 @@ def add_piece_api(request):
         return JsonResponse({'code': 202, 'message': '手机号已存在，请更换手机号'})
     # 以下操作为跑流程
     strs = request.strs
-    data = AddPiece.piece_to_status(status, strs)
+    data = AddPiece.piece_to_status(status, strs,product_type)
     if data in (1, 2):
         data = {"mobile": mobile}
         result_post = post(url='/v1/get/IdAndStatus', data=data)
