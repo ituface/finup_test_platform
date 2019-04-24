@@ -36,8 +36,8 @@ class AddPiece():
                     position=app_status.index(request_status) + 1
             else:
                 app_status = status('lend_app')
-                lend_status = status('lend')
                 position = app_status.index(request_status) + 1
+            lend_status = status('lend')
             print('position---------------》', position)
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
