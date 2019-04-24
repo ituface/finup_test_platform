@@ -42,7 +42,7 @@ class AddPiece():
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
 
-            if request_status in app_status:
+            if request_status in app_status or product_type == 'EXTENSION2.0':
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])
                     print('inner-----<', inner_status)
