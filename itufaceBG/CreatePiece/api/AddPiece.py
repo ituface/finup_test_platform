@@ -34,6 +34,12 @@ class AddPiece():
                     position=len(app_status)
                 else:
                     position=app_status.index(request_status) + 1
+            elif 'REVOLVE' in product_type:
+                app_status = status('Optimal_plan')
+                if request_status not in app_status:
+                    position = len(app_status)
+                else:
+                    position = app_status.index(request_status) + 1
             else:
                 app_status = status('lend_app')
                 position = app_status.index(request_status) + 1
@@ -42,12 +48,17 @@ class AddPiece():
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
 
-            if request_status in app_status or product_type == 'EXTENSION2.0':
+            if request_status in app_status or product_type == 'EXTENSION2.0' or 'REVOLVE' in product_type:
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])
                     print('inner-----<', inner_status)
                     if data:
                         return data
+
+                if  product_type=='EXTENSION2.0' or 'REVOLVE' in product_type:
+                    data=requests.get('http://finup-lend-app-schedule.lendapp.beta/test/pushToLend')
+                    if data.status_code!=200:
+                        return '定时器接口出现问题。。请手动触发'
                 return 1
             if request_status in lend_status:
                 for inner_lend_status in app_status:

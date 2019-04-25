@@ -38,5 +38,10 @@ class SetHearder():
 
 if __name__=='__main__':
     hearder=SetHearder()
-    print(hearder.setHearderData()[1])
 
+
+
+    import requests
+
+    data=requests.get('http://finup-lend-app-schedule.lendapp.beta/test/pushToLend')
+    print(type(data.status_code))

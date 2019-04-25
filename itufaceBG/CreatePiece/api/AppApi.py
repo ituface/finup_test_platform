@@ -26,6 +26,9 @@ class AppApi():
     submitSupplementInfo = '/basic/v1/submitSupplementInfo'
     sumbitContact_v2 = '/contact/v2/submit'
 
+    # 优选计划提交银行卡接口
+    submitBankInfo = '/bank/v1/submitBankInfo'
+
     # 内部接口
     searchProductRequired = '/v1/get/searchProductRequired'
     SearchResult = '/v1/get/SearchResult'
@@ -365,6 +368,14 @@ class AppApi():
             "positionName": "DISPATCH_STAFF"
         })
 
+    @staticmethod
+    def fun_submitBankInfo():
+        return json.dumps({
+            "cardNo": "%s"%int(time.time()*1000)
+        })
+
     def __del__(self):
 
         print('我被销毁了。。。。。啦啦啦啦啦啦啦啊')
+
+

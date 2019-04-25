@@ -20,6 +20,8 @@ def status(position):
          'PUSH_TO_LEND')
     if position=='old_friend_plan':
         return ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT')
+    if position=='Optimal_plan':
+        return ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT','BASE_INFO','MX_GRAB','PUSH_TO_IRON')
     else:
         return None
 
