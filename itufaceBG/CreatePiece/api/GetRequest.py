@@ -148,6 +148,8 @@ class GetRequest():
         self.inner_status = data['data']
         statuss = status('PhotoData')
         enum_list = list(set(self.inner_status).intersection(set(statuss)))
+        if 'REVOLVE' in self.product_type:#优选计划抓取项需要enum_list
+            return 0
         if self.product_type=='QUICK2.0':
             enum_list.append('INCOME_PROVE')
             enum_list.append('SOCIAL_SECURITY_FUND')
