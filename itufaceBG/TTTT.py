@@ -1,12 +1,6 @@
-class A():
-    def gets(self):
-        print('get')
-    def ssss(self):
-        if hasattr(self,'gets'):
-            return self.gets()
-
-
-
-
-a=A()
-a.ssss()
+import requests
+headers = {
+    'Connection': 'close',
+}
+data = requests.get('http://finup-lend-app-schedule.lendapp.beta/test/pushToLend',headers=headers)
+print(data.status_code)

@@ -56,7 +56,10 @@ class AddPiece():
                         return data
 
                 if  product_type=='EXTENSION2.0' or 'REVOLVE' in product_type:
-                    data=requests.get('http://finup-lend-app-schedule.lendapp.beta/test/pushToLend')
+                    headers = {
+                        'Connection': 'close',
+                    }
+                    data=requests.get('http://finup-lend-app-schedule.lendapp.beta/test/pushToLend',headers=headers)
                     if data.status_code!=200:
                         return '定时器接口出现问题。。请手动触发'
                 return 1
