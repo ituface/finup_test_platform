@@ -28,7 +28,7 @@ class AddPiece():
         :return:
         '''
         try:
-            if product_type == 'EXTENSION2.0':
+            if 'EXTENSION' in product_type :
                 app_status = status('old_friend_plan')
                 if request_status not in app_status:
                     position=len(app_status)
@@ -48,14 +48,14 @@ class AddPiece():
             print('参数----------------------------》',eval_strs)
             gtr = eval('GetRequest(%s)' % eval_strs)
 
-            if request_status in app_status or product_type == 'EXTENSION2.0' or 'REVOLVE' in product_type:
+            if request_status in app_status or 'EXTENSION' in product_type or 'REVOLVE' in product_type:
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])
                     print('inner-----<', inner_status)
                     if data:
                         return data
 
-                if  product_type=='EXTENSION2.0' or 'REVOLVE' in product_type:
+                if  'EXTENSION' in product_type  or 'REVOLVE' in product_type:
                     headers = {
                         'Connection': 'close',
                     }
