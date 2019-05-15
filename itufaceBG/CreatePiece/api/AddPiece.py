@@ -44,8 +44,7 @@ class AddPiece():
                 app_status = status('lend_app')
                 position = app_status.index(request_status) + 1
             lend_status = status('lend')
-            print('position---------------》', position)
-            print('参数----------------------------》',eval_strs)
+            print('参数-------------------------------------------------------》',product_type)
             gtr = eval('GetRequest(%s)' % eval_strs)
 
             if request_status in app_status or 'EXTENSION' in product_type or 'REVOLVE' in product_type:
