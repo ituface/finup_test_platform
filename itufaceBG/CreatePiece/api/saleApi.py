@@ -18,7 +18,7 @@ class saleApi():
 
     '''
        登录
-       '''
+    '''
 
     @staticmethod
     def func_login(salesNo='023264', salepassword='123456'):
