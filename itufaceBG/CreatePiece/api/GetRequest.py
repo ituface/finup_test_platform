@@ -120,8 +120,8 @@ class GetRequest():
                 [self.api.func_postVideoCheck(self.video_check),self.api.postVideoCheck,],
                 [self.api.func_submitContact(isable),self.api.sumbitContact],
                 [self.api.func_submitBaseInfo(isable),self.api.submitBasicInfo],
-                [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info],
-                [self.api.func_submitCutomer(),self.api.submitCutomer]
+                [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info]
+                #[self.api.func_submitCutomer(),self.api.submitCutomer]
             ]
             # if self.product_type=='QUICK2.0':
             #     ApiList.append([self.api.func_submitSupplementInfo(),self.api.submitSupplementInfo])
