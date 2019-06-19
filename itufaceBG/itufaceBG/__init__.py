@@ -5,3 +5,7 @@ pymysql.install_as_MySQLdb()
 
 update_city_code()
 insert_statistics_amount()
+
+
+with open('a.text') as f:
+   print( f.read())
