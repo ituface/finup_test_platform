@@ -33,6 +33,7 @@ class AppApi():
     searchProductRequired = '/v1/get/searchProductRequired'
     SearchResult = '/v1/get/SearchResult'
     updateMXstatus = '/v1/get/updateMXstatus'  # 更新魔蝎状态
+    updatefaceid='/v1/set/updatefaceid'  #跳过人脸
 
     '''
     快速登录
