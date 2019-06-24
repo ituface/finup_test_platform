@@ -222,8 +222,7 @@ class GetRequest():
         token = result['result'].get('token')
         print('token________>', token)
         headers = SetHearder.setHearderData(token=token, request_type='USER', devicesToken=devices_token)
-        saleapi_list = [[saleapi.idNo, saleapi.func_idNo(lend_request_id)],
-                        [saleapi.qualityTesting, saleapi.func_qualityTesting(lend_request_id)],
+        saleapi_list = [[saleapi.qualityTesting, saleapi.func_qualityTesting(lend_request_id)],
                         [saleapi.pushToLend, saleapi.func_pushToLend(lend_request_id)]]
         for inner in saleapi_list:
             inner_data = self.request_post(url=inner[0], data=inner[1], headers=headers)
