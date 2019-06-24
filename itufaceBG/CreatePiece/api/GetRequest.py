@@ -207,6 +207,11 @@ class GetRequest():
     '''
 
     def PUSH_TO_LEND(self):
+        status_result=self.inner_post(self.api.IdAndStatus,data=json.dumps({'mobile':self.mobile}))
+        status_result_dict=json.loads(status_result)
+        status_result_current=status_result_dict['data'][0].get('current_status')
+        if status_result_current !='SALE_EXAMINE':
+            return 0
         saleapi = saleApi()
         data = self.inner_post(url=saleapi.deleteTokenLendRequestId,
                                data=saleapi.func_deleteTokenLendRequestId(mobile=self.mobile, sale_no=self.saleNo))

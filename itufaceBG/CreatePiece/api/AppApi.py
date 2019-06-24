@@ -35,6 +35,8 @@ class AppApi():
     updateMXstatus = '/v1/get/updateMXstatus'  # 更新魔蝎状态
     updatefaceid='/v1/set/updatefaceid'  #跳过人脸
 
+    IdAndStatus='/v1/get/IdAndStatus' #获取当前手机所对应的app 进件号和状态
+
     '''
     快速登录
     '''
