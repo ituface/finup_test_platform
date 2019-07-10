@@ -24,7 +24,7 @@ class AppApi():
 
     # 补充一提交资料
     submitSupplementInfo = '/basic/v1/submitSupplementInfo'
-    sumbitContact_v2 = '/contact/v2/submit'
+    sumbitContact_v2 = '/contact/v3/submit'
 
     # 优选计划提交银行卡接口
     submitBankInfo = '/bank/v1/submitBankInfo'
@@ -125,21 +125,19 @@ class AppApi():
     def func_submitContact(isable=1):
 
         if isable:
-            AppApi.sumbitContact = '/contact/v1/submit'
+            AppApi.sumbitContact = '/contact/v3/submit'
 
             data = {
-                "contactVoList": [
-                    {"contactMobile": "18220022211", "contactName": "王朗", "department": "信息科", "isKnow": "0",
-                     "relation": "FATHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
-                    {"contactMobile": "13577772222", "contactName": "王明阳", "department": "信息科", "isKnow": "0",
-                     "relation": "MOTHER", "relationExplain": "string", "relationType": "LINEAL_RELATIVES"},
-                    {"contactMobile": "17308882222", "contactName": "叶利钦", "department": "信息科",
-                     "isKnow": "0",
-                     "relation": "RELATIVES", "relationExplain": "string",
-                     "relationType": "WORK_CERTIFICATE"},
-                    {"contactMobile": "16722233322", "contactName": "斯大林", "department": "信息科", "isKnow": "0",
-                     "relation": "COLLEAGUE", "relationExplain": "string", "relationType": "OTHER_CONTACTS"}],
-                "startTime": AppApi.timestamp}
+                "contactVoList": [{
+                    "contactMobile": "13569996666",
+                    "contactName": "父上大人",
+                    "department": "",
+                    "isKnow": 1,
+                    "relation": "FATHER",
+                    "relationExplain": "",
+                    "relationType": "LINEAL_RELATIVES"
+                }]
+            }
         else:
             AppApi.sumbitContact = '/contact/v4/submit'
             data = {
@@ -344,43 +342,6 @@ class AppApi():
             "houseCity": "false",
             "distCode": "110102",
             "province": "北京市"
-        })
-
-    # 补充一资料项
-    # 补充联系人信息
-    @staticmethod
-    def func_sumbitContact_v2():
-        return json.dumps({
-            "dataType": "SUPPLEMENT",
-            "contactVoList": [{
-                "contactMobile": "13566469999",
-                "contactName": "补充一直系",
-                "department": "",
-                "isKnow": 0,
-                "relation": "MOTHER",
-                "relationExplain": "",
-                "relationType": "LINEAL_RELATIVES"
-            }, {
-                "contactMobile": "13566499666",
-                "contactName": "补充一工作",
-                "department": "凡心",
-                "isKnow": 0,
-                "relation": "COLLEAGUE",
-                "relationExplain": "",
-                "relationType": "WORK_CERTIFICATE"
-            }]
-        })
-
-    # 补充信息
-    @staticmethod
-    def func_submitSupplementInfo():
-        return json.dumps({
-            "accumulationFund": 0,
-            "specialUnitType": "FORMAL_MEDICAL_INSTITUTION",
-            "carPropertyType": "HAVE_CAR_AND_LOAN_WITHOUT",
-            "specialOccupationType": "ARCHITECT",
-            "department": "现单位部门补充一",
-            "positionName": "DISPATCH_STAFF"
         })
 
     @staticmethod
