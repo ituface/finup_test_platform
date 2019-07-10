@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import os, time
 import shutil
 from  AppManage.CreatePlist import createplist
+from public.send_email import send_email
 
 '''
 app列表
@@ -85,6 +86,7 @@ def add_app(request):
         myFile = request.FILES.get('myfile')
 
         customerOruser = request.POST.get('customerOruser')
+
         appType = request.POST.get('app_type')
         isfinal = request.POST.get('isfinal')
         app_version = request.POST.get('app_version')
@@ -93,6 +95,13 @@ def add_app(request):
         describe = request.POST.get('describe')
         environment = request.POST.get('environment')
         test_or_beta = request.POST.get('test_or_beta')
+        #发送邮件所用标题
+        title = "{environment}-{appType}-{customerOruser}".format(environment=environment, appType=appType,
+                                                                  customerOruser=customerOruser)
+        #发送邮件所用名单
+
+        email_list=['yelishuan@finupgroup.com','quguangwen@finupgroup.com']
+
         describe = describe if describe else ''
         customerOruser = 'USER' if customerOruser == '钢铁侠' else 'CUSTOMER'
         isfinal = 1 if isfinal == '是' else 0
@@ -101,7 +110,7 @@ def add_app(request):
         elif appType == "IOS":
             tag = createplist(appPath.lstrip('.'), timestrap)
             if tag == '1':
-                qr_path = 'https://gitee.com/ituface/test/raw/master/%s.plist'%timestrap
+                qr_path = 'https://gitee.com/ituface/test/raw/master/%s.plist' % timestrap
             else:
                 myFilemessage = '上传失败了'
 
@@ -115,7 +124,7 @@ def add_app(request):
             sql = sql.format(appVersion=app_version, appType=appType, customerOruser=customerOruser, describe=describe,
                              appPath=appPath[9:], environment=environment, isFinal=isfinal, test_or_beta=test_or_beta,
                              qr_path=qr_path)
-            print('sql---->',sql)
+            print('sql---->', sql)
             MysqlHandle.reConnect()
             sta = MysqlHandle.delete_update_insert_mysql_data(sql)
             if sta != 1:
@@ -125,6 +134,8 @@ def add_app(request):
             sta = 2
         if sta == 1:
             myFilemessage = '上传成功'
+            send_email(email_list,title,"描述：%s"%describe)
+
     return render(request, 'add-app.html', {'myFilemessage': myFilemessage})
 
 
@@ -161,13 +172,15 @@ def update_app(request):
             message = '修改失败！'
 
     return render(request, 'update_app.html', {'data': data, 'message': message})
-def qr_ios_download(request):
-    ids=request.GET['id']
-    sql_select = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_ios_qr_path')
-    data=MysqlHandle.select_mysql_data(sql_select.format(id=ids))[0]
 
-    return render(request,'qr-ios-download.html',{'data':data})
+
+def qr_ios_download(request):
+    ids = request.GET['id']
+    sql_select = MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_ios_qr_path')
+    data = MysqlHandle.select_mysql_data(sql_select.format(id=ids))[0]
+
+    return render(request, 'qr-ios-download.html', {'data': data})
 
 
 def finup_lottery(request):
-    return render(request,'finup-lottery.html')
+    return render(request, 'finup-lottery.html')
