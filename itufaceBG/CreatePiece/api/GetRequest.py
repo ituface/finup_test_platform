@@ -123,9 +123,7 @@ class GetRequest():
                 [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info],
                 [self.api.func_submitCutomer(),self.api.submitCutomer]
             ]
-            if self.product_type=='QUICK2.0':
-                ApiList.append([self.api.func_submitSupplementInfo(),self.api.submitSupplementInfo])
-                ApiList.append([self.api.func_sumbitContact_v2(),self.api.sumbitContact_v2])
+
         for inner in ApiList:
             print(inner)
             data = self.request_post(url=inner[1], data=inner[0], headers=self.headers)
