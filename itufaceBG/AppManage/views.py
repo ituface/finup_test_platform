@@ -134,7 +134,7 @@ def add_app(request):
             sta = 2
         if sta == 1:
             myFilemessage = '上传成功'
-            send_email(email_list,title,"描述：%s"%describe)
+            send_email(email_list,"描述：%s"%describe,title)
 
     return render(request, 'add-app.html', {'myFilemessage': myFilemessage})
 
