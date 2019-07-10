@@ -113,7 +113,7 @@ class GetRequest():
         else:
             profession_info = self.api.postBusinessPositionInfo if self.product_bool else self.api.postPositionInfo
             isable=1
-            if 'QUICK' in self.product_type:
+            if 'BUSINESS_TAX' in self.product_type:
                 isable=0
 
             ApiList = [

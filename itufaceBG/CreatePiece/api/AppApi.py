@@ -124,7 +124,7 @@ class AppApi():
     @staticmethod
     def func_submitContact(isable=1):
 
-        if isable:
+        if isable==0:
             AppApi.sumbitContact = '/contact/v3/submit'
 
             data = {
