@@ -33,9 +33,9 @@ class AppApi():
     searchProductRequired = '/v1/get/searchProductRequired'
     SearchResult = '/v1/get/SearchResult'
     updateMXstatus = '/v1/get/updateMXstatus'  # 更新魔蝎状态
-    updatefaceid='/v1/set/updatefaceid'  #跳过人脸
+    updatefaceid = '/v1/set/updatefaceid'  # 跳过人脸
 
-    IdAndStatus='/v1/get/IdAndStatus' #获取当前手机所对应的app 进件号和状态
+    IdAndStatus = '/v1/get/IdAndStatus'  # 获取当前手机所对应的app 进件号和状态
 
     '''
     快速登录
@@ -89,9 +89,9 @@ class AppApi():
         :param produt_type: bool  0 薪 1商
         :return: json
         '''
-        data = {"answer": "12"}
+        data = {"answer": "1"}
         if int(produt_bool):
-            data['answer'] = '212'
+            data['answer'] = '2'
         return json.dumps(data)
 
     '''
@@ -141,25 +141,34 @@ class AppApi():
                      "relation": "COLLEAGUE", "relationExplain": "string", "relationType": "OTHER_CONTACTS"}],
                 "startTime": AppApi.timestamp}
         else:
-            AppApi.sumbitContact = '/contact/v2/submit'
+            AppApi.sumbitContact = '/contact/v4/submit'
             data = {
                 "contactVoList": [{
-                    "contactMobile": "13662669333",
-                    "contactName": "母亲大人",
+                    "contactMobile": "13546696666",
+                    "contactName": "付上",
                     "department": "",
-                    "isKnow": 1,
+                    "isKnow": 0,
+                    "relation": "FATHER",
+                    "relationExplain": "",
+                    "relationType": "LINEAL_RELATIVES"
+                }, {
+                    "contactMobile": "13549949966",
+                    "contactName": "母上",
+                    "department": "",
+                    "isKnow": 0,
                     "relation": "MOTHER",
                     "relationExplain": "",
                     "relationType": "LINEAL_RELATIVES"
                 }, {
-                    "contactMobile": "17600810361",
-                    "contactName": "同事二蛋",
-                    "department": "",
+                    "contactMobile": "13579966333",
+                    "contactName": "王大猪",
+                    "department": "销售部",
                     "isKnow": 0,
                     "relation": "COLLEAGUE",
                     "relationExplain": "",
-                    "relationType": "OTHER_CONTACTS"
-                }]
+                    "relationType": "WORK_CERTIFICATE"
+                }],
+                "startTime": AppApi.timestamp
             }
         return json.dumps(data)
 
@@ -225,31 +234,34 @@ class AppApi():
         '''
         if product_bool == 0:
             data = {
-                "positionExplain": "",
-                "companyAttributeDesc": "机关事务单位",
-                "positionName": "GENERAL_STAFF",
+                "positionNameDesc": "派遣员工",
+                "accumulationFund": "0",
+                "town": "朝阳门银河湾",
                 "city": "市辖区",
+                "cityCode": "110100",
+                "provinceCode": "110000",
+                "companyName": "凡普金科",
+                "dist": "东城区",
+                "telephone": "011-6490662-3",
+                "salaryGetForm": "SALARY_BANK_CARD",
+                "officialJobTime": 1467302400000,
+                "companyAttribute": "OPERATE_COMPANY",
+                "companyAttributeDesc": "民营企业",
+                "distCode": "110101",
+                "positionName": "DISPATCH_STAFF",
+                "positionExplain": "",
+                "specialUnitType": "COMMERCIAL_BANK",
+                "entryTime": 1530374400000,
                 "province": "北京市",
                 "attributeExplain": "",
-                "dist": "东城区",
-                "distCode": "110101",
-                "officialJobTime": 1475251200000,
-                "cityCode": "110100",
-                "positionNameDesc": "正式员工",
-                "accumulationFund": "0",
-                "town": "详细地址北京",
-                "companyName": "现单位名称",
-                "telephone": "011-6490662-0",
-                "provinceCode": "110000",
-                "entryTime": 1529314076000,
-                "companyAttribute": "ENTERPRISE_COMPANY",
-                "salaryGetForm": "SALARY_BANK_CARD",
-                "department": "现单位部门"
+                "specialOccupationType": "ACCOUNTANT",
+                "department": "销售部"
             }
         else:
             data = {"town": "健健康康健健康康", "companyName": "来猜猜吧", "telephone": "011-1111111-11", "city": "北京市",
                     "provinceCode": "110102", "province": "西城区", "dist": "市辖区", "officialJobTime": "1535731200000",
-                    "distCode": "110100", "cityCode": "110000"}
+                    "distCode": "110100", "cityCode": "110000", "salaryGetForm": "SALARY_BANK_CARD",
+                    }
         return json.dumps(data)
 
     '''
@@ -374,11 +386,9 @@ class AppApi():
     @staticmethod
     def fun_submitBankInfo():
         return json.dumps({
-            "cardNo": "%s"%int(time.time()*1000)
+            "cardNo": "%s" % int(time.time() * 1000)
         })
 
     def __del__(self):
 
         print('我被销毁了。。。。。啦啦啦啦啦啦啦啊')
-
-
