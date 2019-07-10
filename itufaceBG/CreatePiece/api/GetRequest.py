@@ -19,7 +19,8 @@ host = path.Apihost
 
 
 class GetRequest():
-    def __init__(self, name, mobile,idNo=None,product_type='SALARY2.0_TALENT',video_check="VIDEO_SIGN",saleNo='023264',
+    def __init__(self, name, mobile, idNo=None, product_type='SALARY2.0_TALENT', video_check="VIDEO_SIGN",
+                 saleNo='023264',
                  salePassword='123456', year='1987'):
         '''
 
@@ -46,8 +47,8 @@ class GetRequest():
         self.code = 0
         self.year = year
         self.headers = SetHearder.setHearderData()
-        self.video_check=video_check
-        self.idNo=idNo
+        self.video_check = video_check
+        self.idNo = idNo
 
     '''
     快速登录
@@ -66,7 +67,7 @@ class GetRequest():
     '''
 
     def REGISTER_SUCCESS(self):
-        if self.idNo==None:
+        if self.idNo == None:
             self.idNo = self.IdNo()
         if self.code:
             return self.idNo
@@ -109,19 +110,24 @@ class GetRequest():
 
         # 职业信息接口区分薪商
         if 'REVOLVE' in self.product_type:
-            ApiList=[[self.api.fun_submitBankInfo(),self.api.submitBankInfo]]
+            ApiList = [[self.api.fun_submitBankInfo(), self.api.submitBankInfo]]
         else:
             profession_info = self.api.postBusinessPositionInfo if self.product_bool else self.api.postPositionInfo
-            isable=1
+            isable_contact = 1
+            isable_baseinfo = 1
             if 'BUSINESS_TAX' in self.product_type:
-                isable=0
+                isable_contact = 0
+                isable_baseinfo = 1
+            if 'QUICK' in self.product_type:
+                isable_contact = 1
+                isable_baseinfo = 0
 
             ApiList = [
-                [self.api.func_postVideoCheck(self.video_check),self.api.postVideoCheck,],
-                [self.api.func_submitContact(isable),self.api.sumbitContact],
-                [self.api.func_submitBaseInfo(isable),self.api.submitBasicInfo],
-                [ self.api.func_postBusinessPositionInfo(product_bool=self.product_bool),profession_info],
-                [self.api.func_submitCutomer(),self.api.submitCutomer]
+                [self.api.func_postVideoCheck(self.video_check), self.api.postVideoCheck, ],
+                [self.api.func_submitContact(isable_contact), self.api.sumbitContact],
+                [self.api.func_submitBaseInfo(isable_baseinfo), self.api.submitBasicInfo],
+                [self.api.func_postBusinessPositionInfo(product_bool=self.product_bool), profession_info],
+                [self.api.func_submitCutomer(), self.api.submitCutomer]
             ]
 
         for inner in ApiList:
@@ -146,9 +152,9 @@ class GetRequest():
         self.inner_status = data['data']
         statuss = status('PhotoData')
         enum_list = list(set(self.inner_status).intersection(set(statuss)))
-        if 'REVOLVE' in self.product_type:#优选计划抓取项需要enum_list
+        if 'REVOLVE' in self.product_type:  # 优选计划抓取项需要enum_list
             return 0
-        if self.product_type=='QUICK2.0':
+        if self.product_type == 'QUICK2.0':
             enum_list.append('INCOME_PROVE')
             enum_list.append('SOCIAL_SECURITY_FUND')
         for inner in enum_list:
@@ -189,7 +195,7 @@ class GetRequest():
     '''
 
     def PUSH_TO_IRON(self):
-        inner_data=self.inner_post(self.api.updatefaceid,json.dumps({'mobile': self.mobile}))
+        inner_data = self.inner_post(self.api.updatefaceid, json.dumps({'mobile': self.mobile}))
         if self.code:
             return inner_data
         api = self.api.submitToSale
@@ -205,9 +211,9 @@ class GetRequest():
     '''
 
     def PUSH_TO_LEND(self):
-        status_result=self.inner_post(self.api.IdAndStatus,data=json.dumps({'mobile':self.mobile}))
-        status_result_current=status_result['data'][0].get('current_status')
-        if status_result_current !='SALE_EXAMINE':
+        status_result = self.inner_post(self.api.IdAndStatus, data=json.dumps({'mobile': self.mobile}))
+        status_result_current = status_result['data'][0].get('current_status')
+        if status_result_current != 'SALE_EXAMINE':
             return 0
         saleapi = saleApi()
         data = self.inner_post(url=saleapi.deleteTokenLendRequestId,
@@ -268,7 +274,7 @@ class GetRequest():
 
     def request_post(self, url, data, headers=None):
         print('url--------------->', url)
-        print('host------------>',host)
+        print('host------------>', host)
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
         get_result = result
         result_data = json.loads(get_result.text)
@@ -296,7 +302,6 @@ class GetRequest():
             self.code = 1
             return e
         return json.loads(result.text)
-
 
 # import bisect
 #

@@ -124,21 +124,7 @@ class AppApi():
     @staticmethod
     def func_submitContact(isable=1):
 
-        if isable==0:
-            AppApi.sumbitContact = '/contact/v3/submit'
-
-            data = {
-                "contactVoList": [{
-                    "contactMobile": "13569996666",
-                    "contactName": "父上大人",
-                    "department": "",
-                    "isKnow": 1,
-                    "relation": "FATHER",
-                    "relationExplain": "",
-                    "relationType": "LINEAL_RELATIVES"
-                }]
-            }
-        else:
+        if isable:
             AppApi.sumbitContact = '/contact/v4/submit'
             data = {
                 "contactVoList": [{
@@ -167,6 +153,20 @@ class AppApi():
                     "relationType": "WORK_CERTIFICATE"
                 }],
                 "startTime": AppApi.timestamp
+            }
+        else:
+            AppApi.sumbitContact = '/contact/v3/submit'
+
+            data = {
+                "contactVoList": [{
+                    "contactMobile": "13569996666",
+                    "contactName": "父上大人",
+                    "department": "",
+                    "isKnow": 1,
+                    "relation": "FATHER",
+                    "relationExplain": "",
+                    "relationType": "LINEAL_RELATIVES"
+                }]
             }
         return json.dumps(data)
 
