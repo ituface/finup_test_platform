@@ -198,6 +198,8 @@ class GetRequest():
         inner_data = self.inner_post(self.api.updatefaceid, json.dumps({'mobile': self.mobile}))
         if self.code:
             return inner_data
+        if 'QUICK' in self.product_type :
+            return  0
         api = self.api.submitToSale
         api_data = self.api.func_JsonIsNull()
         data = self.request_post(url=api, data=api_data, headers=self.headers)
