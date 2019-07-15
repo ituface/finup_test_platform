@@ -18,7 +18,7 @@ class path():
     passwd = 'root123!@YE'
     db = 'lend_app'
 
-
+    s='app'
     #外部调用地址
     ToChangeStatus='http://10.10.180.206:8090/updateLendApp'
 
