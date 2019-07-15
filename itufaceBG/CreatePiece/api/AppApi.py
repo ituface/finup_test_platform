@@ -202,20 +202,26 @@ class AppApi():
             AppApi.submitBasicInfo = '/basic/v3/submitBasicInfo'
             data = {
                 "city": "市辖区",
-                "email": '%s@163.com' % str(int(time.time() * 1000)),
                 "marriage": "UNMARRIED",
+                "email": "%s@163.com" % str(int(time.time() * 1000)),
+                "idCardProvince": "北京市",
                 "province": "北京市",
+                "idCardCityCode": "110100",
+                "idCardTown": "您虹魔",
                 "dist": "东城区",
                 "distCode": "110101",
                 "cityCode": "110100",
-                "annualIncome": "3663.00",
-                "town": "银河护卫队A座凡普金科集团有限公司亚龙湾",
-                "housePropertyType": "HAVE_HOUSE_AND_LOAN_WITHOUT",
+                "annualIncome": "666",
+                "idCardDistCode": "110101",
+                "town": "还比查查",
+                "housePropertyType": "NO_HOUSE",
+                "idCardDist": "东城区",
                 "provinceCode": "110000",
-                "livingType": "HOME_HOUSE",
+                "idCardProvinceCode": "110000",
                 "education": "SEN",
-                "livingTypeOther": "",
-                "bankNo": "623166446666"
+                "idCardCity": "市辖区",
+                "carPropertyType": "NO_CAR",
+                "bankNo": "666633333336"
             }
         return json.dumps(data)
 
@@ -232,34 +238,43 @@ class AppApi():
         '''
         if product_bool == 0:
             data = {
-                "positionNameDesc": "派遣员工",
-                "accumulationFund": "0",
-                "town": "朝阳门银河湾",
-                "city": "市辖区",
-                "cityCode": "110100",
-                "provinceCode": "110000",
-                "companyName": "凡普金科",
-                "dist": "东城区",
-                "telephone": "011-6490662-3",
-                "salaryGetForm": "SALARY_BANK_CARD",
-                "officialJobTime": 1467302400000,
-                "companyAttribute": "OPERATE_COMPANY",
-                "companyAttributeDesc": "民营企业",
-                "distCode": "110101",
-                "positionName": "DISPATCH_STAFF",
                 "positionExplain": "",
-                "specialUnitType": "COMMERCIAL_BANK",
-                "entryTime": 1530374400000,
+                "companyAttributeDesc": "机关事务单位",
+                "positionName": "GENERAL_STAFF",
+                "city": "市辖区",
                 "province": "北京市",
                 "attributeExplain": "",
+                "dist": "东城区",
+                "officialJobTime": 1467302400000,
+                "distCode": "110101",
+                "cityCode": "110100",
+                "positionNameDesc": "正式员工",
+                "accumulationFund": "0",
+                "town": "民工",
+                "companyName": "您虹魔",
+                "specialUnitType": "GOVERNMENT_INSTITUTIONS",
+                "telephone": "011-6498555-6",
+                "provinceCode": "110000",
+                "entryTime": 1498838400000,
+                "companyAttribute": "ENTERPRISE_COMPANY",
+                "salaryGetForm": "SALARY_BANK_CARD",
                 "specialOccupationType": "ACCOUNTANT",
-                "department": "销售部"
+                "department": "名模"
             }
         else:
-            data = {"town": "健健康康健健康康", "companyName": "来猜猜吧", "telephone": "011-1111111-11", "city": "北京市",
-                    "provinceCode": "110102", "province": "西城区", "dist": "市辖区", "officialJobTime": "1535731200000",
-                    "distCode": "110100", "cityCode": "110000", "salaryGetForm": "SALARY_BANK_CARD",
-                    }
+            data = {
+                "distCode": "110101",
+                "specialUnitType": "GOVERNMENT_INSTITUTIONS",
+                "province": "北京市",
+                "town": "陌陌",
+                "city": "市辖区",
+                "provinceCode": "110000",
+                "cityCode": "110100",
+                "companyName": "凡普金科卡卡卡",
+                "dist": "东城区",
+                "telephone": "011-6490662-3",
+                "officialJobTime": "1498838400000"
+            }
         return json.dumps(data)
 
     '''
