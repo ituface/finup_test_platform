@@ -195,10 +195,12 @@ class GetRequest():
     '''
 
     def PUSH_TO_IRON(self):
-        inner_data = self.inner_post(self.api.updatefaceid, json.dumps({'mobile': self.mobile}))
-        if self.code:
-            return inner_data
+
         if 'QUICK' in self.product_type :
+            inner_data = self.inner_post(self.api.updatefaceid, json.dumps({'mobile': self.mobile}))
+            if self.code:
+                return inner_data
+
             return  0
         api = self.api.submitToSale
         api_data = self.api.func_JsonIsNull()
