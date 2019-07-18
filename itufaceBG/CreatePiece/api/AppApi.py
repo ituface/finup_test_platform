@@ -221,7 +221,7 @@ class AppApi():
                 "education": "SEN",
                 "idCardCity": "市辖区",
                 "carPropertyType": "NO_CAR",
-                "bankNo": "666633333336"
+                "bankNo": "6227000014970288456"
             }
         return json.dumps(data)
 
