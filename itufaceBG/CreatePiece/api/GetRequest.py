@@ -60,6 +60,7 @@ class GetRequest():
         if self.code:
             return result
         token = result['result'].get('token')
+        self.token=token
         self.headers = SetHearder.setHearderData(token=token)
 
     '''
@@ -277,13 +278,12 @@ class GetRequest():
     '''
 
     def request_post(self, url, data, headers=None):
-        print('数据name--------------->', self.name)
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
+        print(url, 'name--------------->', self.name,'-----',self.token)
         get_result = result
         result_data = json.loads(get_result.text)
         code = result_data['code']
         if code == '200':
-            print(result_data)
             return result_data
         self.code = 1
         return '此接口-->"%s"--出现问题,message为-->"%s"--详情请看日志' % (url, result_data)
