@@ -4,7 +4,7 @@ class path():
     Apihost='http://finup-lend-app-server.lendapp.beta'
     innerApiPath='http://10.10.180.206:8088'
     #测试地址
-   # innerApiPath='http://127.0.0.1:8088'
+    # innerApiPath='http://127.0.0.1:8088'
     #测试地址
     # host = '127.0.0.1'
     # port = 3306

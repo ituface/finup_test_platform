@@ -80,6 +80,8 @@ class AddPiece():
             data = requests.post(url=path.innerApiPath + url, data=data.encode('utf-8'),
                                  headers={'AUTHORIZATION': 'YLS'})
             result = data
+
+            print('result--------------------',data)
             if result.status_code != 200:
                 self.code = 1
                 return '此接口-->"%s"--出现问题--详情请问小叶同学' % url

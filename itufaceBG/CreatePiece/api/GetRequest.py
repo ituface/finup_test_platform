@@ -277,7 +277,7 @@ class GetRequest():
     '''
 
     def request_post(self, url, data, headers=None):
-        print('数据--------------->', self.name)
+        print('数据name--------------->', self.name)
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
         get_result = result
         result_data = json.loads(get_result.text)
