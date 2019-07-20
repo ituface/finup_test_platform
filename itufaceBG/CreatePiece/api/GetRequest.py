@@ -277,13 +277,11 @@ class GetRequest():
     '''
 
     def request_post(self, url, data, headers=None):
-        print('url--------------->', url)
-        print('host------------>', host)
+        print('数据--------------->', self.name)
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
         get_result = result
         result_data = json.loads(get_result.text)
         code = result_data['code']
-        print('接口-----%s  data----->%s' % (url, data))
         if code == '200':
             print(result_data)
             return result_data
