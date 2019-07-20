@@ -49,6 +49,7 @@ class GetRequest():
         self.headers = SetHearder.setHearderData()
         self.video_check = video_check
         self.idNo = idNo
+        self.token='TOKEN'
 
     '''
     快速登录
