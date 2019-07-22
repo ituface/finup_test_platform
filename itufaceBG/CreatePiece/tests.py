@@ -12,7 +12,7 @@ class AddPieceApiTest(TestCase):
         request=HttpRequest()
         request.method='POST'
         request.POST['name']='测试一'
-        request.POST['mobile']='19429008888'
+        request.POST['mobile']='19429008818'
         request.POST['status']='PUSH_TO_IRON'
         request.POST['num']='1'
         request.POST['product_type']=''
@@ -23,8 +23,10 @@ class AddPieceApiTest(TestCase):
         request.POST['idNo']=''
 
         response=add_piece_api(request)
+        result=response.content.decode()
+        china_code=result.encode('utf-8').decode('unicode-escape')
 
-        self.assertIn('造件已完成',response.content.decode())
+        self.assertIn('造件已完成',)
 
 
 

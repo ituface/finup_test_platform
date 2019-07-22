@@ -1,1 +1,2 @@
-print(u"\\u624b\\u673a\\u53f7\\u5df2\\u5b58\\u5728\\uff0c\\u8bf7\\u66f4\\u6362\\u624b\\u673a\\u53f7")
+a="\u9020\u4ef6\u5df2\u5b8c\u6210"
+print(a.encode('utf-8').decode('utf-8'))
