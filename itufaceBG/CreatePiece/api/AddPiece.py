@@ -79,6 +79,7 @@ class AddPiece():
         try:
             data = requests.post(url=path.innerApiPath + url, data=data.encode('utf-8'),
                                  headers={'AUTHORIZATION': 'YLS'})
+            print(path.innerApiPath + url)
             result = data
 
             print('result--------------------',data)
