@@ -13,6 +13,7 @@ class AddPiece():
 
         data = {'mobile': mobile}
         data = AddPiece.inner_post(url='/v1/get/mobileEnable', data=json.dumps(data))
+        print('data----------------',data)
         if int(data['data']):
             return 1
         else:
