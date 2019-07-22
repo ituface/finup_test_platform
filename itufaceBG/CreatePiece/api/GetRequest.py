@@ -280,12 +280,11 @@ class GetRequest():
 
     def request_post(self, url, data, headers=None):
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
-        print(url, 'name--------------->', self.name,'-----',self.token)
         get_result = result
         result_data = json.loads(get_result.text)
 
 
-        print('name---------------->',self.name,'-----------',result_data)
+        print('url---------->',url,'name------->',self.name,'-----------',result_data)
         code = result_data['code']
         if code == '200':
             return result_data
