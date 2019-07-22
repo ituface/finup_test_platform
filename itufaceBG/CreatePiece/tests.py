@@ -12,7 +12,7 @@ class AddPieceApiTest(TestCase):
         request=HttpRequest()
         request.method='POST'
         request.POST['name']='测试一'
-        request.POST['mobile']='18329008888'
+        request.POST['mobile']='19429008888'
         request.POST['status']='PUSH_TO_IRON'
         request.POST['num']='1'
         request.POST['product_type']=''
