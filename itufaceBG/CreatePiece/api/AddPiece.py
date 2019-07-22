@@ -80,6 +80,9 @@ class AddPiece():
         try:
             data = requests.post(url=path.innerApiPath + url, data=data.encode('utf-8'),
                                  headers={'AUTHORIZATION': 'YLS','Connection':'close'})
+            s = requests.session()
+
+            s.keep_alive = False
             print(path.innerApiPath + url)
             result = data
 
