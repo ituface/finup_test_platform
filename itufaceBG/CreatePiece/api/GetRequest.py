@@ -133,7 +133,6 @@ class GetRequest():
             ]
 
         for inner in ApiList:
-            print(inner)
             data = self.request_post(url=inner[1], data=inner[0], headers=self.headers)
             if self.code:
                 return data
@@ -160,7 +159,6 @@ class GetRequest():
             enum_list.append('INCOME_PROVE')
             enum_list.append('SOCIAL_SECURITY_FUND')
         for inner in enum_list:
-            print('inner=--->', inner)
             if inner == 'ID_PHOTO':
                 for i_inner in ['ID_PHOTO_reverse', 'ID_PHOTO_hand', 'ID_PHOTO_positive']:
                     datas = self.request_post(self.api.sumbitPicture, self.api.func_sumbitPicture(inner, i_inner),
@@ -234,7 +232,6 @@ class GetRequest():
         if self.code:
             return result
         token = result['result'].get('token')
-        print('token________>', token)
         headers = SetHearder.setHearderData(token=token, request_type='USER', devicesToken=devices_token)
         saleapi_list = [[saleapi.qualityTesting, saleapi.func_qualityTesting(lend_request_id)],
                         [saleapi.pushToLend, saleapi.func_pushToLend(lend_request_id)]]
@@ -257,13 +254,11 @@ class GetRequest():
             list = MysqlHandle.select_mysql_data(sql)
             dict = list[0]
             city_code = dict['regions_code']
-            print(city_code)
 
             key = '\d{18}|\d{17}X'
             result = requests.get(
                 'http://sfz.uzuzuz.com/?region=%s&birthday=%s%s&sex=2&num=1' % (city_code, self.year, month_day)).text
             data = re.findall(key, result)
-            print('data-----------》', data)
             data = ''.join(data)
             sql = MysqlHandle.get_xml_sql(xml_path='update_sql', xml_tag='update', xml_id='update_regions_enabled')
             sql = sql.format(regions_code=city_code)

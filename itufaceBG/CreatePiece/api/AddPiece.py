@@ -13,7 +13,6 @@ class AddPiece():
 
         data = {'mobile': mobile}
         data = AddPiece.inner_post(url='/v1/get/mobileEnable', data=json.dumps(data))
-        print('data----------------',data)
         if int(data['data']):
             return 1
         else:
@@ -45,7 +44,6 @@ class AddPiece():
                 app_status = status('lend_app')
                 position = app_status.index(request_status) + 1
             lend_status = status('lend')
-            print('参数-------------------------------------------------------》',product_type)
             gtr = eval('GetRequest(%s)' % eval_strs)
 
             if request_status in app_status or 'EXTENSION' in product_type or 'REVOLVE' in product_type:
@@ -81,10 +79,8 @@ class AddPiece():
             data = requests.post(url=path.innerApiPath + url, data=data.encode('utf-8'),
                                  headers={'AUTHORIZATION': 'YLS'})
 
-            print(path.innerApiPath + url)
             result = data
 
-            print('result--------------------',data)
             if result.status_code != 200:
                 self.code = 1
                 return '此接口-->"%s"--出现问题--详情请问小叶同学' % url
