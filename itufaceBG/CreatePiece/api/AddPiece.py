@@ -79,10 +79,8 @@ class AddPiece():
     def inner_post(self, url, data):
         try:
             data = requests.post(url=path.innerApiPath + url, data=data.encode('utf-8'),
-                                 headers={'AUTHORIZATION': 'YLS','Connection':'close'})
-            s = requests.session()
+                                 headers={'AUTHORIZATION': 'YLS'})
 
-            s.keep_alive = False
             print(path.innerApiPath + url)
             result = data
 

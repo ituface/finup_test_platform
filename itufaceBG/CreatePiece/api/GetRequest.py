@@ -283,6 +283,9 @@ class GetRequest():
         print(url, 'name--------------->', self.name,'-----',self.token)
         get_result = result
         result_data = json.loads(get_result.text)
+
+
+        print('name---------------->',self.name,'-----------',result_data)
         code = result_data['code']
         if code == '200':
             return result_data
