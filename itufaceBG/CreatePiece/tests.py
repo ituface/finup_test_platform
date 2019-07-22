@@ -25,8 +25,9 @@ class AddPieceApiTest(TestCase):
         response=add_piece_api(request)
         result=response.content.decode()
         china_code=result.encode('utf-8').decode('unicode-escape')
+        print(china_code)
 
-        self.assertIn('造件已完成',)
+        self.assertIn('造件已完成',china_code)
 
 
 
