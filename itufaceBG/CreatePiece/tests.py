@@ -19,8 +19,8 @@ class AddPieceApiTest(TestCase):
         request.POST['saleNo']=''
         request.POST['salePassword']=''
         request.POST['year']=''
-        request.POST[',ideo_check']='OFF_SIGN'
-        request.POST[',idNo']=''
+        request.POST['video_check']='OFF_SIGN'
+        request.POST['idNo']=''
 
         response=add_piece_api(request)
 
