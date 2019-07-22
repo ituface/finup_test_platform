@@ -14,7 +14,13 @@ class AddPieceApiTest(TestCase):
         request.POST['name']='测试一'
         request.POST['mobile']='18329008888'
         request.POST['status']='PUSH_TO_IRON'
-        request.POST['num']='0'
+        request.POST['num']='1'
+        request.POST['product_type']=''
+        request.POST['saleNo']=''
+        request.POST['salePassword']=''
+        request.POST['year']=''
+        request.POST[',ideo_check']='OFF_SIGN'
+        request.POST[',idNo']=''
 
         response=add_piece_api(request)
 
