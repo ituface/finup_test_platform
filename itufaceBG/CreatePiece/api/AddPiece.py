@@ -49,7 +49,6 @@ class AddPiece():
             if request_status in app_status or 'EXTENSION' in product_type or 'REVOLVE' in product_type:
                 for inner_status in range(position):
                     data = eval("gtr.%s()" % app_status[inner_status])
-                    print('inner-----<', inner_status)
                     if data:
                         return data
 
