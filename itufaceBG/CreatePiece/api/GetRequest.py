@@ -280,7 +280,7 @@ class GetRequest():
 
         code=get_result.text
         print('url---------->',url,'name------->',self.name,'-----------',result_data,'token------>',self.token)
-        print(code.encode('utf-8').decode('unicode-escape'))
+        print(data.encode('utf-8').decode('unicode-escape'))
         code = result_data['code']
         if code == '200':
             return result_data
