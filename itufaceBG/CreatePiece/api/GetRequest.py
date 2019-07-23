@@ -278,9 +278,9 @@ class GetRequest():
         get_result = result
         result_data = json.loads(get_result.text)
 
-
+        code=get_result.text
         print('url---------->',url,'name------->',self.name,'-----------',result_data,'token------>',self.token)
-        print(get_result.encode('utf-8').decode('unicode-escape'))
+        print(code.encode('utf-8').decode('unicode-escape'))
         code = result_data['code']
         if code == '200':
             return result_data
