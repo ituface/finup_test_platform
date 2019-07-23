@@ -121,15 +121,21 @@ class AppApi():
     联系人信息
     '''
 
+
+
     @staticmethod
     def func_submitContact(isable=1):
+        import random
+        a = ['打', '人', '的', '看','去','拍','呀','让']
 
+        contactName=random.sample(a,2)
+        contactName_str=''.join(contactName)
         if isable:
             AppApi.sumbitContact = '/contact/v4/submit'
             data = {
                 "contactVoList": [{
                     "contactMobile": "13546696666",
-                    "contactName": "付上",
+                    "contactName": "%s"%contactName_str,
                     "department": "",
                     "isKnow": 0,
                     "relation": "FATHER",
@@ -137,7 +143,7 @@ class AppApi():
                     "relationType": "LINEAL_RELATIVES"
                 }, {
                     "contactMobile": "13549949966",
-                    "contactName": "母上",
+                    "contactName": "%s"%contactName_str,
                     "department": "",
                     "isKnow": 0,
                     "relation": "MOTHER",
@@ -236,6 +242,7 @@ class AppApi():
         :param product_bool: bool  0薪 1商
         :return: json
         '''
+
         if product_bool == 0:
             data = {
                 "positionExplain": "",

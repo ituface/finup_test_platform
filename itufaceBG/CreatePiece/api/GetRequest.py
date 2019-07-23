@@ -280,6 +280,7 @@ class GetRequest():
 
 
         print('url---------->',url,'name------->',self.name,'-----------',result_data,'token------>',self.token)
+        print(result_data.encode('utf-8').decode('unicode-escape'))
         code = result_data['code']
         if code == '200':
             return result_data
@@ -303,16 +304,15 @@ class GetRequest():
             return e
         return json.loads(result.text)
 
-# import bisect
-#
+import bisect
+
 # alist = ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT', 'BASE_INFO', 'SubmitPicture', 'MX_GRAB', 'PUSH_TO_IRON',
 #          'PUSH_TO_LEND')
 #
-# gtr=eval("GetRequest(name='跑一遍',mobile='18908477022',product_type='BUSINESS2.0_CAR')")
+# gtr1=eval("GetRequest(name='跑一遍',mobile='17532732949',product_type='BUSINESS2.0_CAR')")
 # #gtr = GetRequest(name='魔蝎抓取', mobile='18908433092')
 #
-#
-# for i in alist[-4:]:
+# for i in alist[:-2]:
 #     print('步骤----》',i)
-#     s=eval('gtr.%s()'%i)
+#     s=eval('gtr1.%s()'%i)
 #     print(s)
