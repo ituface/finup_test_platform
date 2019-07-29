@@ -41,6 +41,9 @@ class GetRequest():
         self.product_bool = 0
         if 'BUSINESS' in product_type:
             self.product_bool = 1
+
+        if "BS" ==self.product_type[-2:]:
+            self.product_bool=1
         self.saleNo = saleNo
         self.salePassword = salePassword
         self.api = AppApi
@@ -92,15 +95,17 @@ class GetRequest():
     '''
 
     def ANSWER_PRODUCT(self):
-        if "BUSINESS" not in self.product_type and "SALARY" not in self.product_type:
-            sql=MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_product_type')
 
-            data=MysqlHandle.select_mysql_data(sql.format(product_enum=self.product_type))[0]
-            self.product_bool=0 if data['product_type']=="薪" else 1
+        self.product_type=self.product_type.split_type.split(":")[0]
 
 
-        print("--------iiiiiiiiiiiiiiiiiiii--------",data['product_type'])
 
+        print("----------------",self.product_type,'--------------',self.product_bool)
+        print("\n")
+        print("\n")
+        print("\n")
+        print("\n")
+        print("\n")
         ApiList = [[self.api.submitAnswer, self.api.func_submitAnswer(produt_bool=self.product_bool)],
                    [self.api.submitLoanApply, self.api.func_submitLoanApply()],
                    [self.api.submitProduct, self.api.func_submitProduct(self.product_type)]
