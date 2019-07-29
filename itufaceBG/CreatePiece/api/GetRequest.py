@@ -96,7 +96,7 @@ class GetRequest():
             sql=MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_product_type')
 
             data=MysqlHandle.select_mysql_data(sql.format(self.product_type))[0]
-            self.product_bool=0  if data['product_type']=="薪" else self.product_bool=1
+            self.product_bool=0 if data['product_type']=="薪" else 1
 
 
         print("--------iiiiiiiiiiiiiiiiiiii--------",data['product_type'])
