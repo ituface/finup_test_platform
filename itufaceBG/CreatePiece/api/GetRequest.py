@@ -95,7 +95,7 @@ class GetRequest():
         if "BUSINESS" not in self.product_type and "SALARY" not in self.product_type:
             sql=MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_product_type')
 
-            data=MysqlHandle.select_mysql_data(sql.format(self.product_type))[0]
+            data=MysqlHandle.select_mysql_data(sql.format(product_enum=self.product_type))[0]
             self.product_bool=0 if data['product_type']=="薪" else 1
 
 
