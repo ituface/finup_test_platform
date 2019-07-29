@@ -105,4 +105,7 @@
     <select id="select_statistics_amount_piece_data">
         select DATE_FORMAT(date_record,'%Y-%m-%d') as date,count from statistics_amount where category='PIECE' and date_record>'{hebdomad_ago}'
     </select>
+    <select id="select_product_type">
+        select product_type from app_product where product_enum="{product_enum}"
+    </select>
 </mysql>

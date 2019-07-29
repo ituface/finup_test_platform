@@ -1,7 +1,4 @@
-import random
+a="1234556"
 
-
-a=['打','人','的','看']
-
-
-print(random.sample(a,2))
+if "22" not in a and "5544" not in a:
+    print('test')

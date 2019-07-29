@@ -65,7 +65,7 @@ class GetRequest():
         self.headers = SetHearder.setHearderData(token=token)
 
     '''
-      注册成功（包括实名，不含测一测和实名）
+      注册成功（包括实名，不含测一测）
     '''
 
     def REGISTER_SUCCESS(self):
@@ -92,7 +92,15 @@ class GetRequest():
     '''
 
     def ANSWER_PRODUCT(self):
-        print('ptoduct_bool----------->', self.product_bool)
+        if "BUSINESS" not in self.product_type and "SALARY" not in self.product_type:
+            sql=MysqlHandle.get_xml_sql(xml_path='select_sql', xml_tag='select', xml_id='select_product_type')
+
+            data=MysqlHandle.select_mysql_data(sql.format(self.product_type))[0]
+            self.product_bool=0  if data['product_type']=="薪" else self.product_bool=1
+
+
+        print("--------iiiiiiiiiiiiiiiiiiii--------",data['product_type'])
+
         ApiList = [[self.api.submitAnswer, self.api.func_submitAnswer(produt_bool=self.product_bool)],
                    [self.api.submitLoanApply, self.api.func_submitLoanApply()],
                    [self.api.submitProduct, self.api.func_submitProduct(self.product_type)]
