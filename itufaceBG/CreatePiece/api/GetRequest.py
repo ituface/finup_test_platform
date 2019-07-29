@@ -96,7 +96,7 @@ class GetRequest():
 
     def ANSWER_PRODUCT(self):
 
-        self.product_type=self.product_type.split_type.split(":")[0]
+        self.product_type=self.product_type.split(":")[0]
 
 
 
