@@ -177,7 +177,9 @@ def del_piece_list(request):
         return HttpResponse('1')
     else:
         return HttpResponse('0')
-
+@csrf_exempt
+def search_piece(request):
+    return render(request,"search-piece.html")
 
 def post(url, data):
     '''

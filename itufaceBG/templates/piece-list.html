@@ -117,6 +117,9 @@
                         <a title="删除" onclick="del_list(this,{{ inner.id }})" href="javascript:;">
                             <i class="layui-icon layui-icon-delete"></i>
                         </a>
+                        <a title="查询" onclick="x_admin_show('查询','/update-app/?id={{ inner.app_request_id }}')">
+                            <i class="layui-icon layui-icon-survey"></i>
+                        </a>
                     </td>
                 </tr>
 
@@ -166,7 +169,7 @@
             skin: 'layui-layer-rim',
             area: ["400px", "200px"],
             title: "删除条目",
-            content: '<div align="center" class="text-center" style="margin-top:20px"><p>是否确认删除手机号为：</br>' + mobile+' 的进件?</p></div>',
+            content: '<div align="center" class="text-center" style="margin-top:20px"><p>是否确认删除手机号为：</br>' + mobile + ' 的进件?</p></div>',
             btn: ['确定', '取消'],
             yes: function () {
 
