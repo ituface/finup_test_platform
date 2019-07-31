@@ -48,17 +48,14 @@
 
 <body>
 <div class="x-body">
-    <table width="100%">
-        <tr>
-            <td width="50%">
-                <form class="layui-form" method="post" enctype="multipart/form-data" id="form-sumbit">
+
                     <!--class="layui-form" -->
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名:</label>
 
                         <div class="layui-input-inline">
-                            {{ name }}
+                           啊哈哈 {{ name }}
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -140,36 +137,22 @@
                             {{ name }}
                         </div>
                     </div>
-
                     <div class="layui-form-item">
-                        <label for="L_repass" class="layui-form-label">
-                        </label>
-                        <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
-                            增加
+                        <form>
+                             <button class="layui-btn" lay-filter="add" lay-submit="" id="btnClass">
+                              第一次补充材料
                         </button>
-                        <div class="layui-form-mid layui-word-aux">
-                            {{ errorid }}
-                        </div>
-                        <h2 align="center"><font size="5" color="red" id="message"> </font></h2>
+
+                        </form>
                     </div>
-                </form>
+
 
                 <div id="loadings">
                     <div id="loadinggif">
 
                     </div>
                 </div>
-            </td>
-            <td width="50%" align="center" id="search_result">
 
-                <p><font size="4" color="#6495ed">搜索到库中可能符合你要求的件</font></p>
-                <p><font size="4" color="#6495ed">如果没有符合，再次点击申请新的进件</font></p>
-                <ol>
-
-                </ol>
-            </td>
-        </tr>
-    </table>
 </div>
 <script>
     $(document).ready(function () {
