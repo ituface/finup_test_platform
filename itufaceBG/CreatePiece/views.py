@@ -180,6 +180,7 @@ def del_piece_list(request):
 @csrf_exempt
 def search_piece(request):
     app_request_id=request.GET['id']
+    print(app_request_id)
 
     return render(request,"search-piece.html")
 
