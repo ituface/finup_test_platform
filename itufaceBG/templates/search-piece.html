@@ -13,21 +13,21 @@
     <table>
         <tr>
             <td>
-                <p>App_Cusomer_Id: {{rows.AppCustomerId}}</p>
-                <p>APP进件号: {{rows.AppRequestId}}</p>
-                <p>个贷进件号: {{rows.LendRequestId}}</p>
-                <p>APP状态: {{rows.AppStateType}}</p>
-                <p>个贷状态: {{rows.LendStatus}}</p>
-                <p>个贷进件号: {{rows.AppCustomerId}}</p>
-                <p>产品: {{rows.ProductName}}</p>
-                <p>用户名: {{rows.AppCustomerName}}</p>
-                <p>手机号: {{rows.AppMobile}}</p>
-                <p>APP里的身份证号: {{rows.AppIdNo}}</p>
-                <p>Log_in_ID: {{rows.AppLogin}}</p>
-                <p>销售工号: {{rows.SalesNo}}</p>
-                <p>个贷小状态状态: {{rows.LendMinStatus}}</p>
-                <p>个贷Customer_Id: {{rows.LendCustomerId}}</p>
-                <p>个贷身份证号: {{rows.LendCustomerIdNo}}</p>
+                <p>App_Cusomer_Id: {% verbatim %}{{rows.AppCustomerId}}{% endverbatim %}</p>
+                <p>APP进件号: {% verbatim %}{{rows.AppRequestId}}{% endverbatim %}</p>
+                <p>个贷进件号:{% verbatim %} {{rows.LendRequestId}}{% endverbatim %}</p>
+                <p>APP状态:{% verbatim %} {{rows.AppStateType}}{% endverbatim %}</p>
+                <p>个贷状态:{% verbatim %} {{rows.LendStatus}}{% endverbatim %}</p>
+                <p>个贷进件号: {% verbatim %}{{rows.AppCustomerId}}{% endverbatim %}</p>
+                <p>产品: {% verbatim %}{{rows.ProductName}}{% endverbatim %}</p>
+                <p>用户名: {% verbatim %}{{rows.AppCustomerName}}{% endverbatim %}</p>
+                <p>手机号: {% verbatim %}{{rows.AppMobile}}{% endverbatim %}</p>
+                <p>APP里的身份证号: {% verbatim %}{{rows.AppIdNo}}{% endverbatim %}</p>
+                <p>Log_in_ID: {% verbatim %}{{rows.AppLogin}}{% endverbatim %}</p>
+                <p>销售工号: {% verbatim %}{{rows.SalesNo}}{% endverbatim %}</p>
+                <p>个贷小状态状态: {% verbatim %}{{rows.LendMinStatus}}{% endverbatim %}</p>
+                <p>个贷Customer_Id: {% verbatim %}{{rows.LendCustomerId}}{% endverbatim %}</p>
+                <p>个贷身份证号: {% verbatim %}{{rows.LendCustomerIdNo}}{% endverbatim %}</p>
             </td>
         </tr>
     </table>
@@ -43,16 +43,13 @@
 
     new Vue({
         el: '#app',
-        data() {
+        data:{
 
-            return {
                 rows: {},
                 button_choice: '',
                 showPrise:false,
-
-            }
         },
-        //
+        //进入页面即刷新
         mounted() {
             this.send()
         },
@@ -90,7 +87,6 @@
 
 
                 })
-                console.log(this)
             }
         },
 
