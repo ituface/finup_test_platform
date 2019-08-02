@@ -21,7 +21,6 @@ class AppApi():
     submitToSale = '/apply/v1/submitToSale'  # 提交钢铁侠
     submitCutomer = '/basic/v1/submit/customer/id'  # 提交客户身份证信息
     timestamp = int(time.time() * 1000)
-
     # 补充一提交资料
     submitSupplementInfo = '/basic/v1/submitSupplementInfo'
     sumbitContact_v2 = '/contact/v3/submit'

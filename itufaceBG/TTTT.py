@@ -1,4 +1,13 @@
-a="1234556"
+import logging
+import traceback
 
-a=a.split('4')[0]
-print(a)
+
+if __name__ == '__main__':
+
+
+    try:
+
+        a=1/0
+
+    except Exception as e:
+        logging.exception("s")
