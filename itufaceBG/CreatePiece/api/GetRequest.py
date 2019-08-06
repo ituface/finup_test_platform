@@ -98,14 +98,6 @@ class GetRequest():
 
         self.product_type=self.product_type.split(":")[0]
 
-
-
-        print("----------------",self.product_type,'--------------',self.product_bool)
-        print("\n")
-        print("\n")
-        print("\n")
-        print("\n")
-        print("\n")
         ApiList = [[self.api.submitAnswer, self.api.func_submitAnswer(produt_bool=self.product_bool)],
                    [self.api.submitLoanApply, self.api.func_submitLoanApply()],
                    [self.api.submitProduct, self.api.func_submitProduct(self.product_type)]
@@ -286,6 +278,19 @@ class GetRequest():
     app接口post请求
     '''
 
+
+    def picture_materials_upload(self,picture_materials_list):
+        for picture in picture_materials_list:
+           data1=self.request_post(self.api.sumbitPicture,self.api.func_sumbitPicture(picture),headers=self.headers)
+           data2=self.request_post(self.api.annexstate,self.api.func_annexstate,headers=self.headers)
+           if self.code==1:
+               return data1+data2
+           return 0
+
+
+
+
+
     def request_post(self, url, data, headers=None):
         result = requests.post(url=host + url + '?sign=!signForTest', data=data.encode('utf-8'), headers=self.headers)
         get_result = result
@@ -316,6 +321,9 @@ class GetRequest():
             self.code = 1
             return e
         return json.loads(result.text)
+
+
+
 
 import bisect
 

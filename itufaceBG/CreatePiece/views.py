@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.http import HttpResponseBadRequest
 import json
 from django.views.decorators.csrf import csrf_exempt
 import time, json
@@ -24,7 +25,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @get_web_input_data('select_piece_list')
 @Handle_time
 def piece_list(request):
-    print('post----------->',request.POST)
+    print('post----------->', request.POST)
     sql = request.DPOST.get('sql') + ' order by create_time desc'
     data = MysqlHandle.select_mysql_data(sql)
     print('sqls------>', sql)
@@ -38,10 +39,7 @@ def piece_list(request):
         result = paginator.page(1)
     except EmptyPage:
         result = paginator.page(paginator.num_pages)
-    return render(request, 'piece-list.html', {'piecelist':  result, 'paginator': paginator})
-
-
-
+    return render(request, 'piece-list.html', {'piecelist': result, 'paginator': paginator})
 
 
 @csrf_exempt
@@ -109,9 +107,9 @@ def add_piece_api(request):
     num = gain_data['num']
     name = gain_data['name']
     product_type = gain_data['product_type']
-    video_check=gain_data['video_check']
-    print('video_Check--------------->',video_check)
-    print('gain_data---->',gain_data)
+    video_check = gain_data['video_check']
+    print('video_Check--------------->', video_check)
+    print('gain_data---->', gain_data)
     mobile = gain_data['mobile']
     lend_status = Func_status('lend')
     print('status---------------->', status)
@@ -127,7 +125,7 @@ def add_piece_api(request):
         return JsonResponse({'code': 202, 'message': '手机号已存在，请更换手机号'})
     # 以下操作为跑流程
     strs = request.strs
-    data = AddPiece.piece_to_status(status, strs,product_type)
+    data = AddPiece.piece_to_status(status, strs, product_type)
     if data in (1, 2):
         data = {"mobile": mobile}
         result_post = post(url='/v1/get/IdAndStatus', data=data)
@@ -139,8 +137,8 @@ def add_piece_api(request):
         print('type----------->', type(post_data))
         app_request_id = post_data['app_request_id']
         lend_request_id = post_data['lend_request_id']
-        if lend_request_id==None:
-            lend_request_id='NULL'
+        if lend_request_id == None:
+            lend_request_id = 'NULL'
         current_status = post_data['current_status']
         sql = MysqlHandle.get_xml_sql(xml_path='insert_sql', xml_tag='insert', xml_id='insert_piece')
         MysqlHandle.delete_update_insert_mysql_data(
@@ -150,7 +148,7 @@ def add_piece_api(request):
         if data == 2:
             return JsonResponse({'code': 202, 'message': '已推送到个贷系统，后续状态请关注列表'})
         return JsonResponse({'code': 202, 'message': '造件已完成'})
-    elif data==3:
+    elif data == 3:
         return JsonResponse({'code': 202, 'message': '有异常产生，请稍后重试'})
     else:
         return JsonResponse({'code': 202, 'message': data})
@@ -177,12 +175,53 @@ def del_piece_list(request):
         return HttpResponse('1')
     else:
         return HttpResponse('0')
+
+
 @csrf_exempt
 def search_piece(request):
-    app_request_id=request.GET['id']
+    app_request_id = request.GET['id']
     print(app_request_id)
 
-    return render(request,"search-piece.html")
+    return render(request, "search-piece.html")
+
+
+def first_second_supplement(request):
+    '''
+    :param request:
+    mobile: 手机号
+    status: 判断是第一次补充材料还是第二次
+    id: app进件号
+    :return:
+    '''
+    status = request.POST['status']
+    app_request_id = request.POST['id']
+    mobile = request.POST['mobile']
+    if status in ('FIRST_SUPPLY_MATERIAL','SECOND_SUPPLY_MATERIAL'):
+
+        flow = GetRequest(name='耶耶耶', mobile=mobile)
+        flow.FAST_LOGIN()
+        if status == 'FIRST_SUPPLY_MATERIAL':
+            data = go_post('/updateManage', {'id': app_request_id})
+            picture_materials_list = data['required']
+            code = flow.picture_materials_upload(picture_materials_list)
+            if code != 0:
+                return JsonResponse({'code': 400, 'message': '补充照片项出现问题'}, status=400)
+        # 兼容极速贷
+        flow.product_type = 'TEST'
+        tolend = flow.PUSH_TO_IRON()
+        if tolend != 0:
+            return JsonResponse({'code':400,'message':tolend},status=400)
+
+        return JsonResponse({'code': 200, 'message': '已完成第一次补充材料'}, status=200)
+
+
+
+
+
+
+    else:
+        return JsonResponse({'code': HttpResponseBadRequest, 'message': '请求参数异常'}, status=HttpResponseBadRequest)
+
 
 def post(url, data):
     '''
@@ -197,3 +236,11 @@ def post(url, data):
     if result.status_code != 200:
         return 0
     return result.text
+
+
+def go_post(url, data):
+    request = requests.post(url=path.go_innerApiPath + url, data=data,
+                            headers={'Auth': 'YLS', 'Token': 'yqaefHZs6a/wSeIO1tmd0g=='})
+    if request.status_code != 200:
+        return 0
+    return request.json()

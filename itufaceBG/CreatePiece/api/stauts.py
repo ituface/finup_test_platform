@@ -26,3 +26,7 @@ def status(position):
         return None
 
 
+
+print(len(status('PhotoData')))
+
+print(len(status('GraspData')))

@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'del_piece_list',pieceview.del_piece_list,name='del_piece_list'),
     url(r'finup_lottery',views.finup_lottery,name='finup_lottery'),
     url(r'search-piece/',pieceview.search_piece,name='search-piece'),
+    url(r'supplement-materials',pieceview.first_second_supplement,name='supplement-materials')
 
 
 ]

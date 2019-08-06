@@ -18,7 +18,6 @@
                 <p>个贷进件号:{% verbatim %} {{rows.LendRequestId}}{% endverbatim %}</p>
                 <p>APP状态:{% verbatim %} {{rows.AppStateType}}{% endverbatim %}</p>
                 <p>个贷状态:{% verbatim %} {{rows.LendStatus}}{% endverbatim %}</p>
-                <p>个贷进件号: {% verbatim %}{{rows.AppCustomerId}}{% endverbatim %}</p>
                 <p>产品: {% verbatim %}{{rows.ProductName}}{% endverbatim %}</p>
                 <p>用户名: {% verbatim %}{{rows.AppCustomerName}}{% endverbatim %}</p>
                 <p>手机号: {% verbatim %}{{rows.AppMobile}}{% endverbatim %}</p>
@@ -32,38 +31,57 @@
         </tr>
     </table>
 
-    <div  v-if="showPrise">
+    <div v-if="showPrise">
 
-    <button @click='choice'>{{button_choice}}</button>
+        <button @click='choice'> {% verbatim %}{{button_choice}}{% endverbatim %}</button>
+    </div>
+    <div v-if="showMaterials">
+        {% verbatim %}{{MaterialsMessage}}{% endverbatim %}
     </div>
 
 </div>
 <script>
-    const address='http://172.16.113.79:8882'
+    const address = 'http://172.16.113.79:8882'
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
 
     new Vue({
         el: '#app',
-        data:{
+        data() {
 
+            return {
                 rows: {},
                 button_choice: '',
-                showPrise:false,
+                showPrise: false,
+                showMaterials:false,
+
+            }
         },
-        //进入页面即刷新
+        //
         mounted() {
             this.send()
         },
         methods: {
             choice() {
-                this.showPrise=true
+                this.showPrise = true
                 console.log('adfa')
 
             },
 
             send() {
+                app_id = getQueryVariable('id')
 
-                axios.get(address+'/messages?', {
-                    params: {AppRequestId: '10002566'},
+                axios.get(address + '/messages?', {
+                    params: {AppRequestId: app_id},
                     headers: {
                         Auth: "YLS",
                         Token: 'C2wVRVeJ527xvlfsapxcIg==',
@@ -72,15 +90,26 @@
 
                     const data = response.data;
                     result = data.messages[0]
-                    passe=''
-                    if (result['AppStateType'] == 'PB_SECOND_OTHER') {
-                        showPrise=true
+                    passe = ''
+                    if (result['AppStateType'] == 'FIRST_SUPPLY_MATERIAL' ||result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL' ) {
+                        mobile = getQueryVariable('mobile')
+                        showPrise = true
                         passe = '点击补充第一次补充材料'
+                        if (result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL' ){
+                             passe = '点击补充第二次补充材料'
+                        }
+                        axios.post('{% url 'supplement-materials' %}', {
+                                'mobile': mobile,
+                                'status': result['AppStateType'],
+                                'id': app_id
+                            }
+                        ).then((response)=>{
+                            const inner_data=response.data;
+                            showMaterials:true
+                            MaterialsMessage=inner_data['message']
 
-                    } else if (result['AppStateType'] == 'PB_SECOND_SUPPLY_OPTION') {
-                        showPrise=true
+                        })
 
-                        passe = '点击补充第二次补充材料'
                     }
                     this.rows = result
                     this.button_choice = passe
@@ -88,7 +117,7 @@
 
                 })
             }
-        },
+        }
 
 
     });
