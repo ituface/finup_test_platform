@@ -100,9 +100,9 @@
                              passe = '点击补充第二次补充材料'
                         }
                         axios.post('{% url 'supplement-materials' %}', {
-                                'mobile': mobile,
-                                'status': result['AppStateType'],
-                                'id': app_id
+                                mobile: mobile,
+                                status: result['AppStateType'],
+                                id: app_id
                             }
                         ).then((response)=>{
                             const inner_data=response.data;
