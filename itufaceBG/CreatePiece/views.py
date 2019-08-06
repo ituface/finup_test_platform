@@ -193,6 +193,7 @@ def first_second_supplement(request):
     id: app进件号
     :return:
     '''
+    print(request.POST)
     status = request.POST['status']
     app_request_id = request.POST['id']
     mobile = request.POST['mobile']
