@@ -41,7 +41,7 @@
 
 </div>
 <script>
-    const address = 'http://172.16.113.79:8882'
+    const address = 'http://127.0.0.1:8882'
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -90,6 +90,7 @@
 
                     const data = response.data;
                     result = data.messages[0]
+                    console.log(data)
                     passe = ''
                     if (result['AppStateType'] == 'FIRST_SUPPLY_MATERIAL' ||result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL' ) {
                         mobile = getQueryVariable('mobile')

@@ -184,7 +184,7 @@ def search_piece(request):
 
     return render(request, "search-piece.html")
 
-
+@csrf_exempt
 def first_second_supplement(request):
     '''
     :param request:
