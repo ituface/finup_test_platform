@@ -65,6 +65,7 @@
                 button_choice: '',
                 showPrise: false,
                 showMaterials: false,
+                MaterialsMessage:'11111'
 
             }
         },
@@ -82,13 +83,13 @@
 
                 axios.post('{% url 'supplement-materials' %}', data
                 ).then((response) => {
-                    showMaterials:true
+                    this.showMaterials=true
 
 
                     const inner_data = response.data;
                     console.log(inner_data)
 
-                    MaterialsMessage = inner_data['message']
+                    this.MaterialsMessage = inner_data['message']
 
                 })
 
