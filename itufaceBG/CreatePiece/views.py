@@ -210,7 +210,8 @@ def first_second_supplement(request):
         # 兼容极速贷
         flow.product_type = 'TEST'
         tolend = flow.PUSH_TO_IRON()
-        if tolend != 0:
+        print('tolend-------------',tolend)
+        if tolend!= 0:
             return JsonResponse({'code':400,'message':tolend},status=400)
 
         return JsonResponse({'code': 200, 'message': '已完成第一次补充材料'}, status=200)

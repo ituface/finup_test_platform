@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>circle</title>
 </head>
 <body>
-
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -33,7 +35,7 @@
 
     <div v-if="showPrise">
 
-        <button @click='choice'> {% verbatim %}{{button_choice}}{% endverbatim %}</button>
+        <button @click='choice' class="btn btn-success"> {% verbatim %}{{button_choice}}{% endverbatim %}</button>
     </div>
     <div v-if="showMaterials">
         {% verbatim %}{{MaterialsMessage}}{% endverbatim %}
@@ -62,7 +64,7 @@
                 rows: {},
                 button_choice: '',
                 showPrise: false,
-                showMaterials:false,
+                showMaterials: false,
 
             }
         },
@@ -72,8 +74,23 @@
         },
         methods: {
             choice() {
-                this.showPrise = true
-                console.log('adfa')
+                let data = new FormData();
+                data.append('mobile', this.rows.AppMobile);
+                data.append('status', this.rows.AppStateType);
+                data.append('id', this.rows.AppRequestId);
+
+
+                axios.post('{% url 'supplement-materials' %}', data
+                ).then((response) => {
+                    showMaterials:true
+
+
+                    const inner_data = response.data;
+                    console.log(inner_data)
+
+                    MaterialsMessage = inner_data['message']
+
+                })
 
             },
 
@@ -92,24 +109,12 @@
                     result = data.messages[0]
                     console.log(data)
                     passe = ''
-                    if (result['AppStateType'] == 'FIRST_SUPPLY_MATERIAL' ||result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL' ) {
-                        mobile = getQueryVariable('mobile')
-                        showPrise = true
+                    if (result['AppStateType'] == 'FIRST_SUPPLY_MATERIAL' || result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL') {
+                        this.showPrise = true
                         passe = '点击补充第一次补充材料'
-                        if (result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL' ){
-                             passe = '点击补充第二次补充材料'
+                        if (result['AppStateType'] == 'SECOND_SUPPLY_MATERIAL') {
+                            passe = '点击补充第二次补充材料'
                         }
-                        axios.post('{% url 'supplement-materials' %}', {
-                                mobile: mobile,
-                                status: result['AppStateType'],
-                                id: app_id
-                            }
-                        ).then((response)=>{
-                            const inner_data=response.data;
-                            showMaterials:true
-                            MaterialsMessage=inner_data['message']
-
-                        })
 
                     }
                     this.rows = result
