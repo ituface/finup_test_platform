@@ -93,8 +93,11 @@
 
                 }).catch(function (error) {
                     if (error.response){
-                        console.log(error.response.data);
-                        console.log(error.response.status);
+                        error_data=error.response.data
+
+                        alert(error_data['message'])
+
+
                     }
                     
                 })
