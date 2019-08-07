@@ -5,6 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <title>circle</title>
+    <style>
+
+
+        .loading {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.4;
+            z-index: 1000;
+        }
+
+        /* 动图样式 */
+        .gif {
+            height: 128px;
+            width: 128px;
+            background: url('{% static "/images/loading.gif" %}');
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -64px;
+            margin-top: -64px;
+        }
+
+    </style>
 </head>
 <body>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -40,8 +67,15 @@
     <div v-if="showMaterials">
         {% verbatim %}{{MaterialsMessage}}{% endverbatim %}
     </div>
+     <div v-bind:class="{ loading: isActive }">
+        <div v-bind:class="{ gif: isActive }">
+
+        </div>
+    </div>
 
 </div>
+
+
 <script>
     const address = 'http://127.0.0.1:8882'
     function getQueryVariable(variable) {
@@ -65,7 +99,8 @@
                 button_choice: '',
                 showPrise: false,
                 showMaterials: false,
-                MaterialsMessage:'11111'
+                MaterialsMessage:'',
+                isActive:false
 
             }
         },
@@ -80,26 +115,29 @@
                 data.append('status', this.rows.AppStateType);
                 data.append('id', this.rows.AppRequestId);
 
-
+                this.isActive=true
                 axios.post('{% url 'supplement-materials' %}', data
                 ).then((response) => {
-                    this.showMaterials=true
+                    this.isActive=false
+                    this.showMaterials = false
 
 
                     const inner_data = response.data;
                     console.log(inner_data)
 
                     this.MaterialsMessage = inner_data['message']
+                    this.send()
 
                 }).catch(function (error) {
-                    if (error.response){
-                        error_data=error.response.data
+                    this.isActive=false
+                    if (error.response) {
+                        error_data = error.response.data
 
                         alert(error_data['message'])
 
 
                     }
-                    
+
                 })
 
             },
@@ -140,9 +178,7 @@
 
 
 </script>
-<script>
 
-</script>
 
 </body>
 </html>

@@ -204,6 +204,7 @@ def first_second_supplement(request):
         if status == 'FIRST_SUPPLY_MATERIAL':
             data = go_post('/updateManage', {'id': app_request_id})
             picture_materials_list = data['required']
+            print('================',picture_materials_list)
             code = flow.picture_materials_upload(picture_materials_list)
             if code != 0:
                 return JsonResponse({'code': 400, 'message': '补充照片项出现问题'}, status=400)
@@ -214,7 +215,7 @@ def first_second_supplement(request):
         if tolend!= 0:
             return JsonResponse({'code':400,'message':tolend},status=400)
 
-        return JsonResponse({'code': 200, 'message': '已完成第一次补充材料'}, status=200)
+        return JsonResponse({'code': 200, 'message': '已完成补充材料'}, status=200)
 
 
 
