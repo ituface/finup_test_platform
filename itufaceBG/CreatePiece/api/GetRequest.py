@@ -285,7 +285,7 @@ class GetRequest():
            data2=self.request_post(self.api.annexstate,self.api.func_annexstate(picture),headers=self.headers)
            if self.code==1:
                return data1+data2
-           return 0
+        return 0
 
 
 
