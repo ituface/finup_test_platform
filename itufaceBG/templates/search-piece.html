@@ -97,7 +97,7 @@
             return {
                 rows: {},
                 button_choice: '',
-                showPrise: true,
+                showPrise: false,
                 showMaterials: false,
                 MaterialsMessage:'',
                 isActive:false
@@ -121,7 +121,6 @@
                     this.isActive=false
                     this.showPrise = false
 
-
                     const inner_data = response.data;
                     console.log(inner_data)
 
@@ -130,13 +129,15 @@
                     this.isActive=false
                     if (error.response) {
                         error_data = error.response.data
-
                         alert(error_data['message'])
 
 
                     }
 
+
+
                 })
+
 
             },
 
