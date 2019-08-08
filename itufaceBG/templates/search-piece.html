@@ -97,7 +97,7 @@
             return {
                 rows: {},
                 button_choice: '',
-                showPrise: false,
+                showPrise: true,
                 showMaterials: false,
                 MaterialsMessage:'',
                 isActive:false
@@ -119,15 +119,13 @@
                 axios.post('{% url 'supplement-materials' %}', data
                 ).then((response) => {
                     this.isActive=false
-                    this.showMaterials = false
+                    this.showPrise = false
 
 
                     const inner_data = response.data;
                     console.log(inner_data)
 
                     this.MaterialsMessage = inner_data['message']
-                    this.send()
-
                 }).catch(function (error) {
                     this.isActive=false
                     if (error.response) {
