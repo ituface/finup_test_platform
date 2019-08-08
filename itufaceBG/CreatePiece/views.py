@@ -223,7 +223,7 @@ def first_second_supplement(request):
 
 
     else:
-        return JsonResponse({'code': HttpResponseBadRequest, 'message': '请求参数异常'}, status=HttpResponseBadRequest)
+        return JsonResponse({'code': 400, 'message': '请求参数异常'}, status=400)
 
 
 def post(url, data):
