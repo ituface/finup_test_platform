@@ -236,7 +236,7 @@ def test(request):
 
     t=Thread(target=a)
 
-    return JsonResponse('test'*30)
+    return JsonResponse({'message':'2222222222222'})
 
 def post(url, data):
     '''
