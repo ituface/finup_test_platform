@@ -231,7 +231,7 @@ def a():
     print('---'*30,'***'*30)
 
 @csrf_exempt
-def test():
+def test(request):
     from threading import Thread
 
     t=Thread(target=a)
