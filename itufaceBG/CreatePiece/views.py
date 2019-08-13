@@ -228,11 +228,15 @@ def first_second_supplement(request):
 
 def a():
     time.sleep(110)
-    print('adadafafdasf')
+    print('---'*30,'***'*30)
 
 @csrf_exempt
 def test():
-    return JsonResponse('wang')
+    from threading import Thread
+
+    t=Thread(target=a)
+
+    return JsonResponse('test'*30)
 
 def post(url, data):
     '''
