@@ -1,3 +1,4 @@
+#coding:utf-8
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponseBadRequest
 import json
@@ -225,6 +226,13 @@ def first_second_supplement(request):
     else:
         return JsonResponse({'code': 400, 'message': '请求参数异常'}, status=400)
 
+def a():
+    time.sleep(110)
+    print('adadafafdasf')
+
+@csrf_exempt
+def test():
+    return JsonResponse('wang')
 
 def post(url, data):
     '''

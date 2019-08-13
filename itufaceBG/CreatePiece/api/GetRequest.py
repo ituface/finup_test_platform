@@ -1,3 +1,4 @@
+#coding:utf-8
 from CreatePiece.api.saleApi import saleApi
 from CreatePiece.api.Header import SetHearder
 from CreatePiece.api.AppApi import AppApi
