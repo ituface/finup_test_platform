@@ -235,6 +235,7 @@ def test(request):
     from threading import Thread
 
     t=Thread(target=a)
+    t.start()
 
     return JsonResponse({'message':'2222222222222'})
 
