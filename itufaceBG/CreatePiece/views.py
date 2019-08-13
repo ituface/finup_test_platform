@@ -227,7 +227,7 @@ def first_second_supplement(request):
         return JsonResponse({'code': 400, 'message': '请求参数异常'}, status=400)
 
 def a():
-    time.sleep(110)
+    time.sleep(6)
     print('---'*30,'***'*30)
 
 @csrf_exempt
