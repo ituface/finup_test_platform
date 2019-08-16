@@ -233,9 +233,10 @@ def a():
 @csrf_exempt
 def django_test(request):
     from  django.db import connection
+    connection.autocommit(False)
     cursor=connection.cursor()
     try:
-        cursor.execute("update customer set name='哈哈' where id =1")
+        cursor.execute("update customer set name='顶顶顶顶' where id =1")
         cursor.execute("update customer set name='嘻嘻' where id =9")
         connection.commit()
     except Exception:
