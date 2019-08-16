@@ -28,6 +28,11 @@ class AddPieceApiTest(TestCase):
         print(china_code)
 
         self.assertIn('造件已完成',china_code)
-
+    def test_first_second_supplement(self):
+        request=HttpRequest()
+        request.method='POST'
+        request.POST['FIRST_SUPPLY_MATERIAL']
+        request.POST['id']
+        request.POST['mobile']
 
 

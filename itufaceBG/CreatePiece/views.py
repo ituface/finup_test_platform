@@ -232,10 +232,13 @@ def a():
 
 @csrf_exempt
 def test(request):
-    from threading import Thread
+    from django.db import connection
+    cursor=connection.cursor()
+    cursor.execute('select * from app_piece WHERE id =1130')
+    row=cursor.fetchone()
+    print(row)
 
-    t=Thread(target=a)
-    t.start()
+
 
     return JsonResponse({'message':'2222222222222'})
 
