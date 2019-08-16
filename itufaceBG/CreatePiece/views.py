@@ -239,7 +239,9 @@ def django_test(request):
         cursor.execute("update customer set name='2121' where id =1")
         cursor.execute("update customer set name='76543654' where id =2")
         connection.commit()
-    except Exception:
+    except Exception as e:
+        import traceback
+        print(traceback.print_exc())
         print('===='*100)
         connection.rollback()
 
