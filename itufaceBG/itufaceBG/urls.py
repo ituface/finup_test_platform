@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'finup_lottery',views.finup_lottery,name='finup_lottery'),
     url(r'search-piece/',pieceview.search_piece,name='search-piece'),
     url(r'supplement-materials',pieceview.first_second_supplement,name='supplement-materials'),
-    url(r'test',pieceview.test)
+    url(r'test',pieceview.django_test)
 
 
 ]
