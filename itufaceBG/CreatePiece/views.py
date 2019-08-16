@@ -236,7 +236,7 @@ def django_test(request):
     cursor=connection.cursor()
     try:
         cursor.execute("update customer set name='2121' where id =1")
-        cursor.execute("insert into  customer  VALUE (3,'hahah','765432')")
+        cursor.execute("insert into  customer  VALUE (4,'hahah','765432')")
         connection.commit()
     except Exception as e:
         import traceback
