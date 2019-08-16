@@ -28,17 +28,17 @@ class AddPieceApiTest(TestCase):
         print(china_code)
 
         self.assertIn('造件已完成',china_code)
-    def test_first_second_supplement(self):
-        request=HttpRequest()
-        request.method='POST'
-        request.POST['FIRST_SUPPLY_MATERIAL']
-        request.POST['id']
-        request.POST['mobile']
-
-
-    def test_django_test(self):
-        request=HttpRequest()
-        response=django_test(request)
+    # def test_first_second_supplement(self):
+    #     request=HttpRequest()
+    #     request.method='POST'
+    #     request.POST['FIRST_SUPPLY_MATERIAL']
+    #     request.POST['id']
+    #     request.POST['mobile']
+    #
+    #
+    # def test_django_test(self):
+    #     request=HttpRequest()
+    #     response=django_test(request)
 
 
 
