@@ -233,7 +233,6 @@ def a():
 @csrf_exempt
 def django_test(request):
     from  django.db import connection
-    connection.aut
     cursor=connection.cursor()
     try:
         cursor.execute("update customer set name='55555' where id =1")
