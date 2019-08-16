@@ -233,14 +233,13 @@ def a():
 @csrf_exempt
 def django_test(request):
     from  django.db import connection
-    connection.autocommit(0)
     cursor=connection.cursor()
     try:
         cursor.execute("update customer set name='鱼鱼鱼' where id =1")
         cursor.execute("insert into  customer  VALUE (1)")
         connection.commit()
     except Exception:
-        print('daafa')
+        print('===='*100)
         connection.rollback()
 
     return JsonResponse({'message':'2222222222222'})
