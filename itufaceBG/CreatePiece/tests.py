@@ -2,7 +2,7 @@ from django.test import TestCase
 
 
 from django.http import HttpRequest
-from CreatePiece.views import add_piece_api
+from CreatePiece.views import add_piece_api,django_test
 
 
 class AddPieceApiTest(TestCase):
@@ -34,5 +34,11 @@ class AddPieceApiTest(TestCase):
         request.POST['FIRST_SUPPLY_MATERIAL']
         request.POST['id']
         request.POST['mobile']
+
+
+    def test_django_test(self):
+        request=HttpRequest()
+        response=django_test(request)
+
 
 

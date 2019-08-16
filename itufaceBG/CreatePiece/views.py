@@ -231,12 +231,7 @@ def a():
     print('---'*30,'***'*30)
 
 @csrf_exempt
-def test(request):
-    from django.db import connection
-    cursor=connection.cursor()
-    cursor.execute('select * from app_piece WHERE id =1130')
-    row=cursor.fetchone()
-    print(row)
+def django_test(request):
 
 
 
