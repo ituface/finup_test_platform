@@ -237,8 +237,7 @@ def django_test(request):
     try:
         cursor.execute("START TRANSACTION;")
         cursor.execute("update customer set name='999999999' where id =1")
-        cursor.execute("insert into  customer  VALUE (4,'hahah','765432')")
-        connection.commit()
+        cursor.execute("insert into  customer  VALUE (14,'hahah','765432')")
     except Exception as e:
         print(e.args)
         print(e)
