@@ -237,7 +237,7 @@ def to_pay():
 
 def get_cash():
     cursor = connection.cursor()
-    cursor.execute("delete from lend_app.customer where id=15;")
+    cursor.execute("insert into  customer  VALUE (16,'hahah','765432')")
 
     return "success"
 @csrf_exempt
