@@ -232,12 +232,12 @@ def a():
     print('---'*30,'***'*30)
 def to_pay():
     cursor = connection.cursor()
-    cursor.execute("insert into  customer  VALUE (15,'hahah','765432')")
+    cursor.execute("insert into  customer  VALUE (17,'hahah','765432')")
     return "success"
 
 def get_cash():
     cursor = connection.cursor()
-    cursor.execute("insert into  customer  VALUE (16,'hahah','765432')")
+    cursor.execute("insert into  customer  VALUE (18,'hahah','765432')")
 
     return "success"
 @csrf_exempt
@@ -247,7 +247,9 @@ def django_test(request):
         cursor.execute("START TRANSACTION;")
         to_pay()
         get_cash()
-        rows=cursor.execute("update customer set name='999999999' where id =15")
+        rows=cursor.execute("update customer set name='999999999' where id =19")
+        if rows==0:
+            raise Exception('没有')
         print('rows--->',rows)
         connection.commit()
     except Exception as e:
