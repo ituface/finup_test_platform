@@ -236,7 +236,7 @@ def django_test(request):
     try:
         with connection.cursor() as cursor:
             cursor.execute("update customer set name='2121' where id =1")
-            cursor.execute("insert into  customer  VALUE (5,'hahah','765432')")
+            cursor.execute("insert into  customer  VALUE (13,'hahah','765432')")
     except Exception:
         print('dadadasdad'*10)
 
