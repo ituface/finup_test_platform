@@ -248,7 +248,7 @@ def django_test(request):
         to_pay()
         get_cash()
         rows=cursor.execute("update customer set name='999999999' where id =15")
-        print('rows--->'.rows)
+        print('rows--->',rows)
         connection.commit()
     except Exception as e:
         print(e.args)
