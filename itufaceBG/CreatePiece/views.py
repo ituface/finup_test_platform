@@ -225,19 +225,29 @@ def first_second_supplement(request):
 
     else:
         return JsonResponse({'code': 400, 'message': '请求参数异常'}, status=400)
+from  django.db import connection
 
 def a():
     time.sleep(6)
     print('---'*30,'***'*30)
+def to_pay():
+    cursor = connection.cursor()
+    cursor.execute("insert into  customer  VALUE (15,'hahah','765432')")
+    return "success"
 
+def get_cash():
+    cursor = connection.cursor()
+    cursor.execute("delete from lend_app.customer where id=15;")
+
+    return "success"
 @csrf_exempt
 def django_test(request):
-    from  django.db import connection
     cursor=connection.cursor()
     try:
         cursor.execute("START TRANSACTION;")
-        cursor.execute("update customer set name='999999999' where id =1")
-        cursor.execute("insert into  customer  VALUE (14,'hahah','765432')")
+        to_pay()
+        get_cash()
+        cursor.execute("update customer set name='999999999' where id =15")
         connection.commit()
     except Exception as e:
         print(e.args)
