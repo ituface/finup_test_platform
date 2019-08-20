@@ -126,7 +126,10 @@ def add_piece_api(request):
         return JsonResponse({'code': 202, 'message': '手机号已存在，请更换手机号'})
     # 以下操作为跑流程
     strs = request.strs
-    data = AddPiece.piece_to_status(status, strs, product_type)
+    t=MyThread(func=AddPiece.piece_to_status,args=(status, strs, product_type))
+    t.start()
+    t.join()
+    data = t.get_result()
     if data in (1, 2):
         data = {"mobile": mobile}
         result_post = post(url='/v1/get/IdAndStatus', data=data)
@@ -261,6 +264,28 @@ def django_test(request):
         connection.rollback()
 
     return JsonResponse({'message':'2222222222222'})
+
+
+
+import threading
+class MyThread(threading.Thread):
+
+    def __init__(self,func,args=()):
+        super(MyThread,self).__init__()
+        self.func = func
+        self.args = args
+
+    def run(self):
+        self.result = self.func(*self.args)
+
+    def get_result(self):
+        try:
+            return self.result  # 如果子线程不使用join方法，此处可能会报没有self.result的错误
+        except Exception:
+            return None
+
+
+
 
 def post(url, data):
     '''
