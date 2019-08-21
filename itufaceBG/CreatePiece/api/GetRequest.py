@@ -42,7 +42,6 @@ class GetRequest():
         self.product_bool = 0
         if 'BUSINESS' in product_type:
             self.product_bool = 1
-
         if "BS" ==self.product_type[-2:]:
             self.product_bool=1
         self.saleNo = saleNo
@@ -50,7 +49,7 @@ class GetRequest():
         self.api = AppApi
         self.code = 0
         self.year = year
-        self.headers = SetHearder.setHearderData()
+        self.headers = SetHearder().setHearderData()
         self.video_check = video_check
         self.idNo = idNo
         self.token='TOKEN'
@@ -66,7 +65,7 @@ class GetRequest():
             return result
         token = result['result'].get('token')
         self.token=token
-        self.headers = SetHearder.setHearderData(token=token)
+        self.headers['token']=token
 
     '''
       注册成功（包括实名，不含测一测）
@@ -232,13 +231,13 @@ class GetRequest():
             return data
         lend_request_id = data['data'].get('id')
         devices_token = str(int(time.time() * 1000))
-        headers = SetHearder.setHearderData(token=None, devicesToken=devices_token, request_type='USER')
+        headers = SetHearder().setHearderData( request_type='USER')
         result = self.request_post(url=saleapi.login, data=saleapi.func_login(self.saleNo, self.salePassword),
                                    headers=headers)
         if self.code:
             return result
         token = result['result'].get('token')
-        headers = SetHearder.setHearderData(token=token, request_type='USER', devicesToken=devices_token)
+        headers['token']=token
         saleapi_list = [[saleapi.qualityTesting, saleapi.func_qualityTesting(lend_request_id)],
                         [saleapi.pushToLend, saleapi.func_pushToLend(lend_request_id)]]
         for inner in saleapi_list:
