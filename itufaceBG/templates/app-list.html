@@ -150,35 +150,37 @@
             </script>
 
         </table>
-    </div>
-    <div class="page">
-        <div>
-            {% if applist.has_previous %}
-                {#  当前页的上一页按钮正常使用#}
-                <a class="prev" href="?page={{ applist.previous_page_number }}">&lt;&lt;</a>
-            {% else %}
-                {# 当前页的不存在上一页时,上一页的按钮不可用#}
-                <a class="prev" href="#">&lt;&lt;</a>
-            {% endif %}
-            {#上一页按钮结束#}
-            {# 页码开始#}
-            {% for num in paginator.page_range %}
 
-                {% if num == currentPage %}
-                    <a class="num" href="?page={{ num }}">{{ num }}</a>
+        <div class="page">
+            <div>
+                {% if applist.has_previous %}
+                    {#  当前页的上一页按钮正常使用#}
+                    <a class="prev" href="?page={{ applist.previous_page_number }}">&lt;&lt;</a>
                 {% else %}
-                    <a class="num" href="?page={{ num }}">{{ num }}</a>
-
+                    {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                    <a class="prev" href="#">&lt;&lt;</a>
                 {% endif %}
-            {% endfor %}
-            {% if applist.has_next %}
-                {#  当前页的上一页按钮正常使用#}
-                <a class="prev" href="?page={{ applist.next_page_number }}">&gt;&gt;</a>
-            {% else %}
-                {# 当前页的不存在上一页时,上一页的按钮不可用#}
-                <a class="prev" href="#">&gt;&gt;</a>
-            {% endif %}
+                {#上一页按钮结束#}
+                {# 页码开始#}
+                {% for num in paginator.page_range %}
+
+                    {% if num == currentPage %}
+                        <a class="num" href="?page={{ num }}">{{ num }}</a>
+                    {% else %}
+                        <a class="num" href="?page={{ num }}">{{ num }}</a>
+
+                    {% endif %}
+                {% endfor %}
+                {% if applist.has_next %}
+                    {#  当前页的上一页按钮正常使用#}
+                    <a class="prev" href="?page={{ applist.next_page_number }}">&gt;&gt;</a>
+                {% else %}
+                    {# 当前页的不存在上一页时,上一页的按钮不可用#}
+                    <a class="prev" href="#">&gt;&gt;</a>
+                {% endif %}
+            </div>
         </div>
+    <!--截断到此-->
     </div>
 
 </div>
@@ -277,6 +279,7 @@
                         var data = data;
 
                         var key = /<table[\w|\W]+\<\/table>/;
+                        var key = /<table[\w|\W]+'<!--截断到此-->'/;
                         datas = data.match(key);
 
                         $('#tabb').html(datas);
