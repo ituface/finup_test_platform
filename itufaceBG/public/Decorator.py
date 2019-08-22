@@ -38,7 +38,6 @@ def Handle_time(func):
             if end[0] != '':
                 str_data = str_data + ' and create_time<"%s"' % end[0]
             datas = request.DPOST.get('sql')
-            print('datas======>', datas)
             sql = datas + str_data
             request.DPOST = QueryDict('sql=%s' % sql)
         return func(request, *args, **kwargs)
@@ -69,6 +68,8 @@ def get_web_input_data(SqlStatement):
                 sql_data.append('=')
                 sql_data.append("'%s'" % ''.join(accept_data[key]))
             sql = ' '.join(sql_data)
+
+            print('装饰器sql-------->',sql)
 
             request.DPOST = QueryDict('sql=%s' % sql)
             return func(request, *args, **kwargs)
