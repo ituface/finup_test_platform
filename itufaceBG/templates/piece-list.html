@@ -126,9 +126,9 @@
 
         <div class="page">
             <div>
-                {% if applist.has_previous %}
+                {% if piecelist.has_previous %}
                     {#  当前页的上一页按钮正常使用#}
-                    <a class="prev" href="?page={{ applist.previous_page_number }}">&lt;&lt;</a>
+                    <a class="prev" href="?page={{ piecelist.previous_page_number }}">&lt;&lt;</a>
                 {% else %}
                     {# 当前页的不存在上一页时,上一页的按钮不可用#}
                     <a class="prev" href="#">&lt;&lt;</a>
@@ -138,9 +138,9 @@
 
                 <span class="current">
                     Page {{ piecelist.number }} of {{ piecelist.paginator.num_pages }}</span>
-                {% if applist.has_next %}
+                {% if piecelist.has_next %}
                     {#  当前页的上一页按钮正常使用#}
-                    <a class="prev" href="?page={{ applist.next_page_number }}">&gt;&gt;</a>
+                    <a class="prev" href="?page={{ piecelist.next_page_number }}">&gt;&gt;</a>
                 {% else %}
                     {# 当前页的不存在上一页时,上一页的按钮不可用#}
                     <a class="prev" href="#">&gt;&gt;</a>
