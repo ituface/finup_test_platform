@@ -51,25 +51,24 @@ def get_web_input_data(SqlStatement):
     def outer(func):
         def inner(request, *args, **kwargs):
             sql = getXmlSql(SqlStatement)  # 获取sql语句
-            if request.method == 'POST':
-                accept_data = dict(request.POST)
-                print('accept_data', accept_data)
-                for i in list(accept_data.keys()):
-                    if ''.join(accept_data[i]) == '':
-                        del accept_data[i]
-                sql_data = []
-                sql_data.append(sql)
-                sql_data.append('where 1=1')
-                # 通过for循环把前端传过来的判断添加到sql里
-                print('accept_data---->', accept_data)
-                for key in accept_data.keys():
-                    if key in ('create_time', 'end_time'):
-                        continue
-                    sql_data.append('and')
-                    sql_data.append(key)
-                    sql_data.append('=')
-                    sql_data.append("'%s'" % ''.join(accept_data[key]))
-                sql = ' '.join(sql_data)
+            accept_data = dict(request.POST)
+            print('accept_data', accept_data)
+            for i in list(accept_data.keys()):
+                if ''.join(accept_data[i]) == '':
+                    del accept_data[i]
+            sql_data = []
+            sql_data.append(sql)
+            sql_data.append('where 1=1')
+            # 通过for循环把前端传过来的判断添加到sql里
+            print('accept_data---->', accept_data)
+            for key in accept_data.keys():
+                if key in ('create_time', 'end_time'):
+                    continue
+                sql_data.append('and')
+                sql_data.append(key)
+                sql_data.append('=')
+                sql_data.append("'%s'" % ''.join(accept_data[key]))
+            sql = ' '.join(sql_data)
 
             request.DPOST = QueryDict('sql=%s' % sql)
             return func(request, *args, **kwargs)
