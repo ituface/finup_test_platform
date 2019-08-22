@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, render_to_response, HttpResponse
 from public import Decorator
 from public.mysql import MysqlHandle
@@ -25,15 +26,17 @@ def app_list(request):
     data = MysqlHandle.select_mysql_data(sql)
 
     paginator = Paginator(data, 10)
-    page = request.GET.get('page', 1)
-    currentPage = int(page)
-    try:
-        print(page)
-        result = paginator.page(page)
-    except PageNotAnInteger:
-        result = paginator.page(1)
-    except EmptyPage:
-        result = paginator.page(paginator.num_pages)
+    result=[]
+    if request.method=='GET':
+        page = request.GET.get('page', 1)
+        currentPage = int(page)
+        try:
+            print(page)
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
 
     return render(request, 'app-list.html', {'applist': result, 'paginator': paginator})
 
