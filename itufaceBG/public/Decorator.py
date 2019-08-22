@@ -70,7 +70,6 @@ def get_web_input_data(SqlStatement):
                     sql_data.append('=')
                     sql_data.append("'%s'" % ''.join(accept_data[key]))
                 sql = ' '.join(sql_data)
-                print('装饰器sql---------》',sql)
 
             request.DPOST = QueryDict('sql=%s' % sql)
             return func(request, *args, **kwargs)
