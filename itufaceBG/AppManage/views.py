@@ -26,17 +26,15 @@ def app_list(request):
     data = MysqlHandle.select_mysql_data(sql)
 
     paginator = Paginator(data, 10)
-    result=[]
-    if request.method=='GET':
-        page = request.GET.get('page', 1)
-        currentPage = int(page)
-        try:
-            print(page)
-            result = paginator.page(page)
-        except PageNotAnInteger:
-            result = paginator.page(1)
-        except EmptyPage:
-            result = paginator.page(paginator.num_pages)
+    page = request.GET.get('page', 1)
+    currentPage = int(page)
+    try:
+        print(page)
+        result = paginator.page(page)
+    except PageNotAnInteger:
+        result = paginator.page(1)
+    except EmptyPage:
+        result = paginator.page(paginator.num_pages)
 
     return render(request, 'app-list.html', {'applist': result, 'paginator': paginator})
 
