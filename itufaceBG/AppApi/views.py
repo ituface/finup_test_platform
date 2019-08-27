@@ -15,7 +15,7 @@ from  AppManage.CreatePlist import createplist
 
 
 # Create your views here.
-@cache_page(60*60)
+@cache_page(2)
 def index(request):
     from django.core.cache import cache
     cache.set('7777777777',0)
