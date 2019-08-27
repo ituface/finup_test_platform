@@ -15,6 +15,7 @@ class OnlineMiddlware(object):
     def process_exception(self, request, exception):
         print('sadfaf')
         print(exception)
+        traceback.print_exc()
         return HttpResponse('dsafa')
 
 
