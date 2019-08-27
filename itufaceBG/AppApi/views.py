@@ -16,7 +16,7 @@ from django.core.cache import cache
 
 # Create your views here.
 def index(request):
-    cache.incr('click_count')
+    cache.incr('click_count8')
     count=cache.get('click_count')
     return render(request, 'index.html',{'count':count})
 
