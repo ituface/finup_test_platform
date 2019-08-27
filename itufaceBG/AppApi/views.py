@@ -9,13 +9,11 @@ import os, time
 import datetime
 import json
 from django.utils.safestring import mark_safe
-from django.views.decorators.cache import cache_page
 
 from  AppManage.CreatePlist import createplist
 
 
 # Create your views here.
-@cache_page(2)
 def index(request):
     from django.core.cache import cache
     cache.set('7777777777',0)
