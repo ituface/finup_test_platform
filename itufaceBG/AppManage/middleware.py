@@ -13,8 +13,7 @@ class OnlineMiddlware(object):
          print('--'*30)
          respose=self.get_response(request, *args, **kwargs)
         except Exception as e:
-            print('系统报错', traceback.print_exc())
-            logging.error('系统报错',traceback.print_exc())
+            print('系统报错')
             return
         return respose
 
