@@ -21,7 +21,7 @@ def index(request):
     print('redis'*30,cache.get('click_count'))
     return render(request, 'index.html')
 
-
+@cache_page(60)
 def welcome(request):
     date = []
     app_count = []
