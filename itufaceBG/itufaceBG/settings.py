@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'AppManage.middleware.OnlineMiddleware',
+    'AppManage.middleware.OnlineMiddlware',
 ]
 
 ROOT_URLCONF = 'itufaceBG.urls'
