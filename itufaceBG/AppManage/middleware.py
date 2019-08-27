@@ -1,5 +1,6 @@
 import traceback
 import logging
+from django.utils.deprecation import MiddlewareMixin
 
 from django.shortcuts import HttpResponse
 
@@ -10,9 +11,11 @@ class OnlineMiddlware(object):
     def __call__(self,request, *args, **kwargs):
         try:
          print('--'*30)
-         respose=self.get_response(request)
+         respose=self.get_response(request, *args, **kwargs)
         except Exception as e:
             print('系统报错', traceback.print_exc())
             logging.error('系统报错',traceback.print_exc())
-            return HttpResponse('失败')
+            return
         return respose
+
+
