@@ -11,7 +11,7 @@ class OnlineMiddlware(object):
         try:
          print('--'*30)
          respose=self.get_response(*args,**kwargs)
-        except ValueError as e:
+        except Exception as e:
             print('系统报错', traceback.print_exc())
             logging.error('系统报错',traceback.print_exc())
             return None
