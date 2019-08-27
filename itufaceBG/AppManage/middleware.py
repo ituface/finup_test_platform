@@ -23,6 +23,9 @@ class TestMiddleware(object):
         '''服务器重启之后，接收第一个请求时调用(只会调用一次)'''
         print('----init----')
 
+    def __call__(self, request):
+        print('sssss')
+
     # 中间件函数。(用到哪个函数写哪个，不需要全写)
     def process_request(self, request):
         '''产生request对象之后，url匹配之前调用'''
