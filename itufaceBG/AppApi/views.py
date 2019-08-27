@@ -16,11 +16,9 @@ import traceback
 
 # Create your views here.
 def index(request):
-    try:
-        cache.incr('click_count8')
-        count=cache.get('click_count')
-    except Exception as e:
-        return HttpResponse('fail')
+    cache.incr('click_count8')
+    count=cache.get('click_count')
+
     return render(request, 'index.html',{'count':count})
 
 @cache_page(60*60*5)
