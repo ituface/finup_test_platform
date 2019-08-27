@@ -9,8 +9,6 @@ class OnlineMiddlware(object):
 
     def __call__(self, *args, **kwargs):
         try:
-         print('--'*30,self.get_response)
-
          respose=self.get_response(*args, **kwargs)
         except Exception as e:
             print('系统报错')
