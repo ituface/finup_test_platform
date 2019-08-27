@@ -9,14 +9,14 @@ import os, time
 import datetime
 import json
 from django.utils.safestring import mark_safe
-
+from django.views.decorators.cache import cache_page
 from  AppManage.CreatePlist import createplist
 
 
 # Create your views here.
+@cache_page(60)
 def index(request):
     from django.core.cache import cache
-    cache.set('7777777777',0)
     cache.incr('click_count')
     print('redis'*30,cache.get('click_count'))
     return render(request, 'index.html')
