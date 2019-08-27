@@ -8,13 +8,13 @@ class OnlineMiddlware(object):
     def __init__(self,get_response):
         self.get_response=get_response
 
-    def __call__(self,request, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         try:
          print('--'*30)
-         respose=self.get_response(request, *args, **kwargs)
+         respose=self.get_response(*args, **kwargs)
         except Exception as e:
             print('系统报错')
-            return
+            return HttpResponse('fffff')
         return respose
 
 
