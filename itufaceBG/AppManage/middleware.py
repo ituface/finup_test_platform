@@ -1,6 +1,5 @@
 import traceback
 import logging
-from django.utils.deprecation import MiddlewareMixin
 
 from django.shortcuts import HttpResponse
 
