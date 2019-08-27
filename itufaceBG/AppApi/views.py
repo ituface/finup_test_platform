@@ -18,7 +18,6 @@ import traceback
 
 
 def index(request):
-    raise ValueError('dafaf')
     cache.incr('click_count8')
     count=cache.get('click_count')
 
