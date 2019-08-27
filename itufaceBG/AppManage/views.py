@@ -140,6 +140,8 @@ def add_app(request):
 
 
 def index(request):
+    from django.core.cache import cache
+    cache.incr('click_count')
     return render(request, 'index.html')
 
 
