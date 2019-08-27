@@ -24,7 +24,7 @@ class TestMiddleware(object):
         print('----init----')
 
     def __call__(self, request):
-        print('sssss')
+        return self.get_response(request)
 
     # 中间件函数。(用到哪个函数写哪个，不需要全写)
     def process_request(self, request):
@@ -45,6 +45,9 @@ class TestMiddleware(object):
 
 
 class ExceptionTestMiddleware(object):
+    def __init__(self):
+        '''服务器重启之后，接收第一个请求时调用(只会调用一次)'''
+        print('----init----')
     # 如果注册多个process_exception函数，那么函数的执行顺序与注册的顺序相反。(其他中间件函数与注册顺序一致)
     # 中间件函数，用到哪个就写哪个，不需要写所有的中间件函数。
     def process_exception(self, request, exception):
