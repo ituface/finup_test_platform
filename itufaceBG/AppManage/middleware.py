@@ -1,7 +1,7 @@
 import traceback
 import logging
 
-
+from django.shortcuts import HttpResponse
 
 class OnlineMiddlware(object):
     def __init__(self,get_response):
@@ -14,5 +14,5 @@ class OnlineMiddlware(object):
         except Exception as e:
             print('系统报错', traceback.print_exc())
             logging.error('系统报错',traceback.print_exc())
-            return None
+            return HttpResponse('失败')
         return respose
