@@ -20,7 +20,6 @@ def index(request):
         cache.incr('click_count8')
         count=cache.get('click_count')
     except Exception as e:
-        print('系统错误',traceback.print_exc())
         return HttpResponse('fail')
     return render(request, 'index.html',{'count':count})
 
