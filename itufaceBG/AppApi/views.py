@@ -12,12 +12,16 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.cache import cache_page
 from  AppManage.CreatePlist import createplist
 from django.core.cache import cache
-
+import traceback
 
 # Create your views here.
 def index(request):
-    cache.incr('click_count8')
-    count=cache.get('click_count')
+    try:
+        cache.incr('click_count8')
+        count=cache.get('click_count')
+    except Exception as e:
+        print('系统错误',traceback.print_exc())
+        return HttpResponse('fail')
     return render(request, 'index.html',{'count':count})
 
 @cache_page(60*60*5)
