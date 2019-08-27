@@ -12,4 +12,5 @@ class OnlineMiddlware(object):
          respose=self.get_response(*args,**kwargs)
         except Exception as e:
             logging.error('系统报错',traceback.print_exc())
+            return None
         return respose
