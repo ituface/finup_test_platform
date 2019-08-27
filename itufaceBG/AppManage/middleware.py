@@ -9,7 +9,8 @@ class OnlineMiddlware(object):
 
     def __call__(self, *args, **kwargs):
         try:
-         print('--'*30)
+         print('--'*30,self.get_response.__name__)
+
          respose=self.get_response(*args, **kwargs)
         except ValueError as e:
             print('系统报错')
