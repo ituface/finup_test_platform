@@ -12,7 +12,7 @@ class OnlineMiddlware(object):
         try:
          print('--'*30)
          respose=self.get_response(*args, **kwargs)
-        except Exception as e:
+        except ValueError as e:
             print('系统报错')
             return HttpResponse('fffff')
         return respose
