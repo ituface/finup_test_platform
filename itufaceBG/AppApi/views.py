@@ -17,7 +17,6 @@ from  AppManage.CreatePlist import createplist
 
 def index(request):
     from django.core.cache import cache
-    cache.set('click_count',0)
     cache.incr('click_count')
     print('redis'*30,cache.get('click_count'))
     return render(request, 'index.html')
