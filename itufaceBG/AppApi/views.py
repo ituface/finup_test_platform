@@ -14,14 +14,13 @@ from  AppManage.CreatePlist import createplist
 
 
 # Create your views here.
-@cache_page(60)
 def index(request):
     from django.core.cache import cache
     cache.incr('click_count')
-    print('redis'*30,cache.get('click_count'))
-    return render(request, 'index.html')
+    count=cache.get('click_count')
+    return render(request, 'index.html',{'count':count})
 
-@cache_page(60)
+@cache_page(60*60*5)
 def welcome(request):
     date = []
     app_count = []
