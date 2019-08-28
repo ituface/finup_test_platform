@@ -19,8 +19,11 @@ from AppManage import views
 from AppApi import views as apiview
 from CreatePiece import views as pieceview
 from itufaceBG import settings
+from django.views import static  ##新增
+
 urlpatterns = [
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static'),
     url(r'^admin/', admin.site.urls),
     url(r'app-list', views.app_list, name='app-list'),
     url(r'^del_app_list/', views.del_app_list, name='del_app_list'),
