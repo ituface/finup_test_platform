@@ -325,15 +325,15 @@ class GetRequest():
 
 
 
-import bisect
-
-alist = ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT', 'BASE_INFO', 'SubmitPicture', 'MX_GRAB', 'PUSH_TO_IRON',
-         'PUSH_TO_LEND')
-
-gtr1=eval("GetRequest(name='跑一遍',mobile='17532732949',product_type='BUSINESS2.0_CAR')")
-#gtr = GetRequest(name='魔蝎抓取', mobile='18908433092')
-
-for i in alist[1]:
-    print('步骤----》',i)
-    s=eval('gtr1.%s()'%i)
-    print(s)
+# import bisect
+#
+# alist = ('FAST_LOGIN', 'REGISTER_SUCCESS', 'ANSWER_PRODUCT', 'BASE_INFO', 'SubmitPicture', 'MX_GRAB', 'PUSH_TO_IRON',
+#          'PUSH_TO_LEND')
+#
+# gtr1=eval("GetRequest(name='跑一遍',mobile='17532732949',product_type='BUSINESS2.0_CAR')")
+# #gtr = GetRequest(name='魔蝎抓取', mobile='18908433092')
+#
+# for i in alist[1]:
+#     print('步骤----》',i)
+#     s=eval('gtr1.%s()'%i)
+#     print(s)
