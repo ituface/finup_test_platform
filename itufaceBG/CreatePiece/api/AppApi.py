@@ -7,7 +7,7 @@ class AppApi():
     '''
     app api
     '''
-    fastLogin = '/home/v1/fastLogin'  # 快速登录
+    fastLogin = '/home/v2/fastLogin'  # 快速登录
     certification = '/apply/v1/certification'  # 实名认证
     changePassWord = '/home/v1/changePassWord'  # 修改密码
     submitAnswer = '/apply/v1/submitAnswer'  # 保存测一测密码
