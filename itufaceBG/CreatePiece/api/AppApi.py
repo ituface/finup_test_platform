@@ -361,7 +361,7 @@ class AppApi():
             "dist": "西城区",
             "town": "街道",
             "validTermStart": "2015-03-29",
-            "validTermFinish": "2019-03-29",
+            "validTermFinish": "2025-03-29",
             "houseCity": "false",
             "distCode": "110102",
             "province": "北京市"

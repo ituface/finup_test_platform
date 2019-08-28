@@ -18,7 +18,7 @@ import traceback
 
 
 def index(request):
-    cache.incr('click_count8')
+    cache.incr('click_count')
     count=cache.get('click_count')
 
     return render(request, 'index.html',{'count':count})

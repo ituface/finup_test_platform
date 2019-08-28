@@ -12,9 +12,7 @@ class OnlineMiddlware(object):
         return respose
 
     def process_exception(self, request, exception):
-        print('sadfaf')
-        print(exception)
         traceback.print_exc()
-        return HttpResponse('dsafa')
+        return HttpResponse('有异常产生，稍后重试')
 
 
