@@ -8,6 +8,7 @@ class OnlineMiddlware(object):
         self.get_response=get_response
 
     def __call__(self, *args, **kwargs):
+
         respose=self.get_response(*args, **kwargs)
         return respose
 
