@@ -73,31 +73,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'itufaceBG.wsgi.application'
 
 #
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-#
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'yyy',
-#         'HOST':'127.0.0.1',
-#         'PORT':3306,
-#         'USER':'root',
-#         'PASSWORD':'root123'
-#     }
-# }
+Database
+https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lend_app',
-        'HOST': '10.10.180.206',
-        'PORT': 3306,
-        'USER': 'root',
-        'PASSWORD': 'root123!@YE'
+        'NAME': 'yyy',
+        'HOST':'127.0.0.1',
+        'PORT':3306,
+        'USER':'root',
+        'PASSWORD':'root123'
     }
 }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
